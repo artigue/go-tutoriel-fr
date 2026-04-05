@@ -19,6 +19,7 @@ type error interface {
 ## Convention de base : valeur de retour multiple
 
 La convention principale en Go est que les fonctions qui peuvent échouer retournent **deux valeurs** :
+
 1. Le résultat (si tout va bien)
 2. Une erreur (si quelque chose ne va pas)
 
@@ -47,6 +48,7 @@ func main() {
 ```
 
 **Points importants :**
+
 - On vérifie toujours `err != nil` pour détecter une erreur
 - Si `err` est `nil`, cela signifie qu'il n'y a pas d'erreur
 - La gestion d'erreur se fait **immédiatement** après l'appel de fonction

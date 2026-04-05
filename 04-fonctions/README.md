@@ -23,16 +23,21 @@ Les fonctions remplissent plusieurs rôles essentiels dans un programme Go :
 Go privilégie la simplicité et l'explicité dans sa conception des fonctions. Voici les principes clés :
 
 ### Simplicité syntaxique
+
 La syntaxe des fonctions Go est volontairement simple et lisible. Contrairement à d'autres langages, Go évite les mots-clés complexes et les constructions alambiquées.
 
 ### Valeurs de retour multiples
+
 Une des caractéristiques distinctives de Go est la possibilité de retourner plusieurs valeurs depuis une fonction. Cette fonctionnalité est particulièrement utile pour la gestion des erreurs, un aspect central de la philosophie Go.
 
 ### Gestion explicite des erreurs
+
 Go encourage la gestion explicite des erreurs plutôt que les exceptions. Les fonctions retournent souvent une valeur et une erreur, forçant le développeur à traiter consciemment les cas d'erreur.
 
 ### Fonctions comme citoyens de première classe
+
 En Go, les fonctions sont des "first-class citizens", ce qui signifie qu'elles peuvent être :
+
 - Assignées à des variables
 - Passées comme paramètres à d'autres fonctions
 - Retournées comme valeurs depuis d'autres fonctions
@@ -43,21 +48,25 @@ En Go, les fonctions sont des "first-class citizens", ce qui signifie qu'elles p
 Dans ce chapitre, nous explorerons les concepts suivants :
 
 ### Types de fonctions
+
 - **Fonctions nommées** : Les fonctions classiques avec un nom défini
 - **Fonctions anonymes** : Des fonctions sans nom, souvent utilisées comme callbacks
 - **Méthodes** : Des fonctions associées à des types spécifiques (abordées au chapitre 6)
 
 ### Paramètres et arguments
+
 - **Paramètres par valeur** : Le comportement par défaut en Go
 - **Paramètres par référence** : Utilisation des pointeurs pour modifier les valeurs originales
 - **Paramètres variadiques** : Fonctions acceptant un nombre variable d'arguments
 
 ### Valeurs de retour
+
 - **Retour simple** : Une seule valeur retournée
 - **Retours multiples** : Plusieurs valeurs retournées simultanément
 - **Retours nommés** : Possibilité de nommer les valeurs de retour
 
 ### Portée et closures
+
 - **Portée lexicale** : Comment Go détermine la visibilité des variables
 - **Closures** : Fonctions qui capturent et utilisent des variables de leur environnement
 

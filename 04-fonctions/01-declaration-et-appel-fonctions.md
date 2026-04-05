@@ -46,11 +46,13 @@ func main() {
 ```
 
 **Explication :**
+
 - `direBonjour()` est une fonction qui ne prend aucun paramètre et ne retourne rien
 - Elle se contente d'afficher un message
 - Dans `main()`, nous appelons la fonction en écrivant son nom suivi de parenthèses
 
 **Résultat :**
+
 ```
 Bonjour le monde !
 ```
@@ -76,11 +78,13 @@ func main() {
 ```
 
 **Explication :**
+
 - `nom string` indique que la fonction attend un paramètre appelé `nom` de type `string`
 - Lors de l'appel, nous passons une valeur concrète (appelée "argument")
 - La fonction utilise cette valeur dans son traitement
 
 **Résultat :**
+
 ```
 Bonjour Alice !
 Bonjour Bob !
@@ -107,11 +111,13 @@ func main() {
 ```
 
 **Explication :**
+
 - Les paramètres sont séparés par des virgules
 - Chaque paramètre a son propre type
 - L'ordre des arguments lors de l'appel doit correspondre à l'ordre des paramètres
 
 **Résultat :**
+
 ```
 Je m'appelle Marie, j'ai 25 ans et je viens de Paris
 Je m'appelle Pierre, j'ai 30 ans et je viens de Lyon
@@ -142,11 +148,13 @@ func main() {
 ```
 
 **Explication :**
+
 - `int` après les paramètres indique que la fonction retourne un entier
 - `return resultat` renvoie la valeur calculée
 - Nous pouvons stocker le résultat dans une variable ou l'utiliser directement
 
 **Résultat :**
+
 ```
 5 + 3 = 8
 10 + 7 = 17
@@ -200,11 +208,13 @@ func main() {
 ```
 
 **Explication :**
+
 - `(float64, float64)` indique que la fonction retourne deux valeurs de type `float64`
 - `return aire, perimetre` retourne les deux valeurs
 - `aire, perimetre := calculerRectangle(5.0, 3.0)` récupère les deux valeurs
 
 **Résultat :**
+
 ```
 Aire: 15.00, Périmètre: 16.00
 ```
@@ -254,6 +264,7 @@ func main() {
 ```
 
 **Explication :**
+
 - `(aire, perimetre float64)` nomme les valeurs de retour
 - On peut assigner directement aux noms des valeurs de retour
 - `return` sans valeurs explicites retourne automatiquement les variables nommées
@@ -287,6 +298,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Début du programme
 Étape 1 exécutée
@@ -298,6 +310,7 @@ Fin du programme
 ## Exercices pratiques
 
 ### Exercice 1 : Fonction de salutation personnalisée
+
 Créez une fonction `saluer` qui prend un nom et un moment de la journée ("matin", "après-midi", "soir") et affiche un message approprié.
 
 <details>
@@ -329,9 +342,11 @@ func main() {
     saluer("Charlie", "après-midi")
 }
 ```
+
 </details>
 
 ### Exercice 2 : Calculatrice simple
+
 Créez une fonction `diviser` qui prend deux nombres et retourne le résultat de la division et le reste.
 
 <details>
@@ -353,9 +368,11 @@ func main() {
     fmt.Printf("17 ÷ 5 = %d reste %d\n", q, r)
 }
 ```
+
 </details>
 
 ### Exercice 3 : Fonction de validation
+
 Créez une fonction `estMajeur` qui prend un âge et retourne `true` si la personne est majeure (18 ans ou plus), `false` sinon.
 
 <details>
@@ -381,11 +398,13 @@ func main() {
     }
 }
 ```
+
 </details>
 
 ## Erreurs courantes à éviter
 
 ### 1. Oublier les parenthèses lors de l'appel
+
 ```go
 // ❌ Incorrect
 direBonjour  // Ceci ne fait que référencer la fonction
@@ -395,6 +414,7 @@ direBonjour()  // Ceci appelle la fonction
 ```
 
 ### 2. Mauvais ordre des arguments
+
 ```go
 func presenter(nom string, age int) {
     fmt.Printf("Je suis %s et j'ai %d ans\n", nom, age)
@@ -408,6 +428,7 @@ presenter("Alice", 25)
 ```
 
 ### 3. Oublier de retourner une valeur
+
 ```go
 func additionner(a, b int) int {
     resultat := a + b

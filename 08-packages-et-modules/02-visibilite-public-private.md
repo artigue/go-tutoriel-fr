@@ -9,6 +9,7 @@ La **visibilité** détermine si un élément de votre code (fonction, variable,
 ## La règle d'or de Go
 
 ### Public (Exporté)
+
 Si le nom commence par une **lettre MAJUSCULE**, l'élément est **public** et peut être utilisé depuis d'autres packages.
 
 ```go
@@ -24,6 +25,7 @@ type User struct {           // ✅ Public - accessible depuis d'autres packages
 ```
 
 ### Private (Non-exporté)
+
 Si le nom commence par une **lettre minuscule**, l'élément est **privé** et ne peut être utilisé que dans le même package.
 
 ```go
@@ -43,7 +45,8 @@ type user struct {           // ❌ Privé - accessible uniquement dans ce packa
 Créons un package pour gérer des utilisateurs et voir la visibilité en action.
 
 ### Structure du projet
-```
+
+```text
 user-management/
 ├── go.mod
 ├── main.go
@@ -53,6 +56,7 @@ user-management/
 ```
 
 ### 1. Fichier user/user.go
+
 ```go
 package user
 
@@ -104,6 +108,7 @@ func isValidAge(age int) bool {
 ```
 
 ### 2. Fichier user/validation.go
+
 ```go
 package user
 
@@ -138,6 +143,7 @@ func CreateUserSafe(name, email string, age int) (*User, error) {
 ```
 
 ### 3. Fichier main.go
+
 ```go
 package main
 
@@ -187,6 +193,7 @@ func main() {
 ## Visibilité des structs et de leurs champs
 
 ### Struct publique avec champs mixtes
+
 ```go
 type Product struct {
     Name        string  // PUBLIC - accessible depuis l'extérieur
@@ -197,6 +204,7 @@ type Product struct {
 ```
 
 ### Utilisation depuis un autre package
+
 ```go
 // Dans un autre package
 p := shop.Product{
@@ -210,6 +218,7 @@ p := shop.Product{
 ## Méthodes avec visibilité
 
 ### Exemple : Compte bancaire
+
 ```go
 package bank
 
@@ -253,6 +262,7 @@ func (a *Account) resetBalance() {
 ## Interfaces et visibilité
 
 ### Interface publique avec méthodes mixtes
+
 ```go
 package shapes
 
@@ -287,6 +297,7 @@ func (r Rectangle) validate() bool {
 ## Bonnes pratiques
 
 ### 1. Principe du minimum de visibilité
+
 Commencez toujours par rendre les éléments privés, puis rendez-les publics seulement si nécessaire.
 
 ```go
@@ -301,6 +312,7 @@ func (db *Database) close() { /* ... */ }            // privé
 ```
 
 ### 2. Exposer des méthodes plutôt que des champs
+
 ```go
 // ❌ Évitez : exposition directe des champs
 type User struct {
@@ -321,6 +333,7 @@ func (u *User) AddToBalance(amount float64) {
 ```
 
 ### 3. Constructeurs pour l'initialisation
+
 ```go
 type Car struct {
     Brand string
@@ -346,6 +359,7 @@ func (c *Car) GetModel() string {
 ## Erreurs communes
 
 ### 1. Oublier la majuscule
+
 ```go
 // ❌ Erreur : fonction non accessible depuis l'extérieur
 func calculateTax(amount float64) float64 {
@@ -359,6 +373,7 @@ func CalculateTax(amount float64) float64 {
 ```
 
 ### 2. Exposer trop d'éléments internes
+
 ```go
 // ❌ Trop d'exposition
 type Server struct {
@@ -385,17 +400,20 @@ func (s *Server) GetHost() string { return s.host }
 Créez un package `calculator` qui implémente une calculatrice avec :
 
 **Éléments publics :**
+
 - Struct `Calculator`
 - Méthodes : `Add()`, `Subtract()`, `Multiply()`, `Divide()`
 - Fonction `NewCalculator()`
 - Méthode `GetResult()`
 
 **Éléments privés :**
+
 - Champ `result` dans la struct
 - Fonction `isValidNumber()`
 - Méthode `reset()`
 
 **Test dans main.go :**
+
 ```go
 calc := calculator.NewCalculator()
 calc.Add(10)
@@ -408,16 +426,19 @@ fmt.Println(calc.GetResult()) // Doit afficher 20
 La visibilité en Go est simple mais puissante :
 
 **📋 Règles :**
+
 - **Majuscule** = Public (exporté)
 - **Minuscule** = Privé (non-exporté)
 
 **✅ Avantages :**
+
 - Contrôle de l'accès aux données
 - APIs plus propres et sécurisées
 - Encapsulation naturelle
 - Maintenance facilitée
 
 **🎯 Bonnes pratiques :**
+
 - Commencez par rendre tout privé
 - Exposez seulement ce qui est nécessaire
 - Utilisez des méthodes pour contrôler l'accès

@@ -54,6 +54,7 @@ func main() {
 ```
 
 **Sortie :**
+
 ```
 Aire: 15.00
 Périmètre: 16.00

@@ -14,7 +14,7 @@ Une **variable** est un espace de stockage nommé qui peut contenir une valeur. 
 
 ### Analogie de la boîte
 
-```
+```html
 ┌─────────────────┐
 │ Boîte étiquetée │
 │ "nom"           │
@@ -24,6 +24,7 @@ Une **variable** est un espace de stockage nommé qui peut contenir une valeur. 
 ```
 
 En Go, cela s'écrit :
+
 ```go
 var nom string = "Alice"
 ```
@@ -33,11 +34,13 @@ var nom string = "Alice"
 ### Méthode 1 : Déclaration explicite complète
 
 **Syntaxe :**
+
 ```go
 var nomVariable type = valeur
 ```
 
 **Exemples :**
+
 ```go
 var nom string = "Alice"
 var age int = 25
@@ -46,6 +49,7 @@ var estEtudiant bool = true
 ```
 
 **Décomposition :**
+
 - `var` : mot-clé pour déclarer une variable
 - `nom` : nom de la variable (identifiant)
 - `string` : type de données
@@ -66,11 +70,13 @@ var estEtudiant = true   // Go comprend que c'est un bool
 ### Méthode 3 : Déclaration courte (recommandée)
 
 **Syntaxe :**
+
 ```go
 nomVariable := valeur
 ```
 
 **Exemples :**
+
 ```go
 nom := "Alice"
 age := 25
@@ -79,6 +85,7 @@ estEtudiant := true
 ```
 
 **Avantages :**
+
 - Plus concise
 - Type inféré automatiquement
 - Syntaxe idiomatique Go
@@ -109,6 +116,7 @@ Go initialise automatiquement les variables avec des **valeurs zéro** :
 | `rune` | `0` | `var caractere rune` → `0` |
 
 **Exemple pratique :**
+
 ```go
 package main
 
@@ -128,18 +136,21 @@ func main() {
 ## Assignation et réassignation
 
 ### Première assignation
+
 ```go
 var nom string    // Déclaration
 nom = "Alice"     // Première assignation
 ```
 
 ### Réassignation
+
 ```go
 nom = "Bob"       // Changement de valeur
 nom = "Charlie"   // Nouveau changement
 ```
 
 ### Exemple complet
+
 ```go
 package main
 
@@ -166,6 +177,7 @@ func main() {
 ## Déclaration multiple
 
 ### Variables de même type
+
 ```go
 var nom, prenom string
 var x, y, z int
@@ -176,6 +188,7 @@ var x, y, z int = 1, 2, 3
 ```
 
 ### Variables de types différents
+
 ```go
 var (
     nom     string = "Alice"
@@ -186,6 +199,7 @@ var (
 ```
 
 ### Avec la syntaxe courte
+
 ```go
 nom, age := "Alice", 25
 x, y, z := 1, 2, 3
@@ -194,6 +208,7 @@ x, y, z := 1, 2, 3
 ## Portée des variables (Scope)
 
 ### Variables globales
+
 Déclarées en dehors des fonctions, accessibles partout dans le package :
 
 ```go
@@ -214,6 +229,7 @@ func afficherNom() {
 ```
 
 ### Variables locales
+
 Déclarées à l'intérieur d'une fonction, accessibles uniquement dans cette fonction :
 
 ```go
@@ -228,6 +244,7 @@ func autrefFonction() {
 ```
 
 ### Variables de bloc
+
 Déclarées dans un bloc (entre accolades), accessibles uniquement dans ce bloc :
 
 ```go
@@ -249,11 +266,13 @@ Une **constante** est une valeur qui ne peut **jamais changer** après sa décla
 ### Déclaration de constantes
 
 **Syntaxe :**
+
 ```go
 const nomConstante = valeur
 ```
 
 **Exemples :**
+
 ```go
 const pi = 3.14159
 const nomSite = "MonSite.com"
@@ -264,12 +283,14 @@ const estActif = true
 ### Constantes typées vs non-typées
 
 **Constantes non-typées (recommandé) :**
+
 ```go
 const pi = 3.14159          // Type flexible
 const message = "Hello"     // Type flexible
 ```
 
 **Constantes typées :**
+
 ```go
 const pi float64 = 3.14159
 const message string = "Hello"
@@ -313,6 +334,7 @@ const (
 ```
 
 **Utilisation pratique :**
+
 ```go
 const (
     TaillePetite = iota  // 0
@@ -332,6 +354,7 @@ const (
 ### Conventions Go
 
 **Variables et constantes locales (privées) :**
+
 ```go
 var nom string              // ✅ minuscule
 var ageUtilisateur int      // ✅ camelCase
@@ -339,6 +362,7 @@ var compteurVisites int     // ✅ descriptif
 ```
 
 **Variables et constantes exportées (publiques) :**
+
 ```go
 var Nom string              // ✅ Majuscule (exportée)
 var AgeUtilisateur int      // ✅ PascalCase
@@ -348,6 +372,7 @@ var CompteurVisites int     // ✅ descriptif
 ### Bonnes pratiques
 
 **✅ Noms descriptifs :**
+
 ```go
 var utilisateurConnecte bool    // Clair
 var nombreTentatives int        // Explicite
@@ -355,6 +380,7 @@ var messageErreur string        // Compréhensible
 ```
 
 **❌ Noms cryptiques :**
+
 ```go
 var u bool          // Que représente 'u' ?
 var n int           // Trop vague
@@ -362,6 +388,7 @@ var msg string      // Abréviation peu claire
 ```
 
 **✅ Constantes en majuscules (optionnel) :**
+
 ```go
 const PI = 3.14159
 const MAX_UTILISATEURS = 1000
@@ -545,12 +572,14 @@ func main() {
 ### Exercice 1 : Informations personnelles
 
 Créez un programme qui :
+
 1. Déclare des variables pour votre nom, prénom, âge et ville
 2. Affiche ces informations de manière formatée
 
 ### Exercice 2 : Calculateur d'âge
 
 Créez un programme qui :
+
 1. Déclare une constante pour l'année actuelle (2025)
 2. Déclare une variable pour votre année de naissance
 3. Calcule et affiche votre âge
@@ -558,6 +587,7 @@ Créez un programme qui :
 ### Exercice 3 : Conversion de température
 
 Créez un programme qui :
+
 1. Déclare une variable température en Celsius
 2. Calcule l'équivalent en Fahrenheit (F = C × 9/5 + 32)
 3. Affiche les deux températures
@@ -565,6 +595,7 @@ Créez un programme qui :
 ### Exercice 4 : Gestion de budget
 
 Créez un programme qui :
+
 1. Déclare des variables pour vos revenus et différentes dépenses
 2. Calcule le total des dépenses
 3. Calcule le solde restant
@@ -573,6 +604,7 @@ Créez un programme qui :
 ### Solutions
 
 **Exercice 1 :**
+
 ```go
 package main
 
@@ -591,6 +623,7 @@ func main() {
 ```
 
 **Exercice 2 :**
+
 ```go
 package main
 
@@ -609,6 +642,7 @@ func main() {
 ```
 
 **Exercice 3 :**
+
 ```go
 package main
 
@@ -624,6 +658,7 @@ func main() {
 ```
 
 **Exercice 4 :**
+
 ```go
 package main
 
@@ -659,6 +694,7 @@ func main() {
 ## Récapitulatif
 
 **Ce que vous avez appris :**
+
 - ✅ Différentes façons de déclarer des variables
 - ✅ Valeurs par défaut (valeurs zéro) en Go
 - ✅ Portée des variables (globale, locale, bloc)
@@ -667,6 +703,7 @@ func main() {
 - ✅ Erreurs courantes à éviter
 
 **Points clés à retenir :**
+
 1. **`:=`** : déclaration courte (seulement dans les fonctions)
 2. **`var`** : déclaration explicite (partout)
 3. **`const`** : valeurs qui ne changent jamais
@@ -674,6 +711,7 @@ func main() {
 5. **Nommage** : descriptif et suivant les conventions
 
 **Syntaxes importantes :**
+
 ```go
 var nom string = "Alice"    // Déclaration complète
 var nom = "Alice"           // Avec inférence de type

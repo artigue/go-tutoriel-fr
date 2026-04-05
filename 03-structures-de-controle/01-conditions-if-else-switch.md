@@ -19,6 +19,7 @@ if condition {
 ```
 
 **Exemple concret :**
+
 ```go
 package main
 
@@ -44,6 +45,7 @@ if condition {
 ```
 
 **Exemple :**
+
 ```go
 package main
 
@@ -73,6 +75,7 @@ if condition1 {
 ```
 
 **Exemple pratique :**
+
 ```go
 package main
 
@@ -106,6 +109,7 @@ if variable := expression; condition {
 ```
 
 **Exemple :**
+
 ```go
 package main
 
@@ -122,6 +126,7 @@ func main() {
 ```
 
 **Cas d'usage courant avec les erreurs :**
+
 ```go
 package main
 
@@ -156,6 +161,7 @@ Pour créer des conditions, vous devez connaître les opérateurs :
 | `>=` | Supérieur ou égal à |
 
 **Exemples :**
+
 ```go
 package main
 
@@ -190,6 +196,7 @@ Vous pouvez combiner plusieurs conditions :
 | `!` | NON logique (NOT) |
 
 **Exemples :**
+
 ```go
 package main
 
@@ -234,6 +241,7 @@ default:
 ```
 
 **Exemple simple :**
+
 ```go
 package main
 
@@ -304,6 +312,7 @@ func main() {
 ## 6. Différences importantes avec d'autres langages
 
 ### Pas de break nécessaire
+
 En Go, chaque `case` se termine automatiquement. Pas besoin de `break` :
 
 ```go
@@ -317,6 +326,7 @@ case 2:
 ```
 
 ### Utiliser fallthrough pour continuer
+
 Si vous voulez vraiment continuer vers le case suivant :
 
 ```go
@@ -342,6 +352,7 @@ func main() {
 ## 7. Exemples pratiques
 
 ### Exemple 1 : Calculateur simple
+
 ```go
 package main
 
@@ -372,6 +383,7 @@ func main() {
 ```
 
 ### Exemple 2 : Vérification d'âge
+
 ```go
 package main
 
@@ -395,6 +407,7 @@ func main() {
 ```
 
 ### Exemple 3 : Validation de données
+
 ```go
 package main
 
@@ -417,6 +430,7 @@ func main() {
 ## 8. Bonnes pratiques
 
 ### 1. Utilisez le "early return" pattern
+
 ```go
 func validateUser(age int, name string) error {
     if age < 0 {
@@ -433,6 +447,7 @@ func validateUser(age int, name string) error {
 ```
 
 ### 2. Préférez switch pour de multiples conditions
+
 ```go
 // Préférez ceci
 switch status {
@@ -455,6 +470,7 @@ if status == "active" || status == "pending" {
 ```
 
 ### 3. Évitez l'imbrication excessive
+
 ```go
 // Difficile à lire
 if condition1 {
@@ -481,14 +497,18 @@ if !condition3 {
 ## 9. Exercices pratiques
 
 ### Exercice 1 : Calculateur de TVA
+
 Créez un programme qui calcule le prix TTC selon le pays :
+
 - France : 20%
 - Belgique : 21%
 - Suisse : 7.7%
 - Autre : 0%
 
 ### Exercice 2 : Système de notes
+
 Créez un programme qui convertit une note numérique en lettre :
+
 - 90-100 : A
 - 80-89 : B
 - 70-79 : C
@@ -496,7 +516,9 @@ Créez un programme qui convertit une note numérique en lettre :
 - 0-59 : F
 
 ### Exercice 3 : Validation d'email
+
 Créez un programme qui valide basiquement un email :
+
 - Doit contenir "@"
 - Doit contenir "."
 - Ne doit pas être vide
@@ -506,6 +528,7 @@ Créez un programme qui valide basiquement un email :
 ### Exercice 1 : Calculateur de TVA
 
 #### Solution avec switch
+
 ```go
 package main
 
@@ -540,6 +563,7 @@ func main() {
 ```
 
 #### Solution avec fonction réutilisable
+
 ```go
 package main
 
@@ -587,6 +611,7 @@ func main() {
 ```
 
 #### Solution interactive
+
 ```go
 package main
 
@@ -643,6 +668,7 @@ func main() {
 ### Exercice 2 : Système de notes
 
 #### Solution avec if/else
+
 ```go
 package main
 
@@ -680,6 +706,7 @@ func main() {
 ```
 
 #### Solution avec switch
+
 ```go
 package main
 
@@ -723,6 +750,7 @@ func main() {
 ```
 
 #### Solution avec commentaires détaillés
+
 ```go
 package main
 
@@ -771,6 +799,7 @@ func main() {
 ### Exercice 3 : Validation d'email
 
 #### Solution basique
+
 ```go
 package main
 
@@ -822,6 +851,7 @@ func estEmailValide(email string) bool {
 ```
 
 #### Solution avec validation détaillée
+
 ```go
 package main
 
@@ -901,6 +931,7 @@ func main() {
 ```
 
 #### Solution avec structure de données
+
 ```go
 package main
 
@@ -995,18 +1026,21 @@ func main() {
 ### Points clés des solutions
 
 #### Exercice 1 - TVA
+
 - **Switch** pour les différents pays
 - **Validation** des données d'entrée
 - **Fonctions réutilisables** pour un code propre
 - **Interface utilisateur** simple
 
 #### Exercice 2 - Notes
+
 - **Validation** des notes (0-100)
 - **Switch avec conditions** pour les tranches
 - **Messages descriptifs** pour chaque note
 - **Gestion des cas limites**
 
 #### Exercice 3 - Email
+
 - **Validation progressive** avec strings.Contains
 - **Gestion des erreurs** multiples
 - **Structure de données** pour les résultats

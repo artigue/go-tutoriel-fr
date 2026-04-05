@@ -39,6 +39,7 @@ func main() {
 ```
 
 **Sortie :**
+
 ```
 panic: runtime error: index out of range [10] with length 3
 ```
@@ -74,6 +75,7 @@ func main() {
 ```
 
 **Sortie :**
+
 ```
 Début du programme
 Résultat: 5
@@ -140,6 +142,7 @@ func main() {
 ```
 
 **Sortie :**
+
 ```
 === Test avec nombre valide ===
 Accès à l'index: 0
@@ -204,6 +207,7 @@ func main() {
 ### ✅ Quand utiliser panic
 
 1. **Erreurs de programmation** (bugs dans le code)
+
 ```go
 func traiterTableau(arr []int, index int) {
     if index < 0 || index >= len(arr) {
@@ -213,7 +217,8 @@ func traiterTableau(arr []int, index int) {
 }
 ```
 
-2. **Initialisation critique échouée**
+1. **Initialisation critique échouée**
+
 ```go
 func init() {
     fichierConfig, err := os.ReadFile("config.yaml")
@@ -224,7 +229,8 @@ func init() {
 }
 ```
 
-3. **Conditions impossibles** (ne devrait jamais arriver)
+1. **Conditions impossibles** (ne devrait jamais arriver)
+
 ```go
 func traiterType(valeur interface{}) {
     switch v := valeur.(type) {

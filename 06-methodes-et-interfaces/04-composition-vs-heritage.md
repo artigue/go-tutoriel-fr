@@ -12,7 +12,7 @@ Dans cette section, nous allons comprendre pourquoi Go a fait ce choix et commen
 
 Dans les langages orientés objet traditionnels, l'héritage permet à une classe d'hériter des propriétés et méthodes d'une classe parent :
 
-```
+```text
 // Pseudo-code (pas du Go!)
 class Animal {
     nom string
@@ -140,7 +140,8 @@ func main() {
 ```
 
 **Sortie :**
-```
+
+```text
 Rex mange
 Rex dort
 Rex aboie: Woof!
@@ -417,6 +418,7 @@ func main() {
 ## Composition vs Héritage : Avantages
 
 ### 1. Flexibilité
+
 ```go
 // Avec la composition, on peut facilement combiner différentes capacités
 type RobotVolant struct {
@@ -440,6 +442,7 @@ type RobotAquatique struct {
 ```
 
 ### 2. Éviter le problème du diamant
+
 L'héritage multiple peut créer des ambiguïtés. La composition les évite :
 
 ```go
@@ -462,6 +465,7 @@ func (s SystemeComplet) ReglerVolumeVideo(niveau int) {
 ## Patterns de composition courants
 
 ### 1. Decorator Pattern
+
 ```go
 package main
 
@@ -520,6 +524,7 @@ func main() {
 ```
 
 ### 2. Strategy Pattern
+
 ```go
 package main
 

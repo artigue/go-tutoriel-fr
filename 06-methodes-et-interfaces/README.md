@@ -9,28 +9,34 @@ Après avoir maîtrisé les fondamentaux de Go (variables, fonctions, structures
 ## Pourquoi les méthodes et interfaces sont-elles importantes ?
 
 ### 1. **Abstraction et encapsulation**
+
 Les méthodes permettent d'associer des comportements à des types de données, créant ainsi une abstraction naturelle. Au lieu d'avoir des fonctions éparpillées qui manipulent des structures, nous pouvons grouper logiquement les fonctionnalités avec les données qu'elles manipulent.
 
 ### 2. **Polymorphisme à la Go**
+
 Go n'a pas de classes au sens traditionnel, mais les interfaces offrent un mécanisme de polymorphisme encore plus puissant et flexible. Une interface en Go définit un contrat de comportement plutôt qu'une hiérarchie de types.
 
 ### 3. **Composition over inheritance**
+
 Go favorise la composition plutôt que l'héritage. Les interfaces permettent de créer des systèmes modulaires et flexibles où les types peuvent implémenter plusieurs interfaces sans contraintes hiérarchiques.
 
 ## Concepts clés à retenir
 
 ### **Méthodes**
+
 - Une méthode est une fonction associée à un type spécifique
 - Elle possède un "receiver" qui détermine sur quel type elle opère
 - Les méthodes peuvent être définies sur n'importe quel type (pas seulement les structs)
 
 ### **Interfaces**
+
 - Une interface définit un ensemble de signatures de méthodes
 - Un type implémente une interface simplement en définissant toutes ses méthodes
 - L'implémentation est implicite (pas de mot-clé "implements")
 - Les interfaces permettent le polymorphisme et la testabilité
 
 ### **Philosophie Go**
+>
 > "Don't design with interfaces, discover them" - Rob Pike
 
 Cette philosophie encourage à créer des types concrets d'abord, puis à découvrir les interfaces naturelles qui émergent de l'utilisation.
@@ -47,6 +53,7 @@ Dans ce chapitre, nous explorerons :
 ## Prérequis
 
 Avant de commencer ce chapitre, assurez-vous de maîtriser :
+
 - Les types de base et les structs
 - Les fonctions et leurs signatures
 - Les pointeurs et leur utilisation

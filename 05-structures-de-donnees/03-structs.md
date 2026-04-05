@@ -9,6 +9,7 @@ Une **struct** (structure) est un type de données personnalisé qui permet de r
 ## Concept de base
 
 Imaginez que vous voulez représenter une personne dans votre programme. Une personne a plusieurs attributs :
+
 - Un nom (string)
 - Un âge (int)
 - Une taille (float64)
@@ -823,19 +824,25 @@ func NouvelUtilisateur(nom, email string, age int) (*Utilisateur, error) {
 ## Exercices pratiques
 
 ### Exercice 1 : Basique
+
 Créez une struct `Livre` avec les champs : titre, auteur, pages, prix. Implémentez :
+
 1. Un constructeur `NouveauLivre()`
 2. Une méthode `String()` pour l'affichage
 3. Une méthode `AppliquerRemise(pourcentage float64)`
 
 ### Exercice 2 : Intermédiaire
+
 Créez un système de bibliothèque avec :
+
 1. Struct `Livre` (titre, auteur, ISBN, disponible)
 2. Struct `Bibliotheque` avec une slice de livres
 3. Méthodes : `AjouterLivre()`, `EmprunterLivre()`, `RetournerLivre()`, `RechercherParAuteur()`
 
 ### Exercice 3 : Avancé
+
 Implémentez un système de gestion d'employés :
+
 1. Struct `Adresse` (rue, ville, code postal)
 2. Struct `Employe` (nom, prénom, adresse, salaire, département)
 3. Struct `Entreprise` avec slice d'employés
@@ -845,9 +852,9 @@ Implémentez un système de gestion d'employés :
 package main
 
 import (
-	"fmt"
-	"strings"
-	"time"
+ "fmt"
+ "strings"
+ "time"
 )
 
 // ==========================================
@@ -856,115 +863,115 @@ import (
 
 // Struct Livre avec les champs requis
 type Livre struct {
-	Titre  string
-	Auteur string
-	Pages  int
-	Prix   float64
+ Titre  string
+ Auteur string
+ Pages  int
+ Prix   float64
 }
 
 // Constructeur avec validation
 func NouveauLivre(titre, auteur string, pages int, prix float64) (*Livre, error) {
-	// Validation des paramètres
-	if titre == "" {
-		return nil, fmt.Errorf("le titre ne peut pas être vide")
-	}
-	if auteur == "" {
-		return nil, fmt.Errorf("l'auteur ne peut pas être vide")
-	}
-	if pages <= 0 {
-		return nil, fmt.Errorf("le nombre de pages doit être positif")
-	}
-	if prix < 0 {
-		return nil, fmt.Errorf("le prix ne peut pas être négatif")
-	}
+ // Validation des paramètres
+ if titre == "" {
+  return nil, fmt.Errorf("le titre ne peut pas être vide")
+ }
+ if auteur == "" {
+  return nil, fmt.Errorf("l'auteur ne peut pas être vide")
+ }
+ if pages <= 0 {
+  return nil, fmt.Errorf("le nombre de pages doit être positif")
+ }
+ if prix < 0 {
+  return nil, fmt.Errorf("le prix ne peut pas être négatif")
+ }
 
-	return &Livre{
-		Titre:  titre,
-		Auteur: auteur,
-		Pages:  pages,
-		Prix:   prix,
-	}, nil
+ return &Livre{
+  Titre:  titre,
+  Auteur: auteur,
+  Pages:  pages,
+  Prix:   prix,
+ }, nil
 }
 
 // Méthode String pour l'affichage
 func (l Livre) String() string {
-	return fmt.Sprintf("📖 \"%s\" par %s (%d pages) - %.2f€",
-		l.Titre, l.Auteur, l.Pages, l.Prix)
+ return fmt.Sprintf("📖 \"%s\" par %s (%d pages) - %.2f€",
+  l.Titre, l.Auteur, l.Pages, l.Prix)
 }
 
 // Méthode pour appliquer une remise
 func (l *Livre) AppliquerRemise(pourcentage float64) error {
-	if pourcentage < 0 || pourcentage > 100 {
-		return fmt.Errorf("le pourcentage doit être entre 0 et 100")
-	}
+ if pourcentage < 0 || pourcentage > 100 {
+  return fmt.Errorf("le pourcentage doit être entre 0 et 100")
+ }
 
-	ancienPrix := l.Prix
-	l.Prix = l.Prix * (1.0 - pourcentage/100.0)
+ ancienPrix := l.Prix
+ l.Prix = l.Prix * (1.0 - pourcentage/100.0)
 
-	fmt.Printf("Remise de %.1f%% appliquée: %.2f€ → %.2f€\n",
-		pourcentage, ancienPrix, l.Prix)
-	return nil
+ fmt.Printf("Remise de %.1f%% appliquée: %.2f€ → %.2f€\n",
+  pourcentage, ancienPrix, l.Prix)
+ return nil
 }
 
 // Méthode bonus pour calculer le prix par page
 func (l Livre) PrixParPage() float64 {
-	if l.Pages == 0 {
-		return 0
-	}
-	return l.Prix / float64(l.Pages)
+ if l.Pages == 0 {
+  return 0
+ }
+ return l.Prix / float64(l.Pages)
 }
 
 func exercice1() {
-	fmt.Println("=== EXERCICE 1 : BASIQUE ===")
+ fmt.Println("=== EXERCICE 1 : BASIQUE ===")
 
-	// Créer des livres avec validation
-	livre1, err := NouveauLivre("Le Petit Prince", "Antoine de Saint-Exupéry", 96, 8.50)
-	if err != nil {
-		fmt.Printf("Erreur: %v\n", err)
-		return
-	}
+ // Créer des livres avec validation
+ livre1, err := NouveauLivre("Le Petit Prince", "Antoine de Saint-Exupéry", 96, 8.50)
+ if err != nil {
+  fmt.Printf("Erreur: %v\n", err)
+  return
+ }
 
-	livre2, err := NouveauLivre("1984", "George Orwell", 328, 12.99)
-	if err != nil {
-		fmt.Printf("Erreur: %v\n", err)
-		return
-	}
+ livre2, err := NouveauLivre("1984", "George Orwell", 328, 12.99)
+ if err != nil {
+  fmt.Printf("Erreur: %v\n", err)
+  return
+ }
 
-	livre3, err := NouveauLivre("Go Programming", "Alan Donovan", 380, 45.00)
-	if err != nil {
-		fmt.Printf("Erreur: %v\n", err)
-		return
-	}
+ livre3, err := NouveauLivre("Go Programming", "Alan Donovan", 380, 45.00)
+ if err != nil {
+  fmt.Printf("Erreur: %v\n", err)
+  return
+ }
 
-	// Afficher les livres
-	fmt.Println("Livres créés:")
-	fmt.Printf("1. %s\n", livre1)
-	fmt.Printf("2. %s\n", livre2)
-	fmt.Printf("3. %s\n", livre3)
+ // Afficher les livres
+ fmt.Println("Livres créés:")
+ fmt.Printf("1. %s\n", livre1)
+ fmt.Printf("2. %s\n", livre2)
+ fmt.Printf("3. %s\n", livre3)
 
-	// Appliquer des remises
-	fmt.Println("\nApplication de remises:")
-	livre1.AppliquerRemise(10.0) // 10% de remise
-	livre2.AppliquerRemise(15.0) // 15% de remise
-	livre3.AppliquerRemise(20.0) // 20% de remise
+ // Appliquer des remises
+ fmt.Println("\nApplication de remises:")
+ livre1.AppliquerRemise(10.0) // 10% de remise
+ livre2.AppliquerRemise(15.0) // 15% de remise
+ livre3.AppliquerRemise(20.0) // 20% de remise
 
-	// Afficher après remises
-	fmt.Println("\nAprès remises:")
-	fmt.Printf("1. %s (%.4f€/page)\n", livre1, livre1.PrixParPage())
-	fmt.Printf("2. %s (%.4f€/page)\n", livre2, livre2.PrixParPage())
-	fmt.Printf("3. %s (%.4f€/page)\n", livre3, livre3.PrixParPage())
+ // Afficher après remises
+ fmt.Println("\nAprès remises:")
+ fmt.Printf("1. %s (%.4f€/page)\n", livre1, livre1.PrixParPage())
+ fmt.Printf("2. %s (%.4f€/page)\n", livre2, livre2.PrixParPage())
+ fmt.Printf("3. %s (%.4f€/page)\n", livre3, livre3.PrixParPage())
 
-	// Test de validation
-	fmt.Println("\nTest de validation:")
-	if _, err := NouveauLivre("", "Auteur", 100, 10.0); err != nil {
-		fmt.Printf("Erreur attendue: %v\n", err)
-	}
+ // Test de validation
+ fmt.Println("\nTest de validation:")
+ if _, err := NouveauLivre("", "Auteur", 100, 10.0); err != nil {
+  fmt.Printf("Erreur attendue: %v\n", err)
+ }
 
-	if err := livre1.AppliquerRemise(150.0); err != nil {
-		fmt.Printf("Erreur attendue: %v\n", err)
-	}
+ if err := livre1.AppliquerRemise(150.0); err != nil {
+  fmt.Printf("Erreur attendue: %v\n", err)
+ }
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -973,207 +980,207 @@ func exercice1() {
 
 // Struct Livre pour la bibliothèque (différente de l'exercice 1)
 type LivreBiblio struct {
-	Titre      string
-	Auteur     string
-	ISBN       string
-	Disponible bool
+ Titre      string
+ Auteur     string
+ ISBN       string
+ Disponible bool
 }
 
 // Constructeur pour LivreBiblio
 func NouveauLivreBiblio(titre, auteur, isbn string) *LivreBiblio {
-	return &LivreBiblio{
-		Titre:      titre,
-		Auteur:     auteur,
-		ISBN:       isbn,
-		Disponible: true, // Disponible par défaut
-	}
+ return &LivreBiblio{
+  Titre:      titre,
+  Auteur:     auteur,
+  ISBN:       isbn,
+  Disponible: true, // Disponible par défaut
+ }
 }
 
 func (l LivreBiblio) String() string {
-	statut := "📗 Disponible"
-	if !l.Disponible {
-		statut = "📕 Emprunté"
-	}
-	return fmt.Sprintf("%s - \"%s\" par %s (ISBN: %s)",
-		statut, l.Titre, l.Auteur, l.ISBN)
+ statut := "📗 Disponible"
+ if !l.Disponible {
+  statut = "📕 Emprunté"
+ }
+ return fmt.Sprintf("%s - \"%s\" par %s (ISBN: %s)",
+  statut, l.Titre, l.Auteur, l.ISBN)
 }
 
 // Struct Bibliothèque
 type Bibliotheque struct {
-	Nom    string
-	Livres []*LivreBiblio
+ Nom    string
+ Livres []*LivreBiblio
 }
 
 // Constructeur pour Bibliothèque
 func NouvelleBibliotheque(nom string) *Bibliotheque {
-	return &Bibliotheque{
-		Nom:    nom,
-		Livres: make([]*LivreBiblio, 0),
-	}
+ return &Bibliotheque{
+  Nom:    nom,
+  Livres: make([]*LivreBiblio, 0),
+ }
 }
 
 // Ajouter un livre
 func (b *Bibliotheque) AjouterLivre(livre *LivreBiblio) {
-	// Vérifier si le livre existe déjà (par ISBN)
-	for _, l := range b.Livres {
-		if l.ISBN == livre.ISBN {
-			fmt.Printf("⚠️  Livre avec ISBN %s existe déjà\n", livre.ISBN)
-			return
-		}
-	}
+ // Vérifier si le livre existe déjà (par ISBN)
+ for _, l := range b.Livres {
+  if l.ISBN == livre.ISBN {
+   fmt.Printf("⚠️  Livre avec ISBN %s existe déjà\n", livre.ISBN)
+   return
+  }
+ }
 
-	b.Livres = append(b.Livres, livre)
-	fmt.Printf("✅ Livre ajouté: %s\n", livre.Titre)
+ b.Livres = append(b.Livres, livre)
+ fmt.Printf("✅ Livre ajouté: %s\n", livre.Titre)
 }
 
 // Emprunter un livre par ISBN
 func (b *Bibliotheque) EmprunterLivre(isbn string) error {
-	for _, livre := range b.Livres {
-		if livre.ISBN == isbn {
-			if !livre.Disponible {
-				return fmt.Errorf("le livre \"%s\" est déjà emprunté", livre.Titre)
-			}
-			livre.Disponible = false
-			fmt.Printf("📚 Livre emprunté: %s\n", livre.Titre)
-			return nil
-		}
-	}
-	return fmt.Errorf("livre avec ISBN %s non trouvé", isbn)
+ for _, livre := range b.Livres {
+  if livre.ISBN == isbn {
+   if !livre.Disponible {
+    return fmt.Errorf("le livre \"%s\" est déjà emprunté", livre.Titre)
+   }
+   livre.Disponible = false
+   fmt.Printf("📚 Livre emprunté: %s\n", livre.Titre)
+   return nil
+  }
+ }
+ return fmt.Errorf("livre avec ISBN %s non trouvé", isbn)
 }
 
 // Retourner un livre par ISBN
 func (b *Bibliotheque) RetournerLivre(isbn string) error {
-	for _, livre := range b.Livres {
-		if livre.ISBN == isbn {
-			if livre.Disponible {
-				return fmt.Errorf("le livre \"%s\" n'était pas emprunté", livre.Titre)
-			}
-			livre.Disponible = true
-			fmt.Printf("📖 Livre retourné: %s\n", livre.Titre)
-			return nil
-		}
-	}
-	return fmt.Errorf("livre avec ISBN %s non trouvé", isbn)
+ for _, livre := range b.Livres {
+  if livre.ISBN == isbn {
+   if livre.Disponible {
+    return fmt.Errorf("le livre \"%s\" n'était pas emprunté", livre.Titre)
+   }
+   livre.Disponible = true
+   fmt.Printf("📖 Livre retourné: %s\n", livre.Titre)
+   return nil
+  }
+ }
+ return fmt.Errorf("livre avec ISBN %s non trouvé", isbn)
 }
 
 // Rechercher par auteur
 func (b *Bibliotheque) RechercherParAuteur(auteur string) []*LivreBiblio {
-	var resultats []*LivreBiblio
-	auteurLower := strings.ToLower(auteur)
+ var resultats []*LivreBiblio
+ auteurLower := strings.ToLower(auteur)
 
-	for _, livre := range b.Livres {
-		if strings.Contains(strings.ToLower(livre.Auteur), auteurLower) {
-			resultats = append(resultats, livre)
-		}
-	}
+ for _, livre := range b.Livres {
+  if strings.Contains(strings.ToLower(livre.Auteur), auteurLower) {
+   resultats = append(resultats, livre)
+  }
+ }
 
-	return resultats
+ return resultats
 }
 
 // Afficher tous les livres
 func (b *Bibliotheque) AfficherCatalogue() {
-	fmt.Printf("\n=== CATALOGUE DE %s ===\n", strings.ToUpper(b.Nom))
-	if len(b.Livres) == 0 {
-		fmt.Println("Aucun livre dans la bibliothèque.")
-		return
-	}
+ fmt.Printf("\n=== CATALOGUE DE %s ===\n", strings.ToUpper(b.Nom))
+ if len(b.Livres) == 0 {
+  fmt.Println("Aucun livre dans la bibliothèque.")
+  return
+ }
 
-	for i, livre := range b.Livres {
-		fmt.Printf("%d. %s\n", i+1, livre)
-	}
+ for i, livre := range b.Livres {
+  fmt.Printf("%d. %s\n", i+1, livre)
+ }
 }
 
 // Statistiques de la bibliothèque
 func (b *Bibliotheque) Statistiques() {
-	total := len(b.Livres)
-	disponibles := 0
-	empruntes := 0
+ total := len(b.Livres)
+ disponibles := 0
+ empruntes := 0
 
-	for _, livre := range b.Livres {
-		if livre.Disponible {
-			disponibles++
-		} else {
-			empruntes++
-		}
-	}
+ for _, livre := range b.Livres {
+  if livre.Disponible {
+   disponibles++
+  } else {
+   empruntes++
+  }
+ }
 
-	fmt.Printf("\n=== STATISTIQUES %s ===\n", strings.ToUpper(b.Nom))
-	fmt.Printf("Total des livres: %d\n", total)
-	fmt.Printf("Disponibles: %d\n", disponibles)
-	fmt.Printf("Empruntés: %d\n", empruntes)
-	if total > 0 {
-		fmt.Printf("Taux d'emprunt: %.1f%%\n", float64(empruntes)/float64(total)*100)
-	}
+ fmt.Printf("\n=== STATISTIQUES %s ===\n", strings.ToUpper(b.Nom))
+ fmt.Printf("Total des livres: %d\n", total)
+ fmt.Printf("Disponibles: %d\n", disponibles)
+ fmt.Printf("Empruntés: %d\n", empruntes)
+ if total > 0 {
+  fmt.Printf("Taux d'emprunt: %.1f%%\n", float64(empruntes)/float64(total)*100)
+ }
 }
 
 func exercice2() {
-	fmt.Println("=== EXERCICE 2 : INTERMÉDIAIRE ===")
+ fmt.Println("=== EXERCICE 2 : INTERMÉDIAIRE ===")
 
-	// Créer une bibliothèque
-	biblio := NouvelleBibliotheque("Bibliothèque Municipale")
+ // Créer une bibliothèque
+ biblio := NouvelleBibliotheque("Bibliothèque Municipale")
 
-	// Créer des livres
-	livre1 := NouveauLivreBiblio("Le Petit Prince", "Antoine de Saint-Exupéry", "978-0156012195")
-	livre2 := NouveauLivreBiblio("1984", "George Orwell", "978-0452284234")
-	livre3 := NouveauLivreBiblio("Dune", "Frank Herbert", "978-0441172719")
-	livre4 := NouveauLivreBiblio("La Ferme des Animaux", "George Orwell", "978-0451526342")
-	livre5 := NouveauLivreBiblio("Le Guide du Routard Galactique", "Douglas Adams", "978-0345391803")
+ // Créer des livres
+ livre1 := NouveauLivreBiblio("Le Petit Prince", "Antoine de Saint-Exupéry", "978-0156012195")
+ livre2 := NouveauLivreBiblio("1984", "George Orwell", "978-0452284234")
+ livre3 := NouveauLivreBiblio("Dune", "Frank Herbert", "978-0441172719")
+ livre4 := NouveauLivreBiblio("La Ferme des Animaux", "George Orwell", "978-0451526342")
+ livre5 := NouveauLivreBiblio("Le Guide du Routard Galactique", "Douglas Adams", "978-0345391803")
 
-	// Ajouter les livres
-	fmt.Println("\n--- Ajout de livres ---")
-	biblio.AjouterLivre(livre1)
-	biblio.AjouterLivre(livre2)
-	biblio.AjouterLivre(livre3)
-	biblio.AjouterLivre(livre4)
-	biblio.AjouterLivre(livre5)
+ // Ajouter les livres
+ fmt.Println("\n--- Ajout de livres ---")
+ biblio.AjouterLivre(livre1)
+ biblio.AjouterLivre(livre2)
+ biblio.AjouterLivre(livre3)
+ biblio.AjouterLivre(livre4)
+ biblio.AjouterLivre(livre5)
 
-	// Tentative d'ajout d'un doublon
-	livre1bis := NouveauLivreBiblio("Le Petit Prince (édition illustrée)", "Antoine de Saint-Exupéry", "978-0156012195")
-	biblio.AjouterLivre(livre1bis)
+ // Tentative d'ajout d'un doublon
+ livre1bis := NouveauLivreBiblio("Le Petit Prince (édition illustrée)", "Antoine de Saint-Exupéry", "978-0156012195")
+ biblio.AjouterLivre(livre1bis)
 
-	// Afficher le catalogue
-	biblio.AfficherCatalogue()
+ // Afficher le catalogue
+ biblio.AfficherCatalogue()
 
-	// Emprunter des livres
-	fmt.Println("\n--- Emprunts ---")
-	biblio.EmprunterLivre("978-0156012195") // Le Petit Prince
-	biblio.EmprunterLivre("978-0441172719") // Dune
+ // Emprunter des livres
+ fmt.Println("\n--- Emprunts ---")
+ biblio.EmprunterLivre("978-0156012195") // Le Petit Prince
+ biblio.EmprunterLivre("978-0441172719") // Dune
 
-	// Tentative d'emprunt d'un livre déjà emprunté
-	if err := biblio.EmprunterLivre("978-0156012195"); err != nil {
-		fmt.Printf("❌ %v\n", err)
-	}
+ // Tentative d'emprunt d'un livre déjà emprunté
+ if err := biblio.EmprunterLivre("978-0156012195"); err != nil {
+  fmt.Printf("❌ %v\n", err)
+ }
 
-	// Tentative d'emprunt d'un livre inexistant
-	if err := biblio.EmprunterLivre("978-9999999999"); err != nil {
-		fmt.Printf("❌ %v\n", err)
-	}
+ // Tentative d'emprunt d'un livre inexistant
+ if err := biblio.EmprunterLivre("978-9999999999"); err != nil {
+  fmt.Printf("❌ %v\n", err)
+ }
 
-	// Afficher le catalogue après emprunts
-	biblio.AfficherCatalogue()
+ // Afficher le catalogue après emprunts
+ biblio.AfficherCatalogue()
 
-	// Retourner un livre
-	fmt.Println("\n--- Retours ---")
-	biblio.RetournerLivre("978-0156012195") // Le Petit Prince
+ // Retourner un livre
+ fmt.Println("\n--- Retours ---")
+ biblio.RetournerLivre("978-0156012195") // Le Petit Prince
 
-	// Recherche par auteur
-	fmt.Println("\n--- Recherche par auteur ---")
-	livresOrwell := biblio.RechercherParAuteur("George Orwell")
-	fmt.Printf("Livres de George Orwell (%d trouvé(s)):\n", len(livresOrwell))
-	for _, livre := range livresOrwell {
-		fmt.Printf("  - %s\n", livre)
-	}
+ // Recherche par auteur
+ fmt.Println("\n--- Recherche par auteur ---")
+ livresOrwell := biblio.RechercherParAuteur("George Orwell")
+ fmt.Printf("Livres de George Orwell (%d trouvé(s)):\n", len(livresOrwell))
+ for _, livre := range livresOrwell {
+  fmt.Printf("  - %s\n", livre)
+ }
 
-	livresSaint := biblio.RechercherParAuteur("Saint-Exupéry")
-	fmt.Printf("Livres de Saint-Exupéry (%d trouvé(s)):\n", len(livresSaint))
-	for _, livre := range livresSaint {
-		fmt.Printf("  - %s\n", livre)
-	}
+ livresSaint := biblio.RechercherParAuteur("Saint-Exupéry")
+ fmt.Printf("Livres de Saint-Exupéry (%d trouvé(s)):\n", len(livresSaint))
+ for _, livre := range livresSaint {
+  fmt.Printf("  - %s\n", livre)
+ }
 
-	// Statistiques
-	biblio.Statistiques()
+ // Statistiques
+ biblio.Statistiques()
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -1182,323 +1189,323 @@ func exercice2() {
 
 // Struct Adresse
 type Adresse struct {
-	Rue        string
-	Ville      string
-	CodePostal string
+ Rue        string
+ Ville      string
+ CodePostal string
 }
 
 func (a Adresse) String() string {
-	return fmt.Sprintf("%s, %s %s", a.Rue, a.CodePostal, a.Ville)
+ return fmt.Sprintf("%s, %s %s", a.Rue, a.CodePostal, a.Ville)
 }
 
 // Struct Employé
 type Employe struct {
-	ID          int
-	Nom         string
-	Prenom      string
-	Adresse     Adresse
-	Salaire     float64
-	Departement string
-	DateEmbauche time.Time
+ ID          int
+ Nom         string
+ Prenom      string
+ Adresse     Adresse
+ Salaire     float64
+ Departement string
+ DateEmbauche time.Time
 }
 
 func (e Employe) String() string {
-	return fmt.Sprintf("%s %s (ID: %d) - %s - %.2f€/mois",
-		e.Prenom, e.Nom, e.ID, e.Departement, e.Salaire)
+ return fmt.Sprintf("%s %s (ID: %d) - %s - %.2f€/mois",
+  e.Prenom, e.Nom, e.ID, e.Departement, e.Salaire)
 }
 
 func (e Employe) NomComplet() string {
-	return fmt.Sprintf("%s %s", e.Prenom, e.Nom)
+ return fmt.Sprintf("%s %s", e.Prenom, e.Nom)
 }
 
 func (e Employe) AncienneteAnnees() int {
-	return int(time.Since(e.DateEmbauche).Hours() / 24 / 365)
+ return int(time.Since(e.DateEmbauche).Hours() / 24 / 365)
 }
 
 // Constructeur pour Employé
 func NouvelEmploye(id int, nom, prenom string, adresse Adresse,
-	salaire float64, departement string) *Employe {
-	return &Employe{
-		ID:           id,
-		Nom:          nom,
-		Prenom:       prenom,
-		Adresse:      adresse,
-		Salaire:      salaire,
-		Departement:  departement,
-		DateEmbauche: time.Now(),
-	}
+ salaire float64, departement string) *Employe {
+ return &Employe{
+  ID:           id,
+  Nom:          nom,
+  Prenom:       prenom,
+  Adresse:      adresse,
+  Salaire:      salaire,
+  Departement:  departement,
+  DateEmbauche: time.Now(),
+ }
 }
 
 // Struct Entreprise
 type Entreprise struct {
-	Nom       string
-	Employes  []*Employe
-	prochainID int
+ Nom       string
+ Employes  []*Employe
+ prochainID int
 }
 
 // Constructeur pour Entreprise
 func NouvelleEntreprise(nom string) *Entreprise {
-	return &Entreprise{
-		Nom:        nom,
-		Employes:   make([]*Employe, 0),
-		prochainID: 1,
-	}
+ return &Entreprise{
+  Nom:        nom,
+  Employes:   make([]*Employe, 0),
+  prochainID: 1,
+ }
 }
 
 // Ajouter un employé
 func (ent *Entreprise) AjouterEmploye(nom, prenom string, adresse Adresse,
-	salaire float64, departement string) *Employe {
-	employe := NouvelEmploye(ent.prochainID, nom, prenom, adresse, salaire, departement)
-	ent.prochainID++
-	ent.Employes = append(ent.Employes, employe)
+ salaire float64, departement string) *Employe {
+ employe := NouvelEmploye(ent.prochainID, nom, prenom, adresse, salaire, departement)
+ ent.prochainID++
+ ent.Employes = append(ent.Employes, employe)
 
-	fmt.Printf("✅ Employé ajouté: %s\n", employe.NomComplet())
-	return employe
+ fmt.Printf("✅ Employé ajouté: %s\n", employe.NomComplet())
+ return employe
 }
 
 // Supprimer un employé par ID
 func (ent *Entreprise) SupprimerEmploye(id int) error {
-	for i, employe := range ent.Employes {
-		if employe.ID == id {
-			// Supprimer l'employé du slice
-			ent.Employes = append(ent.Employes[:i], ent.Employes[i+1:]...)
-			fmt.Printf("🗑️  Employé supprimé: %s\n", employe.NomComplet())
-			return nil
-		}
-	}
-	return fmt.Errorf("employé avec ID %d non trouvé", id)
+ for i, employe := range ent.Employes {
+  if employe.ID == id {
+   // Supprimer l'employé du slice
+   ent.Employes = append(ent.Employes[:i], ent.Employes[i+1:]...)
+   fmt.Printf("🗑️  Employé supprimé: %s\n", employe.NomComplet())
+   return nil
+  }
+ }
+ return fmt.Errorf("employé avec ID %d non trouvé", id)
 }
 
 // Calculer la masse salariale par département
 func (ent *Entreprise) MasseSalarialeParDepartement() map[string]float64 {
-	masseSalariale := make(map[string]float64)
+ masseSalariale := make(map[string]float64)
 
-	for _, employe := range ent.Employes {
-		masseSalariale[employe.Departement] += employe.Salaire
-	}
+ for _, employe := range ent.Employes {
+  masseSalariale[employe.Departement] += employe.Salaire
+ }
 
-	return masseSalariale
+ return masseSalariale
 }
 
 // Trouver les employés par ville
 func (ent *Entreprise) EmployesParVille(ville string) []*Employe {
-	var resultats []*Employe
-	villeLower := strings.ToLower(ville)
+ var resultats []*Employe
+ villeLower := strings.ToLower(ville)
 
-	for _, employe := range ent.Employes {
-		if strings.ToLower(employe.Adresse.Ville) == villeLower {
-			resultats = append(resultats, employe)
-		}
-	}
+ for _, employe := range ent.Employes {
+  if strings.ToLower(employe.Adresse.Ville) == villeLower {
+   resultats = append(resultats, employe)
+  }
+ }
 
-	return resultats
+ return resultats
 }
 
 // Trouver les employés par département
 func (ent *Entreprise) EmployesParDepartement(departement string) []*Employe {
-	var resultats []*Employe
-	deptLower := strings.ToLower(departement)
+ var resultats []*Employe
+ deptLower := strings.ToLower(departement)
 
-	for _, employe := range ent.Employes {
-		if strings.ToLower(employe.Departement) == deptLower {
-			resultats = append(resultats, employe)
-		}
-	}
+ for _, employe := range ent.Employes {
+  if strings.ToLower(employe.Departement) == deptLower {
+   resultats = append(resultats, employe)
+  }
+ }
 
-	return resultats
+ return resultats
 }
 
 // Calculer le salaire moyen
 func (ent *Entreprise) SalaireMoyen() float64 {
-	if len(ent.Employes) == 0 {
-		return 0
-	}
+ if len(ent.Employes) == 0 {
+  return 0
+ }
 
-	var total float64
-	for _, employe := range ent.Employes {
-		total += employe.Salaire
-	}
+ var total float64
+ for _, employe := range ent.Employes {
+  total += employe.Salaire
+ }
 
-	return total / float64(len(ent.Employes))
+ return total / float64(len(ent.Employes))
 }
 
 // Trouver l'employé avec le salaire le plus élevé
 func (ent *Entreprise) EmployeAvecSalaireMax() *Employe {
-	if len(ent.Employes) == 0 {
-		return nil
-	}
+ if len(ent.Employes) == 0 {
+  return nil
+ }
 
-	maxEmploye := ent.Employes[0]
-	for _, employe := range ent.Employes[1:] {
-		if employe.Salaire > maxEmploye.Salaire {
-			maxEmploye = employe
-		}
-	}
+ maxEmploye := ent.Employes[0]
+ for _, employe := range ent.Employes[1:] {
+  if employe.Salaire > maxEmploye.Salaire {
+   maxEmploye = employe
+  }
+ }
 
-	return maxEmploye
+ return maxEmploye
 }
 
 // Augmenter les salaires d'un département
 func (ent *Entreprise) AugmenterSalaires(departement string, pourcentage float64) {
-	employesAffectes := 0
+ employesAffectes := 0
 
-	for _, employe := range ent.Employes {
-		if strings.ToLower(employe.Departement) == strings.ToLower(departement) {
-			ancienSalaire := employe.Salaire
-			employe.Salaire *= (1.0 + pourcentage/100.0)
-			fmt.Printf("💰 %s: %.2f€ → %.2f€ (+%.1f%%)\n",
-				employe.NomComplet(), ancienSalaire, employe.Salaire, pourcentage)
-			employesAffectes++
-		}
-	}
+ for _, employe := range ent.Employes {
+  if strings.ToLower(employe.Departement) == strings.ToLower(departement) {
+   ancienSalaire := employe.Salaire
+   employe.Salaire *= (1.0 + pourcentage/100.0)
+   fmt.Printf("💰 %s: %.2f€ → %.2f€ (+%.1f%%)\n",
+    employe.NomComplet(), ancienSalaire, employe.Salaire, pourcentage)
+   employesAffectes++
+  }
+ }
 
-	if employesAffectes == 0 {
-		fmt.Printf("Aucun employé trouvé dans le département: %s\n", departement)
-	} else {
-		fmt.Printf("Augmentation appliquée à %d employé(s)\n", employesAffectes)
-	}
+ if employesAffectes == 0 {
+  fmt.Printf("Aucun employé trouvé dans le département: %s\n", departement)
+ } else {
+  fmt.Printf("Augmentation appliquée à %d employé(s)\n", employesAffectes)
+ }
 }
 
 // Afficher tous les employés
 func (ent *Entreprise) AfficherEmployes() {
-	fmt.Printf("\n=== EMPLOYÉS DE %s ===\n", strings.ToUpper(ent.Nom))
-	if len(ent.Employes) == 0 {
-		fmt.Println("Aucun employé.")
-		return
-	}
+ fmt.Printf("\n=== EMPLOYÉS DE %s ===\n", strings.ToUpper(ent.Nom))
+ if len(ent.Employes) == 0 {
+  fmt.Println("Aucun employé.")
+  return
+ }
 
-	for i, employe := range ent.Employes {
-		fmt.Printf("%d. %s\n", i+1, employe)
-		fmt.Printf("   📍 %s\n", employe.Adresse)
-		fmt.Printf("   📅 Embauché depuis %d an(s)\n", employe.AncienneteAnnees())
-	}
+ for i, employe := range ent.Employes {
+  fmt.Printf("%d. %s\n", i+1, employe)
+  fmt.Printf("   📍 %s\n", employe.Adresse)
+  fmt.Printf("   📅 Embauché depuis %d an(s)\n", employe.AncienneteAnnees())
+ }
 }
 
 // Statistiques complètes
 func (ent *Entreprise) StatistiquesCompletes() {
-	fmt.Printf("\n=== STATISTIQUES %s ===\n", strings.ToUpper(ent.Nom))
+ fmt.Printf("\n=== STATISTIQUES %s ===\n", strings.ToUpper(ent.Nom))
 
-	if len(ent.Employes) == 0 {
-		fmt.Println("Aucun employé.")
-		return
-	}
+ if len(ent.Employes) == 0 {
+  fmt.Println("Aucun employé.")
+  return
+ }
 
-	// Statistiques générales
-	fmt.Printf("Nombre total d'employés: %d\n", len(ent.Employes))
-	fmt.Printf("Salaire moyen: %.2f€\n", ent.SalaireMoyen())
+ // Statistiques générales
+ fmt.Printf("Nombre total d'employés: %d\n", len(ent.Employes))
+ fmt.Printf("Salaire moyen: %.2f€\n", ent.SalaireMoyen())
 
-	employeMax := ent.EmployeAvecSalaireMax()
-	if employeMax != nil {
-		fmt.Printf("Salaire le plus élevé: %.2f€ (%s)\n",
-			employeMax.Salaire, employeMax.NomComplet())
-	}
+ employeMax := ent.EmployeAvecSalaireMax()
+ if employeMax != nil {
+  fmt.Printf("Salaire le plus élevé: %.2f€ (%s)\n",
+   employeMax.Salaire, employeMax.NomComplet())
+ }
 
-	// Masse salariale par département
-	fmt.Println("\nMasse salariale par département:")
-	masseSalariale := ent.MasseSalarialeParDepartement()
-	var totalMasse float64
-	for dept, masse := range masseSalariale {
-		fmt.Printf("  %s: %.2f€/mois\n", dept, masse)
-		totalMasse += masse
-	}
-	fmt.Printf("  TOTAL: %.2f€/mois (%.2f€/an)\n", totalMasse, totalMasse*12)
+ // Masse salariale par département
+ fmt.Println("\nMasse salariale par département:")
+ masseSalariale := ent.MasseSalarialeParDepartement()
+ var totalMasse float64
+ for dept, masse := range masseSalariale {
+  fmt.Printf("  %s: %.2f€/mois\n", dept, masse)
+  totalMasse += masse
+ }
+ fmt.Printf("  TOTAL: %.2f€/mois (%.2f€/an)\n", totalMasse, totalMasse*12)
 
-	// Répartition par département
-	fmt.Println("\nRépartition par département:")
-	departements := make(map[string]int)
-	for _, employe := range ent.Employes {
-		departements[employe.Departement]++
-	}
-	for dept, count := range departements {
-		fmt.Printf("  %s: %d employé(s)\n", dept, count)
-	}
+ // Répartition par département
+ fmt.Println("\nRépartition par département:")
+ departements := make(map[string]int)
+ for _, employe := range ent.Employes {
+  departements[employe.Departement]++
+ }
+ for dept, count := range departements {
+  fmt.Printf("  %s: %d employé(s)\n", dept, count)
+ }
 
-	// Répartition par ville
-	fmt.Println("\nRépartition par ville:")
-	villes := make(map[string]int)
-	for _, employe := range ent.Employes {
-		villes[employe.Adresse.Ville]++
-	}
-	for ville, count := range villes {
-		fmt.Printf("  %s: %d employé(s)\n", ville, count)
-	}
+ // Répartition par ville
+ fmt.Println("\nRépartition par ville:")
+ villes := make(map[string]int)
+ for _, employe := range ent.Employes {
+  villes[employe.Adresse.Ville]++
+ }
+ for ville, count := range villes {
+  fmt.Printf("  %s: %d employé(s)\n", ville, count)
+ }
 }
 
 func exercice3() {
-	fmt.Println("=== EXERCICE 3 : AVANCÉ ===")
+ fmt.Println("=== EXERCICE 3 : AVANCÉ ===")
 
-	// Créer une entreprise
-	entreprise := NouvelleEntreprise("TechCorp Solutions")
+ // Créer une entreprise
+ entreprise := NouvelleEntreprise("TechCorp Solutions")
 
-	// Créer des adresses
-	adresse1 := Adresse{"123 Rue de la République", "Lyon", "69001"}
-	adresse2 := Adresse{"456 Avenue des Champs", "Paris", "75001"}
-	adresse3 := Adresse{"789 Boulevard Central", "Lyon", "69002"}
-	adresse4 := Adresse{"321 Rue Victor Hugo", "Marseille", "13001"}
-	adresse5 := Adresse{"654 Place de la Liberté", "Paris", "75002"}
+ // Créer des adresses
+ adresse1 := Adresse{"123 Rue de la République", "Lyon", "69001"}
+ adresse2 := Adresse{"456 Avenue des Champs", "Paris", "75001"}
+ adresse3 := Adresse{"789 Boulevard Central", "Lyon", "69002"}
+ adresse4 := Adresse{"321 Rue Victor Hugo", "Marseille", "13001"}
+ adresse5 := Adresse{"654 Place de la Liberté", "Paris", "75002"}
 
-	// Ajouter des employés
-	fmt.Println("\n--- Ajout d'employés ---")
-	entreprise.AjouterEmploye("Dupont", "Alice", adresse1, 4500.0, "Développement")
-	entreprise.AjouterEmploye("Martin", "Bob", adresse2, 5200.0, "Développement")
-	entreprise.AjouterEmploye("Durand", "Charlie", adresse3, 3800.0, "Marketing")
-	entreprise.AjouterEmploye("Bernard", "Diana", adresse4, 4100.0, "Marketing")
-	entreprise.AjouterEmploye("Petit", "Eve", adresse5, 6000.0, "Direction")
-	entreprise.AjouterEmploye("Moreau", "Frank", adresse1, 3500.0, "RH")
-	entreprise.AjouterEmploye("Simon", "Grace", adresse2, 4800.0, "Développement")
+ // Ajouter des employés
+ fmt.Println("\n--- Ajout d'employés ---")
+ entreprise.AjouterEmploye("Dupont", "Alice", adresse1, 4500.0, "Développement")
+ entreprise.AjouterEmploye("Martin", "Bob", adresse2, 5200.0, "Développement")
+ entreprise.AjouterEmploye("Durand", "Charlie", adresse3, 3800.0, "Marketing")
+ entreprise.AjouterEmploye("Bernard", "Diana", adresse4, 4100.0, "Marketing")
+ entreprise.AjouterEmploye("Petit", "Eve", adresse5, 6000.0, "Direction")
+ entreprise.AjouterEmploye("Moreau", "Frank", adresse1, 3500.0, "RH")
+ entreprise.AjouterEmploye("Simon", "Grace", adresse2, 4800.0, "Développement")
 
-	// Afficher tous les employés
-	entreprise.AfficherEmployes()
+ // Afficher tous les employés
+ entreprise.AfficherEmployes()
 
-	// Recherches par ville
-	fmt.Println("\n--- Recherche par ville ---")
-	employesLyon := entreprise.EmployesParVille("Lyon")
-	fmt.Printf("Employés à Lyon (%d):\n", len(employesLyon))
-	for _, emp := range employesLyon {
-		fmt.Printf("  - %s (%s)\n", emp.NomComplet(), emp.Departement)
-	}
+ // Recherches par ville
+ fmt.Println("\n--- Recherche par ville ---")
+ employesLyon := entreprise.EmployesParVille("Lyon")
+ fmt.Printf("Employés à Lyon (%d):\n", len(employesLyon))
+ for _, emp := range employesLyon {
+  fmt.Printf("  - %s (%s)\n", emp.NomComplet(), emp.Departement)
+ }
 
-	employesParis := entreprise.EmployesParVille("Paris")
-	fmt.Printf("Employés à Paris (%d):\n", len(employesParis))
-	for _, emp := range employesParis {
-		fmt.Printf("  - %s (%s)\n", emp.NomComplet(), emp.Departement)
-	}
+ employesParis := entreprise.EmployesParVille("Paris")
+ fmt.Printf("Employés à Paris (%d):\n", len(employesParis))
+ for _, emp := range employesParis {
+  fmt.Printf("  - %s (%s)\n", emp.NomComplet(), emp.Departement)
+ }
 
-	// Recherche par département
-	fmt.Println("\n--- Recherche par département ---")
-	employesDev := entreprise.EmployesParDepartement("Développement")
-	fmt.Printf("Employés en Développement (%d):\n", len(employesDev))
-	for _, emp := range employesDev {
-		fmt.Printf("  - %s (%.2f€)\n", emp.NomComplet(), emp.Salaire)
-	}
+ // Recherche par département
+ fmt.Println("\n--- Recherche par département ---")
+ employesDev := entreprise.EmployesParDepartement("Développement")
+ fmt.Printf("Employés en Développement (%d):\n", len(employesDev))
+ for _, emp := range employesDev {
+  fmt.Printf("  - %s (%.2f€)\n", emp.NomComplet(), emp.Salaire)
+ }
 
-	// Augmentation de salaire
-	fmt.Println("\n--- Augmentation de salaire ---")
-	entreprise.AugmenterSalaires("Développement", 8.0) // 8% d'augmentation
-	entreprise.AugmenterSalaires("Marketing", 5.0)     // 5% d'augmentation
+ // Augmentation de salaire
+ fmt.Println("\n--- Augmentation de salaire ---")
+ entreprise.AugmenterSalaires("Développement", 8.0) // 8% d'augmentation
+ entreprise.AugmenterSalaires("Marketing", 5.0)     // 5% d'augmentation
 
-	// Statistiques complètes
-	entreprise.StatistiquesCompletes()
+ // Statistiques complètes
+ entreprise.StatistiquesCompletes()
 
-	// Test de suppression
-	fmt.Println("\n--- Suppression d'employé ---")
-	if err := entreprise.SupprimerEmploye(3); err != nil {
-		fmt.Printf("Erreur: %v\n", err)
-	}
+ // Test de suppression
+ fmt.Println("\n--- Suppression d'employé ---")
+ if err := entreprise.SupprimerEmploye(3); err != nil {
+  fmt.Printf("Erreur: %v\n", err)
+ }
 
-	// Statistiques après suppression
-	fmt.Println("\nStatistiques après suppression:")
-	fmt.Printf("Nombre d'employés: %d\n", len(entreprise.Employes))
-	fmt.Printf("Nouvelle masse salariale totale: %.2f€/mois\n",
-		func() float64 {
-			var total float64
-			for _, masse := range entreprise.MasseSalarialeParDepartement() {
-				total += masse
-			}
-			return total
-		}())
+ // Statistiques après suppression
+ fmt.Println("\nStatistiques après suppression:")
+ fmt.Printf("Nombre d'employés: %d\n", len(entreprise.Employes))
+ fmt.Printf("Nouvelle masse salariale totale: %.2f€/mois\n",
+  func() float64 {
+   var total float64
+   for _, masse := range entreprise.MasseSalarialeParDepartement() {
+    total += masse
+   }
+   return total
+  }())
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -1507,62 +1514,62 @@ func exercice3() {
 
 // Fonction pour créer des données de test rapidement
 func creerDonneesTest() (*Bibliotheque, *Entreprise) {
-	// Bibliothèque de test
-	biblio := NouvelleBibliotheque("Bibliothèque de Test")
-	biblio.AjouterLivre(NouveauLivreBiblio("Test Livre 1", "Auteur Test", "111"))
-	biblio.AjouterLivre(NouveauLivreBiblio("Test Livre 2", "Auteur Test", "222"))
+ // Bibliothèque de test
+ biblio := NouvelleBibliotheque("Bibliothèque de Test")
+ biblio.AjouterLivre(NouveauLivreBiblio("Test Livre 1", "Auteur Test", "111"))
+ biblio.AjouterLivre(NouveauLivreBiblio("Test Livre 2", "Auteur Test", "222"))
 
-	// Entreprise de test
-	entreprise := NouvelleEntreprise("Test Corp")
-	adresse := Adresse{"Test Rue", "Test Ville", "12345"}
-	entreprise.AjouterEmploye("Test", "Employé", adresse, 3000.0, "Test")
+ // Entreprise de test
+ entreprise := NouvelleEntreprise("Test Corp")
+ adresse := Adresse{"Test Rue", "Test Ville", "12345"}
+ entreprise.AjouterEmploye("Test", "Employé", adresse, 3000.0, "Test")
 
-	return biblio, entreprise
+ return biblio, entreprise
 }
 
 // Démonstration des patterns avancés
 func demonstrationPatterns() {
-	fmt.Println("=== DÉMONSTRATION PATTERNS AVANCÉS ===")
+ fmt.Println("=== DÉMONSTRATION PATTERNS AVANCÉS ===")
 
-	// Pattern Builder pour Employé
-	type EmployeBuilder struct {
-		employe *Employe
-	}
+ // Pattern Builder pour Employé
+ type EmployeBuilder struct {
+  employe *Employe
+ }
 
-	func NouvelEmployeBuilder() *EmployeBuilder {
-		return &EmployeBuilder{
-			employe: &Employe{},
-		}
-	}
+ func NouvelEmployeBuilder() *EmployeBuilder {
+  return &EmployeBuilder{
+   employe: &Employe{},
+  }
+ }
 
-	func (eb *EmployeBuilder) Nom(nom string) *EmployeBuilder {
-		eb.employe.Nom = nom
-		return eb
-	}
+ func (eb *EmployeBuilder) Nom(nom string) *EmployeBuilder {
+  eb.employe.Nom = nom
+  return eb
+ }
 
-	func (eb *EmployeBuilder) Prenom(prenom string) *EmployeBuilder {
-		eb.employe.Prenom = prenom
-		return eb
-	}
+ func (eb *EmployeBuilder) Prenom(prenom string) *EmployeBuilder {
+  eb.employe.Prenom = prenom
+  return eb
+ }
 
-	func (eb *EmployeBuilder) Salaire(salaire float64) *EmployeBuilder {
-		eb.employe.Salaire = salaire
-		return eb
-	}
+ func (eb *EmployeBuilder) Salaire(salaire float64) *EmployeBuilder {
+  eb.employe.Salaire = salaire
+  return eb
+ }
 
-	func (eb *EmployeBuilder) Build() *Employe {
-		eb.employe.DateEmbauche = time.Now()
-		return eb.employe
-	}
+ func (eb *EmployeBuilder) Build() *Employe {
+  eb.employe.DateEmbauche = time.Now()
+  return eb.employe
+ }
 
-	// Utilisation du Builder
-	employe := NouvelEmployeBuilder().
-		Nom("Builder").
-		Prenom("Pattern").
-		Salaire(5000.0).
-		Build()
+ // Utilisation du Builder
+ employe := NouvelEmployeBuilder().
+  Nom("Builder").
+  Prenom("Pattern").
+  Salaire(5000.0).
+  Build()
 
-	fmt.Printf("Employé créé avec Builder: %s\n", employe.NomComplet())
+ fmt.Printf("Employé créé avec Builder: %s\n", employe.NomComplet())
 }
 
 // ==========================================
@@ -1570,18 +1577,18 @@ func demonstrationPatterns() {
 // ==========================================
 
 func main() {
-	fmt.Println("SOLUTIONS DES EXERCICES - STRUCTS")
-	fmt.Println("==================================")
+ fmt.Println("SOLUTIONS DES EXERCICES - STRUCTS")
+ fmt.Println("==================================")
 
-	exercice1()
-	exercice2()
-	exercice3()
+ exercice1()
+ exercice2()
+ exercice3()
 
-	// Bonus: démonstration de patterns avancés
-	demonstrationPatterns()
+ // Bonus: démonstration de patterns avancés
+ demonstrationPatterns()
 
-	// Bonus: test de performance
-	demonstrationPerformance()
+ // Bonus: test de performance
+ demonstrationPerformance()
 }
 
 // ==========================================
@@ -1589,42 +1596,42 @@ func main() {
 // ==========================================
 
 func demonstrationPerformance() {
-	fmt.Println("\n=== DÉMONSTRATION PERFORMANCE ===")
+ fmt.Println("\n=== DÉMONSTRATION PERFORMANCE ===")
 
-	// Comparaison passage par valeur vs pointeur
-	type GrosseStruct struct {
-		Donnees [1000]int
-		Nom     string
-		Actif   bool
-	}
+ // Comparaison passage par valeur vs pointeur
+ type GrosseStruct struct {
+  Donnees [1000]int
+  Nom     string
+  Actif   bool
+ }
 
-	// Fonction avec passage par valeur (copie)
-	func traiterParValeur(gs GrosseStruct) {
-		// Toute la struct est copiée !
-		gs.Nom = "Modifié"
-	}
+ // Fonction avec passage par valeur (copie)
+ func traiterParValeur(gs GrosseStruct) {
+  // Toute la struct est copiée !
+  gs.Nom = "Modifié"
+ }
 
-	// Fonction avec passage par pointeur (référence)
-	func traiterParPointeur(gs *GrosseStruct) {
-		// Seul le pointeur est passé
-		gs.Nom = "Modifié"
-	}
+ // Fonction avec passage par pointeur (référence)
+ func traiterParPointeur(gs *GrosseStruct) {
+  // Seul le pointeur est passé
+  gs.Nom = "Modifié"
+ }
 
-	gs := GrosseStruct{Nom: "Original"}
+ gs := GrosseStruct{Nom: "Original"}
 
-	fmt.Printf("Avant traitement par valeur: %s\n", gs.Nom)
-	traiterParValeur(gs)
-	fmt.Printf("Après traitement par valeur: %s\n", gs.Nom) // Pas modifié
+ fmt.Printf("Avant traitement par valeur: %s\n", gs.Nom)
+ traiterParValeur(gs)
+ fmt.Printf("Après traitement par valeur: %s\n", gs.Nom) // Pas modifié
 
-	fmt.Printf("Avant traitement par pointeur: %s\n", gs.Nom)
-	traiterParPointeur(&gs)
-	fmt.Printf("Après traitement par pointeur: %s\n", gs.Nom) // Modifié
+ fmt.Printf("Avant traitement par pointeur: %s\n", gs.Nom)
+ traiterParPointeur(&gs)
+ fmt.Printf("Après traitement par pointeur: %s\n", gs.Nom) // Modifié
 
-	// Démonstration avec benchmark simulé
-	fmt.Println("\n💡 Pour les grosses structs, utilisez des pointeurs!")
-	fmt.Println("   - Évite la copie de données")
-	fmt.Println("   - Permet la modification")
-	fmt.Println("   - Plus efficace en mémoire")
+ // Démonstration avec benchmark simulé
+ fmt.Println("\n💡 Pour les grosses structs, utilisez des pointeurs!")
+ fmt.Println("   - Évite la copie de données")
+ fmt.Println("   - Permet la modification")
+ fmt.Println("   - Plus efficace en mémoire")
 }
 ```
 
@@ -1633,6 +1640,7 @@ func demonstrationPerformance() {
 Les structs sont le fondement de l'organisation des données en Go :
 
 **Points clés à retenir :**
+
 - Les structs regroupent des données de types différents
 - Elles supportent la composition via l'embedding
 - Les méthodes peuvent être attachées aux structs
@@ -1641,6 +1649,7 @@ Les structs sont le fondement de l'organisation des données en Go :
 - Préférez les pointeurs pour les grosses structs ou les modifications
 
 **Patterns courants :**
+
 - Constructeurs avec validation
 - Méthodes receiver par pointeur pour modification
 - Embedding pour la composition

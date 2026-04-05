@@ -11,12 +11,15 @@ Go a une approche unique et explicite pour gérer les erreurs qui peut sembler �
 ## 1. Philosophie de Go concernant les erreurs
 
 ### Principe fondamental
+
 En Go, **les erreurs sont des valeurs**, pas des exceptions. Cela signifie :
+
 - Elles sont retournées explicitement par les fonctions
 - Elles doivent être vérifiées manuellement
 - Le code reste lisible et prévisible
 
 ### Comparaison avec d'autres langages
+
 ```go
 // ❌ Autres langages (try/catch)
 // try {
@@ -37,6 +40,7 @@ if err != nil {
 ## 2. Le type error
 
 ### Qu'est-ce qu'une error ?
+
 En Go, `error` est une interface très simple :
 
 ```go
@@ -48,6 +52,7 @@ type error interface {
 Toute structure qui a une méthode `Error() string` peut être une erreur.
 
 ### Valeur nil
+
 Une erreur `nil` signifie "pas d'erreur" :
 
 ```go
@@ -84,6 +89,7 @@ func main() {
 ## 3. Pattern de base : vérification d'erreur
 
 ### Le pattern classique
+
 ```go
 result, err := functionThatCanFail()
 if err != nil {
@@ -94,6 +100,7 @@ if err != nil {
 ```
 
 ### Exemple concret
+
 ```go
 package main
 
@@ -122,6 +129,7 @@ func main() {
 ## 4. Créer des erreurs
 
 ### Avec fmt.Errorf
+
 ```go
 package main
 
@@ -152,6 +160,7 @@ func main() {
 ```
 
 ### Avec errors.New
+
 ```go
 package main
 
@@ -185,6 +194,7 @@ func main() {
 ## 5. Gestion de multiples erreurs
 
 ### Early return pattern
+
 ```go
 package main
 
@@ -309,6 +319,7 @@ func main() {
 ## 7. Différentes stratégies de gestion
 
 ### 1. Propager l'erreur (return)
+
 ```go
 func functionA() error {
     err := functionB()
@@ -320,6 +331,7 @@ func functionA() error {
 ```
 
 ### 2. Logger et continuer
+
 ```go
 package main
 
@@ -354,6 +366,7 @@ func main() {
 ```
 
 ### 3. Valeur par défaut
+
 ```go
 package main
 
@@ -384,6 +397,7 @@ func main() {
 ## 8. Wrapping d'erreurs (Go 1.13+)
 
 ### Ajouter du contexte
+
 ```go
 package main
 
@@ -431,6 +445,7 @@ func main() {
 ## 9. Exemples pratiques complets
 
 ### Calculatrice avec gestion d'erreurs
+
 ```go
 package main
 
@@ -498,6 +513,7 @@ func main() {
 ## 10. Bonnes pratiques
 
 ### 1. Messages d'erreur clairs
+
 ```go
 // ✅ Bon
 return fmt.Errorf("impossible de connecter à la base de données %s sur le port %d : %w",
@@ -508,6 +524,7 @@ return errors.New("erreur de connexion")
 ```
 
 ### 2. Vérifier les erreurs immédiatement
+
 ```go
 // ✅ Bon
 file, err := os.Open("fichier.txt")
@@ -525,6 +542,7 @@ if err != nil {
 ```
 
 ### 3. Ne pas ignorer les erreurs
+
 ```go
 // ❌ Mauvais
 data, _ := ioutil.ReadFile("config.txt")
@@ -540,18 +558,23 @@ if err != nil {
 ## 11. Exercices pratiques
 
 ### Exercice 1 : Validateur d'email
+
 Créez une fonction qui valide un email et retourne des erreurs spécifiques pour chaque problème.
 
 ### Exercice 2 : Calculateur d'IMC
+
 Créez un calculateur d'IMC qui gère les erreurs (poids/taille négatifs, division par zéro).
 
 ### Exercice 3 : Lecteur de fichier CSV
+
 Créez une fonction qui lit un fichier CSV et gère toutes les erreurs possibles.
 
 ### Exercice 4 : Convertisseur d'unités
+
 Créez un convertisseur température avec gestion d'erreurs pour les valeurs impossibles.
 
 ### Exercice 5 : Gestionnaire de mots de passe
+
 Créez un validateur de mot de passe avec différents types d'erreurs.
 
 # Solutions des Exercices - Gestion des erreurs basique
@@ -559,6 +582,7 @@ Créez un validateur de mot de passe avec différents types d'erreurs.
 ### Exercice 1 : Validateur d'email
 
 #### Solution basique
+
 ```go
 package main
 
@@ -649,6 +673,7 @@ func main() {
 ```
 
 #### Solution avancée avec structure de résultat
+
 ```go
 package main
 
@@ -759,6 +784,7 @@ func main() {
 ### Exercice 2 : Calculateur d'IMC
 
 #### Solution complète
+
 ```go
 package main
 
@@ -902,6 +928,7 @@ func main() {
 ### Exercice 3 : Lecteur de fichier CSV
 
 #### Solution avec gestion complète des erreurs
+
 ```go
 package main
 
@@ -1095,6 +1122,7 @@ func main() {
 ### Exercice 4 : Convertisseur d'unités
 
 #### Solution complète pour les températures
+
 ```go
 package main
 
@@ -1320,6 +1348,7 @@ func main() {
 ### Exercice 5 : Gestionnaire de mots de passe
 
 #### Solution complète avec différents niveaux de sécurité
+
 ```go
 package main
 
@@ -1776,12 +1805,14 @@ func main() {
 ### Fonctionnalités clés du gestionnaire de mots de passe
 
 #### 🔒 **Niveaux de sécurité**
+
 - **Basique** : Longueur minimale seulement
 - **Moyen** : Minuscules, majuscules, chiffres
 - **Fort** : + caractères spéciaux, longueur 10+
 - **Très Fort** : Critères renforcés, longueur 12+
 
 #### 🎯 **Validations implémentées**
+
 - Longueur (min/max selon niveau)
 - Composition (maj/min/chiffres/spéciaux)
 - Répétitions excessives
@@ -1789,6 +1820,7 @@ func main() {
 - Score de force (0-100)
 
 #### 💡 **Fonctionnalités avancées**
+
 - Système de scoring intelligent
 - Suggestions personnalisées
 - Mode interactif
@@ -1796,6 +1828,7 @@ func main() {
 - Détection de patterns faibles
 
 #### 🛡️ **Sécurité**
+
 - Masquage du mot de passe à l'affichage
 - Vérification contre liste de mots courants
 - Détection de variantes simples (password123, etc.)
@@ -1843,6 +1876,7 @@ La gestion d'erreurs en Go suit ces principes :
 - **Fail fast** : Échouez rapidement et proprement
 
 **Points clés à retenir :**
+
 - Toujours vérifier `if err != nil`
 - Utiliser `fmt.Errorf` pour ajouter du contexte
 - Propager, logger ou gérer selon le contexte

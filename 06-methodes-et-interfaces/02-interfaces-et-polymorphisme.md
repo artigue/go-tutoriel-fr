@@ -88,6 +88,7 @@ func main() {
 ```
 
 **Sortie :**
+
 ```
 === Rectangle ===
 Aire: 15.00

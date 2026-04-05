@@ -5,6 +5,7 @@
 ## Qu'est-ce qu'un module Go ?
 
 Un **module** en Go est comme un "conteneur" pour votre projet qui :
+
 - Définit le nom de votre projet
 - Liste toutes les dépendances externes (autres packages/bibliothèques)
 - Spécifie les versions exactes de ces dépendances
@@ -15,6 +16,7 @@ Imaginez un module comme la "recette" complète de votre projet, avec tous les i
 ## Pourquoi les modules sont-ils importants ?
 
 ### Avant les modules (le problème)
+
 ```bash
 # Problèmes de l'ancien système GOPATH :
 - Tous les projets dans un seul dossier
@@ -24,6 +26,7 @@ Imaginez un module comme la "recette" complète de votre projet, avec tous les i
 ```
 
 ### Avec les modules (la solution)
+
 ```bash
 # Avantages des modules :
 ✅ Chaque projet est indépendant
@@ -36,6 +39,7 @@ Imaginez un module comme la "recette" complète de votre projet, avec tous les i
 ## Créer votre premier module
 
 ### 1. Initialisation d'un module
+
 ```bash
 # Créer un nouveau dossier pour votre projet
 mkdir mon-projet
@@ -46,6 +50,7 @@ go mod init mon-projet
 ```
 
 Cela crée un fichier `go.mod` :
+
 ```go
 module mon-projet
 
@@ -53,7 +58,8 @@ go 1.21
 ```
 
 ### 2. Structure recommandée
-```
+
+```text
 mon-projet/
 ├── go.mod          # Définition du module
 ├── go.sum          # Checksums de sécurité (généré automatiquement)
@@ -67,6 +73,7 @@ mon-projet/
 ## Le fichier go.mod expliqué
 
 ### Exemple complet
+
 ```go
 module github.com/monnom/mon-super-projet
 
@@ -87,24 +94,29 @@ replace (
 )
 ```
 
-### Décortiquons chaque partie :
+### Décortiquons chaque partie
 
 **1. Module name**
+
 ```go
 module github.com/monnom/mon-super-projet
 ```
+
 - Nom unique de votre module
 - Souvent l'URL GitHub/GitLab de votre projet
 - Utilisé par d'autres pour importer votre code
 
 **2. Version Go**
+
 ```go
 go 1.21
 ```
+
 - Version minimale de Go requise
 - Assure la compatibilité
 
 **3. Dépendances requises**
+
 ```go
 require (
     github.com/gin-gonic/gin v1.9.1    # Version exacte
@@ -113,6 +125,7 @@ require (
 ```
 
 **4. Exclusions (optionnel)**
+
 ```go
 exclude (
     github.com/buggy/package v1.0.0    # Exclut une version problématique
@@ -120,6 +133,7 @@ exclude (
 ```
 
 **5. Remplacements (optionnel)**
+
 ```go
 replace (
     github.com/original => github.com/myfork v1.2.3
@@ -131,6 +145,7 @@ replace (
 Créons une application web qui utilise des dépendances externes.
 
 ### 1. Initialisation du projet
+
 ```bash
 mkdir webapp-example
 cd webapp-example
@@ -138,6 +153,7 @@ go mod init webapp-example
 ```
 
 ### 2. Création du code principal
+
 ```go
 // main.go
 package main
@@ -174,6 +190,7 @@ func main() {
 ```
 
 ### 3. Ajout des dépendances
+
 ```bash
 # Ajouter la dépendance Gin
 go get github.com/gin-gonic/gin
@@ -182,6 +199,7 @@ go get github.com/gin-gonic/gin
 ```
 
 Le fichier `go.mod` devient :
+
 ```go
 module webapp-example
 
@@ -197,6 +215,7 @@ require (
 ```
 
 ### 4. Tester l'application
+
 ```bash
 go run main.go
 # Ouvrir http://localhost:8080 dans votre navigateur
@@ -205,6 +224,7 @@ go run main.go
 ## Commandes essentielles
 
 ### 1. go mod init
+
 ```bash
 # Créer un nouveau module
 go mod init nom-du-module
@@ -216,6 +236,7 @@ go mod init example.com/moncompany/monapp
 ```
 
 ### 2. go get
+
 ```bash
 # Ajouter une dépendance
 go get github.com/gorilla/mux
@@ -231,6 +252,7 @@ go get -u ./...
 ```
 
 ### 3. go mod tidy
+
 ```bash
 # Nettoyer les dépendances
 go mod tidy
@@ -241,12 +263,14 @@ go mod tidy
 ```
 
 ### 4. go mod download
+
 ```bash
 # Télécharger les dépendances sans les compiler
 go mod download
 ```
 
 ### 5. go list
+
 ```bash
 # Lister toutes les dépendances
 go list -m all
@@ -258,9 +282,10 @@ go list -m -versions github.com/gin-gonic/gin
 ## Gestion des versions
 
 ### Semantic Versioning (SemVer)
+
 Go utilise le versioning sémantique : `v1.2.3`
 
-```
+```text
 v1.2.3
 │ │ │
 │ │ └─ PATCH : corrections de bugs
@@ -269,6 +294,7 @@ v1.2.3
 ```
 
 ### Exemples de contraintes de version
+
 ```bash
 # Version exacte
 go get github.com/gin-gonic/gin@v1.9.1
@@ -291,6 +317,7 @@ go get github.com/gin-gonic/gin@master
 Créons une API plus complexe avec plusieurs dépendances.
 
 ### 1. Initialisation
+
 ```bash
 mkdir api-example
 cd api-example
@@ -298,6 +325,7 @@ go mod init api-example
 ```
 
 ### 2. Ajout des dépendances
+
 ```bash
 go get github.com/gin-gonic/gin       # Framework web
 go get github.com/jinzhu/gorm         # ORM pour base de données
@@ -306,6 +334,7 @@ go get github.com/joho/godotenv       # Variables d'environnement
 ```
 
 ### 3. Code de l'application
+
 ```go
 // main.go
 package main
@@ -399,6 +428,7 @@ func getUser(c *gin.Context) {
 ```
 
 ### 4. Fichier .env
+
 ```bash
 # .env
 DATABASE_URL=user=postgres password=password dbname=testdb sslmode=disable
@@ -406,6 +436,7 @@ PORT=8080
 ```
 
 Le fichier `go.mod` final :
+
 ```go
 module api-example
 
@@ -428,6 +459,7 @@ require (
 ## Publier votre module
 
 ### 1. Préparer le code
+
 ```bash
 # Structure recommandée pour un module public
 mon-package/
@@ -442,6 +474,7 @@ mon-package/
 ```
 
 ### 2. Tagging des versions
+
 ```bash
 # Créer un tag Git pour une version
 git tag v1.0.0
@@ -451,6 +484,7 @@ git push origin v1.0.0
 ```
 
 ### 3. Documentation
+
 ```go
 // Package mathutils fournit des utilitaires mathématiques.
 //
@@ -470,6 +504,7 @@ func Add(a, b int) int {
 ## Résolution de problèmes courants
 
 ### 1. Dépendances en conflit
+
 ```bash
 # Voir les détails des conflits
 go mod graph
@@ -480,6 +515,7 @@ go mod tidy
 ```
 
 ### 2. Modules locaux
+
 ```go
 // go.mod
 module monapp
@@ -492,6 +528,7 @@ replace monpackagelocal => ./local-package
 ```
 
 ### 3. Vérifier l'intégrité
+
 ```bash
 # Vérifier que go.sum est à jour
 go mod verify
@@ -504,6 +541,7 @@ go mod tidy
 ## Bonnes pratiques
 
 ### 1. Nommage des modules
+
 ```bash
 # ✅ Bon : utilise un domaine
 go mod init github.com/monnom/monprojet
@@ -515,6 +553,7 @@ go mod init helpers
 ```
 
 ### 2. Gestion des versions
+
 ```bash
 # ✅ Bon : versions spécifiques en production
 go get github.com/gin-gonic/gin@v1.9.1
@@ -524,6 +563,7 @@ go get github.com/gin-gonic/gin@latest
 ```
 
 ### 3. Fichier .gitignore
+
 ```gitignore
 # Binaires
 *.exe
@@ -556,6 +596,7 @@ Créez un module "task-manager" qui :
    - Stockage en mémoire
 
 **Test :**
+
 ```bash
 curl http://localhost:8080/tasks
 curl -X POST -H "Content-Type: application/json" \
@@ -568,21 +609,25 @@ curl -X POST -H "Content-Type: application/json" \
 Les modules Go permettent :
 
 **📦 Organisation :**
+
 - Projets indépendants
 - Gestion fine des versions
 - Distribution facile
 
 **🔒 Sécurité :**
+
 - Checksums d'intégrité (go.sum)
 - Versions verrouillées
 - Builds reproductibles
 
 **⚡ Productivité :**
+
 - Dépendances automatiques
 - Mises à jour simples
 - Outils intégrés
 
 **📋 Commandes clés :**
+
 - `go mod init` : créer un module
 - `go get` : ajouter/mettre à jour des dépendances
 - `go mod tidy` : nettoyer les dépendances

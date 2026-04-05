@@ -356,14 +356,16 @@ func main() {
 ### Exercice 1 : Message personnalisé
 
 Modifiez le programme pour qu'il affiche votre nom :
-```
+
+```text
 Hello, [Votre nom]!
 ```
 
 ### Exercice 2 : Plusieurs lignes
 
 Créez un programme qui affiche :
-```
+
+```text
 Bonjour !
 Je m'appelle [Votre nom]
 J'apprends Go

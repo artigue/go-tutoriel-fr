@@ -11,13 +11,14 @@ Les types de données primitifs sont les briques de base pour stocker l'informat
 ### Définition simple
 
 Un **type de données** définit :
+
 - **Quelle sorte de valeur** peut être stockée
 - **Combien de mémoire** est nécessaire
 - **Quelles opérations** sont possibles
 
 ### Analogie des contenants
 
-```
+```text
 ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
 │    int      │  │   string    │  │    bool     │
 │  (nombre)   │  │   (texte)   │  │ (vrai/faux) │
@@ -189,6 +190,7 @@ func main() {
 Le type `string` stocke du **texte** (séquence de caractères).
 
 **Caractéristiques importantes :**
+
 - Les strings sont **immutables** (ne peuvent pas être modifiées)
 - Encodage **UTF-8** par défaut
 - Délimitées par des **guillemets doubles** `"`
@@ -229,6 +231,7 @@ func main() {
 ### Opérations sur les strings
 
 **Concaténation (assemblage) :**
+
 ```go
 package main
 
@@ -250,6 +253,7 @@ func main() {
 ```
 
 **Longueur d'une string :**
+
 ```go
 package main
 
@@ -307,6 +311,7 @@ func main() {
 ### Définition
 
 Le type `bool` ne peut avoir que **deux valeurs** :
+
 - `true` (vrai)
 - `false` (faux)
 
@@ -484,6 +489,7 @@ func main() {
 ### Guide de sélection
 
 **Pour les nombres entiers :**
+
 ```go
 var age int              // ✅ Usage général
 var temperature int8     // ✅ Si vous savez que les valeurs sont petites
@@ -492,12 +498,14 @@ var couleurRouge uint8   // ✅ Si vous voulez seulement des positifs (0-255)
 ```
 
 **Pour les nombres décimaux :**
+
 ```go
 var prix float64         // ✅ Recommandé par défaut
 var coordonnee float32   // ✅ Si la précision réduite suffit et vous voulez économiser la mémoire
 ```
 
 **Pour le texte :**
+
 ```go
 var nom string           // ✅ Pour tout texte
 var initiale rune        // ✅ Pour un seul caractère Unicode
@@ -505,6 +513,7 @@ var ascii byte           // ✅ Pour un seul caractère ASCII
 ```
 
 **Pour les valeurs vrai/faux :**
+
 ```go
 var estValide bool       // ✅ Toujours bool pour les booléens
 ```
@@ -596,6 +605,7 @@ nom = "B" + nom[1:]  // Résultat: "Blice"
 ### Exercice 1 : Calculateur d'IMC
 
 Créez un programme qui :
+
 1. Déclare des variables pour le poids (kg) et la taille (m)
 2. Calcule l'IMC (poids / taille²)
 3. Affiche le résultat avec 2 décimales
@@ -603,6 +613,7 @@ Créez un programme qui :
 ### Exercice 2 : Profil complet
 
 Créez un programme avec :
+
 1. Informations personnelles (nom, âge, etc.)
 2. Préférences (couleur favorite, sport, etc.)
 3. Statistiques (nombre d'amis, note moyenne, etc.)
@@ -611,6 +622,7 @@ Créez un programme avec :
 ### Exercice 3 : Conversions
 
 Créez un programme qui :
+
 1. Déclare une température en Celsius (float64)
 2. Convertit en Fahrenheit et Kelvin
 3. Affiche les trois températures avec des précisions appropriées
@@ -618,6 +630,7 @@ Créez un programme qui :
 ### Exercice 4 : Analyse de texte
 
 Créez un programme qui :
+
 1. Déclare une phrase
 2. Compte le nombre de caractères
 3. Extrait et affiche le premier et dernier caractère
@@ -626,6 +639,7 @@ Créez un programme qui :
 ### Solutions
 
 **Exercice 1 :**
+
 ```go
 package main
 
@@ -656,6 +670,7 @@ func main() {
 ```
 
 **Exercice 2 :**
+
 ```go
 package main
 
@@ -697,6 +712,7 @@ func main() {
 ```
 
 **Exercice 3 :**
+
 ```go
 package main
 
@@ -717,6 +733,7 @@ func main() {
 ```
 
 **Exercice 4 :**
+
 ```go
 package main
 
@@ -751,6 +768,7 @@ func main() {
 ## Récapitulatif
 
 **Ce que vous avez appris :**
+
 - ✅ Types d'entiers (signés et non signés)
 - ✅ Types de nombres décimaux (float32, float64)
 - ✅ Type chaîne de caractères (string)
@@ -760,6 +778,7 @@ func main() {
 - ✅ Guide pour choisir le bon type
 
 **Points clés à retenir :**
+
 1. **Go est strict** : pas de conversions automatiques
 2. **int et float64** : choix par défaut pour la plupart des cas
 3. **string sont immutables** : ne peuvent pas être modifiées
@@ -767,6 +786,7 @@ func main() {
 5. **UTF-8 par défaut** : support international excellent
 
 **Types recommandés pour débuter :**
+
 ```go
 var nombre int           // Entiers
 var decimal float64      // Nombres à virgule

@@ -9,10 +9,12 @@ Une **map** (carte ou dictionnaire en français) est une structure de données q
 ## Concept de base
 
 Imaginez un dictionnaire de traduction :
+
 - **Clé** : "hello" (mot en anglais)
 - **Valeur** : "bonjour" (traduction en français)
 
 En Go, cela se représente ainsi :
+
 ```go
 traduction := map[string]string{
     "hello":   "bonjour",
@@ -280,7 +282,7 @@ for categorie, items := range categories {
 
 ## Copier des Maps
 
-### Attention : Maps sont des références !
+### Attention : Maps sont des références
 
 ```go
 original := map[string]int{"a": 1, "b": 2}
@@ -578,20 +580,26 @@ if score, existe := scores["Alice"]; existe {
 ## Exercices pratiques
 
 ### Exercice 1 : Basique
+
 Créez un programme qui :
+
 1. Crée une map pour stocker les notes d'étudiants (nom → note)
 2. Ajoute 5 étudiants avec leurs notes
 3. Calcule et affiche la moyenne des notes
 4. Trouve et affiche l'étudiant avec la meilleure note
 
 ### Exercice 2 : Intermédiaire
+
 Implémentez une fonction qui :
+
 1. Prend un slice de strings en entrée
 2. Retourne une map indiquant combien de fois chaque string apparaît
 3. Affiche les résultats triés par fréquence (plus fréquent en premier)
 
 ### Exercice 3 : Avancé
+
 Créez un système de gestion d'inventaire :
+
 1. Map principale : `map[string]map[string]interface{}`
 2. Chaque produit a : nom, prix, quantité, catégorie
 3. Fonctions : ajouter produit, modifier stock, rechercher par catégorie
@@ -601,9 +609,9 @@ Créez un système de gestion d'inventaire :
 package main
 
 import (
-	"fmt"
-	"sort"
-	"strings"
+ "fmt"
+ "sort"
+ "strings"
 )
 
 // ==========================================
@@ -611,47 +619,47 @@ import (
 // ==========================================
 
 func exercice1() {
-	fmt.Println("=== EXERCICE 1 : BASIQUE ===")
+ fmt.Println("=== EXERCICE 1 : BASIQUE ===")
 
-	// 1. Créer une map pour stocker les notes d'étudiants
-	notes := make(map[string]float64)
+ // 1. Créer une map pour stocker les notes d'étudiants
+ notes := make(map[string]float64)
 
-	// 2. Ajouter 5 étudiants avec leurs notes
-	notes["Alice"] = 16.5
-	notes["Bob"] = 14.0
-	notes["Charlie"] = 18.5
-	notes["Diana"] = 12.5
-	notes["Eve"] = 15.0
+ // 2. Ajouter 5 étudiants avec leurs notes
+ notes["Alice"] = 16.5
+ notes["Bob"] = 14.0
+ notes["Charlie"] = 18.5
+ notes["Diana"] = 12.5
+ notes["Eve"] = 15.0
 
-	fmt.Println("Notes des étudiants:")
-	for nom, note := range notes {
-		fmt.Printf("  %s: %.1f/20\n", nom, note)
-	}
+ fmt.Println("Notes des étudiants:")
+ for nom, note := range notes {
+  fmt.Printf("  %s: %.1f/20\n", nom, note)
+ }
 
-	// 3. Calculer et afficher la moyenne des notes
-	var somme float64
-	for _, note := range notes {
-		somme += note
-	}
-	moyenne := somme / float64(len(notes))
-	fmt.Printf("\nMoyenne de la classe: %.2f/20\n", moyenne)
+ // 3. Calculer et afficher la moyenne des notes
+ var somme float64
+ for _, note := range notes {
+  somme += note
+ }
+ moyenne := somme / float64(len(notes))
+ fmt.Printf("\nMoyenne de la classe: %.2f/20\n", moyenne)
 
-	// 4. Trouver et afficher l'étudiant avec la meilleure note
-	var meilleurEtudiant string
-	var meilleureNote float64
+ // 4. Trouver et afficher l'étudiant avec la meilleure note
+ var meilleurEtudiant string
+ var meilleureNote float64
 
-	// Initialiser avec le premier étudiant
-	premierTour := true
-	for nom, note := range notes {
-		if premierTour || note > meilleureNote {
-			meilleurEtudiant = nom
-			meilleureNote = note
-			premierTour = false
-		}
-	}
+ // Initialiser avec le premier étudiant
+ premierTour := true
+ for nom, note := range notes {
+  if premierTour || note > meilleureNote {
+   meilleurEtudiant = nom
+   meilleureNote = note
+   premierTour = false
+  }
+ }
 
-	fmt.Printf("Meilleur étudiant: %s avec %.1f/20\n", meilleurEtudiant, meilleureNote)
-	fmt.Println()
+ fmt.Printf("Meilleur étudiant: %s avec %.1f/20\n", meilleurEtudiant, meilleureNote)
+ fmt.Println()
 }
 
 // ==========================================
@@ -660,99 +668,99 @@ func exercice1() {
 
 // Structure pour trier par fréquence
 type FrequenceItem struct {
-	Mot    string
-	Compte int
+ Mot    string
+ Compte int
 }
 
 // Fonction pour compter les occurrences
 func compterOccurrences(mots []string) map[string]int {
-	compteur := make(map[string]int)
+ compteur := make(map[string]int)
 
-	for _, mot := range mots {
-		compteur[mot]++
-	}
+ for _, mot := range mots {
+  compteur[mot]++
+ }
 
-	return compteur
+ return compteur
 }
 
 // Fonction pour trier et afficher par fréquence
 func afficherParFrequence(compteur map[string]int) {
-	// Convertir la map en slice pour pouvoir trier
-	var items []FrequenceItem
-	for mot, compte := range compteur {
-		items = append(items, FrequenceItem{
-			Mot:    mot,
-			Compte: compte,
-		})
-	}
+ // Convertir la map en slice pour pouvoir trier
+ var items []FrequenceItem
+ for mot, compte := range compteur {
+  items = append(items, FrequenceItem{
+   Mot:    mot,
+   Compte: compte,
+  })
+ }
 
-	// Trier par fréquence (ordre décroissant)
-	sort.Slice(items, func(i, j int) bool {
-		if items[i].Compte == items[j].Compte {
-			// Si même fréquence, trier alphabétiquement
-			return items[i].Mot < items[j].Mot
-		}
-		return items[i].Compte > items[j].Compte
-	})
+ // Trier par fréquence (ordre décroissant)
+ sort.Slice(items, func(i, j int) bool {
+  if items[i].Compte == items[j].Compte {
+   // Si même fréquence, trier alphabétiquement
+   return items[i].Mot < items[j].Mot
+  }
+  return items[i].Compte > items[j].Compte
+ })
 
-	// Afficher les résultats
-	fmt.Println("Résultats triés par fréquence:")
-	for i, item := range items {
-		fmt.Printf("  %d. %s: %d occurrence(s)\n", i+1, item.Mot, item.Compte)
-	}
+ // Afficher les résultats
+ fmt.Println("Résultats triés par fréquence:")
+ for i, item := range items {
+  fmt.Printf("  %d. %s: %d occurrence(s)\n", i+1, item.Mot, item.Compte)
+ }
 }
 
 func exercice2() {
-	fmt.Println("=== EXERCICE 2 : INTERMÉDIAIRE ===")
+ fmt.Println("=== EXERCICE 2 : INTERMÉDIAIRE ===")
 
-	// Tests avec différents cas
-	testCases := [][]string{
-		{"pomme", "banane", "pomme", "orange", "banane", "pomme", "kiwi"},
-		{"go", "est", "un", "langage", "go", "est", "rapide", "un", "langage", "rapide"},
-		{"a", "b", "c", "a", "b", "a"},
-		{"unique"},
-		{}, // slice vide
-	}
+ // Tests avec différents cas
+ testCases := [][]string{
+  {"pomme", "banane", "pomme", "orange", "banane", "pomme", "kiwi"},
+  {"go", "est", "un", "langage", "go", "est", "rapide", "un", "langage", "rapide"},
+  {"a", "b", "c", "a", "b", "a"},
+  {"unique"},
+  {}, // slice vide
+ }
 
-	for i, test := range testCases {
-		fmt.Printf("\nTest %d: %v\n", i+1, test)
+ for i, test := range testCases {
+  fmt.Printf("\nTest %d: %v\n", i+1, test)
 
-		if len(test) == 0 {
-			fmt.Println("  Slice vide!")
-			continue
-		}
+  if len(test) == 0 {
+   fmt.Println("  Slice vide!")
+   continue
+  }
 
-		// Compter les occurrences
-		resultats := compterOccurrences(test)
+  // Compter les occurrences
+  resultats := compterOccurrences(test)
 
-		// Afficher les résultats bruts
-		fmt.Println("  Map des occurrences:", resultats)
+  // Afficher les résultats bruts
+  fmt.Println("  Map des occurrences:", resultats)
 
-		// Afficher triés par fréquence
-		afficherParFrequence(resultats)
-	}
+  // Afficher triés par fréquence
+  afficherParFrequence(resultats)
+ }
 
-	// Test avec un texte réel
-	fmt.Println("\n--- Test avec un texte réel ---")
-	texte := "Go est un langage de programmation. Go est rapide et efficace. Un langage moderne."
-	mots := strings.Fields(strings.ToLower(texte))
+ // Test avec un texte réel
+ fmt.Println("\n--- Test avec un texte réel ---")
+ texte := "Go est un langage de programmation. Go est rapide et efficace. Un langage moderne."
+ mots := strings.Fields(strings.ToLower(texte))
 
-	// Nettoyer la ponctuation (version simplifiée)
-	var motsNettoyes []string
-	for _, mot := range mots {
-		motPropre := strings.Trim(mot, ".,!?;:")
-		if motPropre != "" {
-			motsNettoyes = append(motsNettoyes, motPropre)
-		}
-	}
+ // Nettoyer la ponctuation (version simplifiée)
+ var motsNettoyes []string
+ for _, mot := range mots {
+  motPropre := strings.Trim(mot, ".,!?;:")
+  if motPropre != "" {
+   motsNettoyes = append(motsNettoyes, motPropre)
+  }
+ }
 
-	fmt.Printf("Texte: %s\n", texte)
-	fmt.Printf("Mots extraits: %v\n", motsNettoyes)
+ fmt.Printf("Texte: %s\n", texte)
+ fmt.Printf("Mots extraits: %v\n", motsNettoyes)
 
-	resultats := compterOccurrences(motsNettoyes)
-	afficherParFrequence(resultats)
+ resultats := compterOccurrences(motsNettoyes)
+ afficherParFrequence(resultats)
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -761,196 +769,196 @@ func exercice2() {
 
 // Système de gestion d'inventaire
 type Inventaire struct {
-	produits map[string]map[string]interface{}
+ produits map[string]map[string]interface{}
 }
 
 // Créer un nouvel inventaire
 func NouvelInventaire() *Inventaire {
-	return &Inventaire{
-		produits: make(map[string]map[string]interface{}),
-	}
+ return &Inventaire{
+  produits: make(map[string]map[string]interface{}),
+ }
 }
 
 // Ajouter un produit
 func (inv *Inventaire) AjouterProduit(id, nom string, prix float64, quantite int, categorie string) {
-	inv.produits[id] = map[string]interface{}{
-		"nom":       nom,
-		"prix":      prix,
-		"quantite":  quantite,
-		"categorie": categorie,
-	}
-	fmt.Printf("Produit ajouté: %s (%s)\n", nom, id)
+ inv.produits[id] = map[string]interface{}{
+  "nom":       nom,
+  "prix":      prix,
+  "quantite":  quantite,
+  "categorie": categorie,
+ }
+ fmt.Printf("Produit ajouté: %s (%s)\n", nom, id)
 }
 
 // Modifier le stock d'un produit
 func (inv *Inventaire) ModifierStock(id string, nouvelleQuantite int) error {
-	produit, existe := inv.produits[id]
-	if !existe {
-		return fmt.Errorf("produit %s non trouvé", id)
-	}
+ produit, existe := inv.produits[id]
+ if !existe {
+  return fmt.Errorf("produit %s non trouvé", id)
+ }
 
-	ancienneQuantite := produit["quantite"].(int)
-	produit["quantite"] = nouvelleQuantite
+ ancienneQuantite := produit["quantite"].(int)
+ produit["quantite"] = nouvelleQuantite
 
-	nom := produit["nom"].(string)
-	fmt.Printf("Stock modifié pour %s (%s): %d → %d\n", nom, id, ancienneQuantite, nouvelleQuantite)
-	return nil
+ nom := produit["nom"].(string)
+ fmt.Printf("Stock modifié pour %s (%s): %d → %d\n", nom, id, ancienneQuantite, nouvelleQuantite)
+ return nil
 }
 
 // Rechercher par catégorie
 func (inv *Inventaire) RechercherParCategorie(categorie string) []map[string]interface{} {
-	var resultats []map[string]interface{}
+ var resultats []map[string]interface{}
 
-	for id, produit := range inv.produits {
-		if produit["categorie"].(string) == categorie {
-			// Ajouter l'ID au produit pour le résultat
-			produitAvecID := make(map[string]interface{})
-			for k, v := range produit {
-				produitAvecID[k] = v
-			}
-			produitAvecID["id"] = id
-			resultats = append(resultats, produitAvecID)
-		}
-	}
+ for id, produit := range inv.produits {
+  if produit["categorie"].(string) == categorie {
+   // Ajouter l'ID au produit pour le résultat
+   produitAvecID := make(map[string]interface{})
+   for k, v := range produit {
+    produitAvecID[k] = v
+   }
+   produitAvecID["id"] = id
+   resultats = append(resultats, produitAvecID)
+  }
+ }
 
-	return resultats
+ return resultats
 }
 
 // Générer un rapport de stock faible
 func (inv *Inventaire) RapportStockFaible() []map[string]interface{} {
-	var stockFaible []map[string]interface{}
+ var stockFaible []map[string]interface{}
 
-	for id, produit := range inv.produits {
-		quantite := produit["quantite"].(int)
-		if quantite < 5 {
-			produitAvecID := make(map[string]interface{})
-			for k, v := range produit {
-				produitAvecID[k] = v
-			}
-			produitAvecID["id"] = id
-			stockFaible = append(stockFaible, produitAvecID)
-		}
-	}
+ for id, produit := range inv.produits {
+  quantite := produit["quantite"].(int)
+  if quantite < 5 {
+   produitAvecID := make(map[string]interface{})
+   for k, v := range produit {
+    produitAvecID[k] = v
+   }
+   produitAvecID["id"] = id
+   stockFaible = append(stockFaible, produitAvecID)
+  }
+ }
 
-	// Trier par quantité (plus faible en premier)
-	sort.Slice(stockFaible, func(i, j int) bool {
-		return stockFaible[i]["quantite"].(int) < stockFaible[j]["quantite"].(int)
-	})
+ // Trier par quantité (plus faible en premier)
+ sort.Slice(stockFaible, func(i, j int) bool {
+  return stockFaible[i]["quantite"].(int) < stockFaible[j]["quantite"].(int)
+ })
 
-	return stockFaible
+ return stockFaible
 }
 
 // Afficher tous les produits
 func (inv *Inventaire) AfficherTous() {
-	fmt.Println("\n=== INVENTAIRE COMPLET ===")
-	if len(inv.produits) == 0 {
-		fmt.Println("Aucun produit en inventaire.")
-		return
-	}
+ fmt.Println("\n=== INVENTAIRE COMPLET ===")
+ if len(inv.produits) == 0 {
+  fmt.Println("Aucun produit en inventaire.")
+  return
+ }
 
-	for id, produit := range inv.produits {
-		fmt.Printf("ID: %s\n", id)
-		fmt.Printf("  Nom: %s\n", produit["nom"])
-		fmt.Printf("  Prix: %.2f€\n", produit["prix"])
-		fmt.Printf("  Quantité: %d\n", produit["quantite"])
-		fmt.Printf("  Catégorie: %s\n", produit["categorie"])
-		fmt.Println()
-	}
+ for id, produit := range inv.produits {
+  fmt.Printf("ID: %s\n", id)
+  fmt.Printf("  Nom: %s\n", produit["nom"])
+  fmt.Printf("  Prix: %.2f€\n", produit["prix"])
+  fmt.Printf("  Quantité: %d\n", produit["quantite"])
+  fmt.Printf("  Catégorie: %s\n", produit["categorie"])
+  fmt.Println()
+ }
 }
 
 // Obtenir des statistiques
 func (inv *Inventaire) Statistiques() {
-	if len(inv.produits) == 0 {
-		fmt.Println("Aucun produit pour les statistiques.")
-		return
-	}
+ if len(inv.produits) == 0 {
+  fmt.Println("Aucun produit pour les statistiques.")
+  return
+ }
 
-	// Compter par catégorie
-	categories := make(map[string]int)
-	var valeurTotale float64
-	var quantiteTotale int
+ // Compter par catégorie
+ categories := make(map[string]int)
+ var valeurTotale float64
+ var quantiteTotale int
 
-	for _, produit := range inv.produits {
-		cat := produit["categorie"].(string)
-		categories[cat]++
+ for _, produit := range inv.produits {
+  cat := produit["categorie"].(string)
+  categories[cat]++
 
-		prix := produit["prix"].(float64)
-		quantite := produit["quantite"].(int)
-		valeurTotale += prix * float64(quantite)
-		quantiteTotale += quantite
-	}
+  prix := produit["prix"].(float64)
+  quantite := produit["quantite"].(int)
+  valeurTotale += prix * float64(quantite)
+  quantiteTotale += quantite
+ }
 
-	fmt.Println("\n=== STATISTIQUES INVENTAIRE ===")
-	fmt.Printf("Nombre total de produits: %d\n", len(inv.produits))
-	fmt.Printf("Quantité totale en stock: %d\n", quantiteTotale)
-	fmt.Printf("Valeur totale du stock: %.2f€\n", valeurTotale)
+ fmt.Println("\n=== STATISTIQUES INVENTAIRE ===")
+ fmt.Printf("Nombre total de produits: %d\n", len(inv.produits))
+ fmt.Printf("Quantité totale en stock: %d\n", quantiteTotale)
+ fmt.Printf("Valeur totale du stock: %.2f€\n", valeurTotale)
 
-	fmt.Println("\nRépartition par catégorie:")
-	for cat, count := range categories {
-		fmt.Printf("  %s: %d produit(s)\n", cat, count)
-	}
+ fmt.Println("\nRépartition par catégorie:")
+ for cat, count := range categories {
+  fmt.Printf("  %s: %d produit(s)\n", cat, count)
+ }
 }
 
 func exercice3() {
-	fmt.Println("=== EXERCICE 3 : AVANCÉ ===")
+ fmt.Println("=== EXERCICE 3 : AVANCÉ ===")
 
-	// Créer un inventaire
-	inv := NouvelInventaire()
+ // Créer un inventaire
+ inv := NouvelInventaire()
 
-	// Ajouter des produits
-	fmt.Println("\n--- Ajout de produits ---")
-	inv.AjouterProduit("P001", "MacBook Pro", 2499.99, 3, "informatique")
-	inv.AjouterProduit("P002", "iPhone 15", 1199.99, 12, "informatique")
-	inv.AjouterProduit("P003", "AirPods", 179.99, 25, "informatique")
-	inv.AjouterProduit("P004", "Chaise de bureau", 299.99, 2, "mobilier")
-	inv.AjouterProduit("P005", "Bureau standing", 599.99, 1, "mobilier")
-	inv.AjouterProduit("P006", "Lampe LED", 49.99, 8, "éclairage")
-	inv.AjouterProduit("P007", "Câble USB-C", 19.99, 4, "accessoires")
+ // Ajouter des produits
+ fmt.Println("\n--- Ajout de produits ---")
+ inv.AjouterProduit("P001", "MacBook Pro", 2499.99, 3, "informatique")
+ inv.AjouterProduit("P002", "iPhone 15", 1199.99, 12, "informatique")
+ inv.AjouterProduit("P003", "AirPods", 179.99, 25, "informatique")
+ inv.AjouterProduit("P004", "Chaise de bureau", 299.99, 2, "mobilier")
+ inv.AjouterProduit("P005", "Bureau standing", 599.99, 1, "mobilier")
+ inv.AjouterProduit("P006", "Lampe LED", 49.99, 8, "éclairage")
+ inv.AjouterProduit("P007", "Câble USB-C", 19.99, 4, "accessoires")
 
-	// Afficher l'inventaire complet
-	inv.AfficherTous()
+ // Afficher l'inventaire complet
+ inv.AfficherTous()
 
-	// Modifier du stock
-	fmt.Println("--- Modification de stock ---")
-	inv.ModifierStock("P001", 1) // MacBook Pro: 3 → 1
-	inv.ModifierStock("P007", 2) // Câble USB-C: 4 → 2
+ // Modifier du stock
+ fmt.Println("--- Modification de stock ---")
+ inv.ModifierStock("P001", 1) // MacBook Pro: 3 → 1
+ inv.ModifierStock("P007", 2) // Câble USB-C: 4 → 2
 
-	if err := inv.ModifierStock("P999", 10); err != nil {
-		fmt.Printf("Erreur: %v\n", err)
-	}
+ if err := inv.ModifierStock("P999", 10); err != nil {
+  fmt.Printf("Erreur: %v\n", err)
+ }
 
-	// Recherche par catégorie
-	fmt.Println("\n--- Recherche par catégorie 'informatique' ---")
-	produitsInfo := inv.RechercherParCategorie("informatique")
-	for _, produit := range produitsInfo {
-		fmt.Printf("- %s (%s): %d en stock à %.2f€\n",
-			produit["nom"], produit["id"], produit["quantite"], produit["prix"])
-	}
+ // Recherche par catégorie
+ fmt.Println("\n--- Recherche par catégorie 'informatique' ---")
+ produitsInfo := inv.RechercherParCategorie("informatique")
+ for _, produit := range produitsInfo {
+  fmt.Printf("- %s (%s): %d en stock à %.2f€\n",
+   produit["nom"], produit["id"], produit["quantite"], produit["prix"])
+ }
 
-	fmt.Println("\n--- Recherche par catégorie 'mobilier' ---")
-	produitsMobilier := inv.RechercherParCategorie("mobilier")
-	for _, produit := range produitsMobilier {
-		fmt.Printf("- %s (%s): %d en stock à %.2f€\n",
-			produit["nom"], produit["id"], produit["quantite"], produit["prix"])
-	}
+ fmt.Println("\n--- Recherche par catégorie 'mobilier' ---")
+ produitsMobilier := inv.RechercherParCategorie("mobilier")
+ for _, produit := range produitsMobilier {
+  fmt.Printf("- %s (%s): %d en stock à %.2f€\n",
+   produit["nom"], produit["id"], produit["quantite"], produit["prix"])
+ }
 
-	// Rapport de stock faible
-	fmt.Println("\n--- Rapport de stock faible (< 5) ---")
-	stockFaible := inv.RapportStockFaible()
-	if len(stockFaible) == 0 {
-		fmt.Println("Aucun produit en stock faible.")
-	} else {
-		fmt.Printf("⚠️  %d produit(s) en stock faible:\n", len(stockFaible))
-		for i, produit := range stockFaible {
-			fmt.Printf("%d. %s (%s): %d en stock\n",
-				i+1, produit["nom"], produit["id"], produit["quantite"])
-		}
-	}
+ // Rapport de stock faible
+ fmt.Println("\n--- Rapport de stock faible (< 5) ---")
+ stockFaible := inv.RapportStockFaible()
+ if len(stockFaible) == 0 {
+  fmt.Println("Aucun produit en stock faible.")
+ } else {
+  fmt.Printf("⚠️  %d produit(s) en stock faible:\n", len(stockFaible))
+  for i, produit := range stockFaible {
+   fmt.Printf("%d. %s (%s): %d en stock\n",
+    i+1, produit["nom"], produit["id"], produit["quantite"])
+  }
+ }
 
-	// Afficher les statistiques
-	inv.Statistiques()
+ // Afficher les statistiques
+ inv.Statistiques()
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -959,80 +967,80 @@ func exercice3() {
 
 // Fonction pour simuler un système de commande
 func (inv *Inventaire) PasserCommande(id string, quantiteDemandee int) error {
-	produit, existe := inv.produits[id]
-	if !existe {
-		return fmt.Errorf("produit %s non trouvé", id)
-	}
+ produit, existe := inv.produits[id]
+ if !existe {
+  return fmt.Errorf("produit %s non trouvé", id)
+ }
 
-	quantiteActuelle := produit["quantite"].(int)
-	if quantiteActuelle < quantiteDemandee {
-		return fmt.Errorf("stock insuffisant pour %s: %d demandé, %d disponible",
-			produit["nom"], quantiteDemandee, quantiteActuelle)
-	}
+ quantiteActuelle := produit["quantite"].(int)
+ if quantiteActuelle < quantiteDemandee {
+  return fmt.Errorf("stock insuffisant pour %s: %d demandé, %d disponible",
+   produit["nom"], quantiteDemandee, quantiteActuelle)
+ }
 
-	nouvelleQuantite := quantiteActuelle - quantiteDemandee
-	produit["quantite"] = nouvelleQuantite
+ nouvelleQuantite := quantiteActuelle - quantiteDemandee
+ produit["quantite"] = nouvelleQuantite
 
-	prix := produit["prix"].(float64)
-	total := prix * float64(quantiteDemandee)
+ prix := produit["prix"].(float64)
+ total := prix * float64(quantiteDemandee)
 
-	fmt.Printf("✅ Commande validée:\n")
-	fmt.Printf("   Produit: %s\n", produit["nom"])
-	fmt.Printf("   Quantité: %d\n", quantiteDemandee)
-	fmt.Printf("   Prix unitaire: %.2f€\n", prix)
-	fmt.Printf("   Total: %.2f€\n", total)
-	fmt.Printf("   Stock restant: %d\n", nouvelleQuantite)
+ fmt.Printf("✅ Commande validée:\n")
+ fmt.Printf("   Produit: %s\n", produit["nom"])
+ fmt.Printf("   Quantité: %d\n", quantiteDemandee)
+ fmt.Printf("   Prix unitaire: %.2f€\n", prix)
+ fmt.Printf("   Total: %.2f€\n", total)
+ fmt.Printf("   Stock restant: %d\n", nouvelleQuantite)
 
-	return nil
+ return nil
 }
 
 // Fonction pour sauvegarder l'inventaire (simulation)
 func (inv *Inventaire) ExporterJSON() string {
-	// En réalité, on utiliserait encoding/json
-	// Ici on fait une version simplifiée pour la démonstration
-	result := "{\n"
-	result += "  \"produits\": {\n"
+ // En réalité, on utiliserait encoding/json
+ // Ici on fait une version simplifiée pour la démonstration
+ result := "{\n"
+ result += "  \"produits\": {\n"
 
-	i := 0
-	for id, produit := range inv.produits {
-		if i > 0 {
-			result += ",\n"
-		}
-		result += fmt.Sprintf("    \"%s\": {\n", id)
-		result += fmt.Sprintf("      \"nom\": \"%s\",\n", produit["nom"])
-		result += fmt.Sprintf("      \"prix\": %.2f,\n", produit["prix"])
-		result += fmt.Sprintf("      \"quantite\": %d,\n", produit["quantite"])
-		result += fmt.Sprintf("      \"categorie\": \"%s\"\n", produit["categorie"])
-		result += "    }"
-		i++
-	}
+ i := 0
+ for id, produit := range inv.produits {
+  if i > 0 {
+   result += ",\n"
+  }
+  result += fmt.Sprintf("    \"%s\": {\n", id)
+  result += fmt.Sprintf("      \"nom\": \"%s\",\n", produit["nom"])
+  result += fmt.Sprintf("      \"prix\": %.2f,\n", produit["prix"])
+  result += fmt.Sprintf("      \"quantite\": %d,\n", produit["quantite"])
+  result += fmt.Sprintf("      \"categorie\": \"%s\"\n", produit["categorie"])
+  result += "    }"
+  i++
+ }
 
-	result += "\n  }\n}"
-	return result
+ result += "\n  }\n}"
+ return result
 }
 
 func demonstrationAvancee() {
-	fmt.Println("=== DÉMONSTRATION AVANCÉE ===")
+ fmt.Println("=== DÉMONSTRATION AVANCÉE ===")
 
-	inv := NouvelInventaire()
+ inv := NouvelInventaire()
 
-	// Ajouter quelques produits
-	inv.AjouterProduit("TEST001", "Produit Test", 99.99, 10, "test")
+ // Ajouter quelques produits
+ inv.AjouterProduit("TEST001", "Produit Test", 99.99, 10, "test")
 
-	// Simuler des commandes
-	fmt.Println("\n--- Simulation de commandes ---")
-	if err := inv.PasserCommande("TEST001", 3); err != nil {
-		fmt.Printf("Erreur commande: %v\n", err)
-	}
+ // Simuler des commandes
+ fmt.Println("\n--- Simulation de commandes ---")
+ if err := inv.PasserCommande("TEST001", 3); err != nil {
+  fmt.Printf("Erreur commande: %v\n", err)
+ }
 
-	if err := inv.PasserCommande("TEST001", 15); err != nil {
-		fmt.Printf("Erreur commande: %v\n", err)
-	}
+ if err := inv.PasserCommande("TEST001", 15); err != nil {
+  fmt.Printf("Erreur commande: %v\n", err)
+ }
 
-	// Export JSON simulé
-	fmt.Println("\n--- Export JSON (simulation) ---")
-	jsonData := inv.ExporterJSON()
-	fmt.Println(jsonData)
+ // Export JSON simulé
+ fmt.Println("\n--- Export JSON (simulation) ---")
+ jsonData := inv.ExporterJSON()
+ fmt.Println(jsonData)
 }
 
 // ==========================================
@@ -1040,15 +1048,15 @@ func demonstrationAvancee() {
 // ==========================================
 
 func main() {
-	fmt.Println("SOLUTIONS DES EXERCICES - MAPS")
-	fmt.Println("===============================")
+ fmt.Println("SOLUTIONS DES EXERCICES - MAPS")
+ fmt.Println("===============================")
 
-	exercice1()
-	exercice2()
-	exercice3()
+ exercice1()
+ exercice2()
+ exercice3()
 
-	// Bonus: démonstration avancée
-	demonstrationAvancee()
+ // Bonus: démonstration avancée
+ demonstrationAvancee()
 }
 ```
 
@@ -1057,6 +1065,7 @@ func main() {
 Les maps sont des structures de données essentielles en Go pour les associations clé-valeur :
 
 **Points clés à retenir :**
+
 - Les maps stockent des paires clé-valeur avec accès O(1)
 - Elles doivent être initialisées avant utilisation
 - L'ordre de parcours est aléatoire
@@ -1065,6 +1074,7 @@ Les maps sont des structures de données essentielles en Go pour les association
 - Utiliser `delete()` pour supprimer des éléments
 
 **Cas d'usage typiques :**
+
 - Caches et lookups rapides
 - Compteurs et histogrammes
 - Index et mappings

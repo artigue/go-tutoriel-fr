@@ -46,6 +46,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 J'ai reçu 0 nombre(s): []
 Somme de rien: 0
@@ -58,6 +59,7 @@ Somme de 5 nombres: 150
 ```
 
 **Points importants :**
+
 - `nombres ...int` signifie "zéro ou plusieurs entiers"
 - À l'intérieur de la fonction, `nombres` est un slice `[]int`
 - On peut appeler la fonction avec 0, 1, ou plusieurs arguments
@@ -99,6 +101,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Personne à saluer !
 Bonjour Alice !
@@ -144,6 +147,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Maximum de 3, 7, 2: 7
 Maximum du slice: 27
@@ -151,6 +155,7 @@ Maximum mixte: 200
 ```
 
 **Explication :**
+
 - `maximum(mesNombres...)` "décompresse" le slice et passe chaque élément comme argument séparé
 - C'est équivalent à `maximum(15, 3, 9, 27, 1)`
 
@@ -190,6 +195,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Phrase vide
 Bonjour.
@@ -246,6 +252,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 === Achat 1 ===
 Produits dans le panier:
@@ -289,6 +296,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 J'ai reçu 5 élément(s):
   [0] Hello (type: string)
@@ -358,6 +366,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 [2024-01-15 14:30:45] INFO: Application démarrée
 [2024-01-15 14:30:45] DEBUG: Valeur de x: 42
@@ -368,6 +377,7 @@ func main() {
 ## Exercices pratiques
 
 ### Exercice 1 : Fonction de moyenne
+
 Créez une fonction variadique `moyenne` qui calcule la moyenne de nombres flottants.
 
 <details>
@@ -411,9 +421,11 @@ func main() {
     }
 }
 ```
+
 </details>
 
 ### Exercice 2 : Constructeur flexible
+
 Créez une fonction variadique pour créer des utilisateurs avec des informations optionnelles.
 
 <details>
@@ -474,9 +486,11 @@ func main() {
     fmt.Println(user5)
 }
 ```
+
 </details>
 
 ### Exercice 3 : Fonction de validation multiple
+
 Créez une fonction variadique qui vérifie si tous les arguments passés respectent une condition.
 
 <details>
@@ -544,6 +558,7 @@ func main() {
     }
 }
 ```
+
 </details>
 
 ## Patterns avancés avec les fonctions variadiques
@@ -587,6 +602,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Nombre initial: 5
   Étape 1: 5 -> 10
@@ -598,6 +614,7 @@ Résultat final: 400
 ## Erreurs courantes à éviter
 
 ### 1. Paramètre variadique pas en dernier
+
 ```go
 // ❌ Incorrect - le paramètre variadique doit être en dernier
 func mauvaise(params ...string, autreParam int) { }
@@ -607,6 +624,7 @@ func bonne(autreParam int, params ...string) { }
 ```
 
 ### 2. Oublier les ... pour passer un slice
+
 ```go
 func somme(nombres ...int) int {
     total := 0
@@ -629,6 +647,7 @@ func main() {
 ```
 
 ### 3. Confusion entre slice et arguments variadiques
+
 ```go
 // Ces deux approches sont différentes :
 
@@ -664,6 +683,7 @@ Les fonctions variadiques sont un outil puissant de Go qui permet de :
 **Améliorer la lisibilité** : Le code devient plus expressif et proche du langage naturel.
 
 **Points clés à retenir :**
+
 - Syntaxe : `param ...type`
 - Le paramètre variadique devient un slice dans la fonction
 - Doit toujours être le dernier paramètre
@@ -671,6 +691,7 @@ Les fonctions variadiques sont un outil puissant de Go qui permet de :
 - `interface{}` permet d'accepter différents types
 
 **Cas d'usage courants :**
+
 - Fonctions de calcul (somme, moyenne, maximum)
 - Logging et debugging
 - Constructeurs flexibles

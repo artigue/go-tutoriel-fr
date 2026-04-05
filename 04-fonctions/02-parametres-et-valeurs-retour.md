@@ -36,7 +36,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 Avant l'appel de fonction: 42
 Dans la fonction, x avant modification: 42
 Dans la fonction, x après modification: 100
@@ -44,6 +45,7 @@ Après l'appel de fonction: 42
 ```
 
 **Explication :**
+
 - La variable `nombre` garde sa valeur originale (42)
 - Les modifications dans la fonction n'affectent que la copie locale
 - C'est un comportement sûr qui évite les effets de bord non désirés
@@ -74,7 +76,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 Avant l'appel de fonction: 42
 Dans la fonction, valeur pointée avant: 42
 Dans la fonction, valeur pointée après: 100
@@ -82,6 +85,7 @@ Après l'appel de fonction: 100
 ```
 
 **Explication :**
+
 - `*int` indique que le paramètre est un pointeur vers un entier
 - `&nombre` passe l'adresse de la variable
 - `*x` déréférence le pointeur pour accéder à la valeur originale
@@ -118,7 +122,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 Par valeur - Original: 5, Résultat: 10
 Par pointeur - Après modification: 10
 ```
@@ -164,7 +169,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 Avant modification: [1 2 3]
 Dans la fonction: [999 2 3]
 Après modification: [999 2 3]
@@ -217,7 +223,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 Avant (par valeur): Alice a 25 ans
 Dans la fonction: Alice a 26 ans
 Après (par valeur): Alice a 25 ans
@@ -268,7 +275,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 10 ÷ 2 = 5.00
 Erreur: division par zéro impossible
 ```
@@ -323,7 +331,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 Note: 95 - Excellent (Réussite: true)
 Commentaire: Félicitations, résultat exceptionnel !
 
@@ -377,7 +386,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 5 + 3 = 8
 5 - 3 = 2
 5 * 3 = 15
@@ -432,7 +442,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 'test@example.com' -> true (Email valide)
 'invalide' -> false (L'email doit contenir un @)
 'test@' -> false (L'email doit contenir un point)
@@ -502,7 +513,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```txt
 '  HELLO WORLD  ' -> 'hello world' (Valide: true) - Texte traité avec succès
 '  Go Programming  ' -> 'go programming' (Valide: true) - Texte traité avec succès
 '   ' -> '' (Valide: false) - Texte invalide après traitement
@@ -513,6 +525,7 @@ func main() {
 ## Exercices pratiques
 
 ### Exercice 1 : Calculatrice avec gestion d'erreurs
+
 Créez une fonction `calculer` qui prend deux nombres et une opération (string) et retourne le résultat et une erreur éventuelle.
 
 <details>
@@ -567,9 +580,11 @@ func main() {
     }
 }
 ```
+
 </details>
 
 ### Exercice 2 : Modification de structure par référence
+
 Créez une fonction qui modifie les propriétés d'une structure `Compte` (nom, solde) par référence.
 
 <details>
@@ -634,9 +649,11 @@ func main() {
     afficherCompte(compte)
 }
 ```
+
 </details>
 
 ### Exercice 3 : Analyse de slice avec statistiques
+
 Créez une fonction qui analyse un slice d'entiers et retourne la moyenne, le minimum, le maximum et la somme.
 
 <details>
@@ -695,11 +712,13 @@ func main() {
     }
 }
 ```
+
 </details>
 
 ## Bonnes pratiques
 
 ### 1. Nommage des paramètres
+
 ```go
 // ❌ Pas assez descriptif
 func calculer(a, b float64, c string) (float64, error) { ... }
@@ -709,6 +728,7 @@ func calculer(nombre1, nombre2 float64, operation string) (float64, error) { ...
 ```
 
 ### 2. Gestion des erreurs
+
 ```go
 // ✅ Toujours retourner une erreur quand nécessaire
 func diviser(dividende, diviseur float64) (float64, error) {
@@ -720,6 +740,7 @@ func diviser(dividende, diviseur float64) (float64, error) {
 ```
 
 ### 3. Utilisation des pointeurs
+
 ```go
 // ✅ Utilisez des pointeurs pour les gros objets ou quand vous devez modifier
 func traiterGrosObjet(obj *GrosObjet) { ... }
@@ -729,6 +750,7 @@ func calculerAire(largeur, hauteur float64) float64 { ... }
 ```
 
 ### 4. Valeurs de retour cohérentes
+
 ```go
 // ✅ Ordre cohérent : valeur, erreur
 func lireFichier(nom string) ([]byte, error) { ... }
@@ -742,16 +764,19 @@ func analyserDonnees(data []int) (moyenne float64, ecartType float64, err error)
 Dans cette section, nous avons exploré :
 
 **Paramètres :**
+
 - **Passage par valeur** : comportement par défaut, sûr mais copie les données
 - **Passage par référence** : avec des pointeurs, permet de modifier l'original
 - **Types complexes** : slices, maps et structs ont des comportements spécifiques
 
 **Valeurs de retour :**
+
 - **Retours multiples** : spécialité de Go, très utile pour la gestion d'erreurs
 - **Retours nommés** : améliorent la lisibilité des fonctions complexes
 - **Fonctions comme valeurs** : permettent des patterns avancés
 
 **Patterns courants :**
+
 - **Validation** : retour booléen avec message d'erreur
 - **Transformation** : chaînage de fonctions
 - **Gestion d'erreurs** : convention (valeur, erreur)

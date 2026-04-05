@@ -16,6 +16,7 @@ Maintenant que vous savez créer un programme Go basique, il est temps d'apprend
 ### Avant Go 1.11 : GOPATH
 
 **Ancienne méthode (à connaître mais plus utilisée) :**
+
 ```
 $GOPATH/
 ├── bin/        # Exécutables compilés
@@ -29,6 +30,7 @@ $GOPATH/
 ### Depuis Go 1.11 : Go Modules (Moderne)
 
 **Nouvelle approche (recommandée) :**
+
 - Les projets peuvent être n'importe où sur votre système
 - Chaque projet a son propre fichier `go.mod`
 - Gestion automatique des dépendances
@@ -39,6 +41,7 @@ $GOPATH/
 ### Le fichier go.mod
 
 **Créer un nouveau module :**
+
 ```bash
 mkdir mon-projet
 cd mon-projet
@@ -46,6 +49,7 @@ go mod init github.com/votre-nom/mon-projet
 ```
 
 **Contenu du fichier `go.mod` :**
+
 ```go
 module github.com/votre-nom/mon-projet
 
@@ -57,6 +61,7 @@ require (
 ```
 
 **Explication des parties :**
+
 - `module` : Nom unique de votre module
 - `go 1.21` : Version minimale de Go requise
 - `require` : Liste des dépendances externes
@@ -64,12 +69,15 @@ require (
 ### Le fichier go.sum
 
 **Apparaît automatiquement quand vous ajoutez des dépendances :**
+
 ```
+
 github.com/gin-gonic/gin v1.9.1 h1:4idEAncQnU5cB7BeOkPtxjfCSye0AAm1R0RVIqJ+Jmg=
 github.com/gin-gonic/gin v1.9.1/go.mod h1:hPrL7YrpYKXt5YId3A/Tnip5kqbEAP+KLuI3SUcPTeU=
 ```
 
 **Rôle :**
+
 - Vérifie l'intégrité des dépendances
 - Assure la reproductibilité des builds
 - Ne pas modifier manuellement
@@ -78,14 +86,15 @@ github.com/gin-gonic/gin v1.9.1/go.mod h1:hPrL7YrpYKXt5YId3A/Tnip5kqbEAP+KLuI3SU
 
 ### Projet basique (un seul fichier)
 
-```
+```go
+
 mon-petit-projet/
 ├── go.mod
 ├── main.go
 └── README.md
-```
-
+```go
 **Exemple de `main.go` :**
+
 ```go
 package main
 
@@ -98,7 +107,7 @@ func main() {
 
 ### Projet avec plusieurs fichiers
 
-```
+```go
 calculatrice/
 ├── go.mod
 ├── main.go
@@ -107,6 +116,7 @@ calculatrice/
 ```
 
 **main.go :**
+
 ```go
 package main
 
@@ -119,6 +129,7 @@ func main() {
 ```
 
 **operations.go :**
+
 ```go
 package main
 
@@ -132,6 +143,7 @@ func soustraction(a, b int) int {
 ```
 
 **Points importants :**
+
 - Tous les fichiers du même répertoire doivent avoir le même `package`
 - Les fonctions commençant par une majuscule sont publiques
 - Les fonctions commençant par une minuscule sont privées
@@ -140,7 +152,7 @@ func soustraction(a, b int) int {
 
 ### Organisation recommandée
 
-```
+```go
 mon-api/
 ├── go.mod
 ├── go.sum
@@ -161,6 +173,7 @@ mon-api/
 ### Exemple concret
 
 **main.go (point d'entrée) :**
+
 ```go
 package main
 
@@ -179,6 +192,7 @@ func main() {
 ```
 
 **config/config.go :**
+
 ```go
 package config
 
@@ -196,6 +210,7 @@ func Load() *Config {
 ```
 
 **handlers/user.go :**
+
 ```go
 package handlers
 
@@ -211,6 +226,7 @@ func CreateUser() {
 ```
 
 **models/user.go :**
+
 ```go
 package models
 
@@ -229,7 +245,7 @@ func (u *User) Validate() bool {
 
 ### Layout Standard (Recommandation communautaire)
 
-```
+```text
 grand-projet/
 ├── go.mod
 ├── go.sum
@@ -267,10 +283,12 @@ grand-projet/
 ### Explication des répertoires
 
 #### `/cmd`
+
 **Rôle :** Applications principales de votre projet
 
 **Exemple :**
-```
+
+```text
 cmd/
 ├── api/
 │   └── main.go      # Point d'entrée de l'API
@@ -281,6 +299,7 @@ cmd/
 ```
 
 #### `/internal`
+
 **Rôle :** Code privé qui ne peut pas être importé par d'autres projets
 
 **Avantage :** Go empêche automatiquement l'import de code dans `/internal`
@@ -291,18 +310,22 @@ import "github.com/autre/projet/internal/database"
 ```
 
 #### `/pkg`
+
 **Rôle :** Code réutilisable par d'autres projets
 
 **Exemple :**
+
 ```go
 // Ceci fonctionne depuis d'autres projets :
 import "github.com/votre/projet/pkg/logger"
 ```
 
 #### `/api`
+
 **Rôle :** Spécifications et documentation des APIs
 
 **Contenu typique :**
+
 - Fichiers OpenAPI/Swagger
 - Schémas JSON
 - Documentation des protocoles
@@ -312,6 +335,7 @@ import "github.com/votre/projet/pkg/logger"
 ### Packages
 
 **Bonnes pratiques :**
+
 ```go
 // ✅ Bon : court, descriptif, minuscules
 package user
@@ -327,7 +351,8 @@ package JsonParser
 ### Fichiers
 
 **Convention :**
-```
+
+```txt
 user.go           # ✅ minuscules
 user_service.go   # ✅ underscore pour séparer
 UserService.go    # ❌ éviter les majuscules
@@ -337,7 +362,8 @@ user-service.go   # ❌ éviter les tirets
 ### Répertoires
 
 **Structure recommandée :**
-```
+
+```txt
 models/           # ✅ pluriel
 handlers/         # ✅ pluriel
 config/           # ✅ singulier (un seul concept)
@@ -357,6 +383,7 @@ go get github.com/gin-gonic/gin@v1.9.1
 ```
 
 **Le fichier `go.mod` se met à jour automatiquement :**
+
 ```go
 module mon-projet
 
@@ -402,7 +429,7 @@ go mod download
 
 ### Structure complète
 
-```
+```txt
 todo-app/
 ├── go.mod
 ├── main.go
@@ -420,6 +447,7 @@ todo-app/
 ### Implémentation
 
 **go.mod :**
+
 ```go
 module todo-app
 
@@ -429,6 +457,7 @@ require github.com/gin-gonic/gin v1.9.1
 ```
 
 **models/todo.go :**
+
 ```go
 package models
 
@@ -451,6 +480,7 @@ func NewTodo(title string) *Todo {
 ```
 
 **storage/memory.go :**
+
 ```go
 package storage
 
@@ -490,6 +520,7 @@ func (s *MemoryStorage) GetAll() []models.Todo {
 ```
 
 **handlers/todo.go :**
+
 ```go
 package handlers
 
@@ -532,6 +563,7 @@ func (h *TodoHandler) GetTodos(c *gin.Context) {
 ```
 
 **main.go :**
+
 ```go
 package main
 
@@ -588,11 +620,13 @@ go build -o todo-app
 ## Bonnes pratiques
 
 ### 1. Organisation logique
+
 - Grouper le code par fonctionnalité, pas par type
 - Séparer les préoccupations (handlers, models, storage)
 - Utiliser des noms descriptifs
 
 ### 2. Visibilité des packages
+
 ```go
 // ✅ Fonction publique (majuscule)
 func CreateUser() {}
@@ -602,6 +636,7 @@ func validateEmail() {}
 ```
 
 ### 3. Documentation
+
 ```go
 // Package user fournit les fonctionnalités de gestion des utilisateurs.
 package user
@@ -619,6 +654,7 @@ func CreateUser(name string) *User {
 ```
 
 ### 4. Tests
+
 ```
 projet/
 ├── handlers/
@@ -670,6 +706,7 @@ GOOS=windows GOARCH=amd64 go build
 ## Récapitulatif
 
 **Ce que vous avez appris :**
+
 - ✅ Évolution de GOPATH vers Go Modules
 - ✅ Structure d'un projet Go moderne
 - ✅ Organisation du code par packages
@@ -678,6 +715,7 @@ GOOS=windows GOARCH=amd64 go build
 - ✅ Exemple pratique complet
 
 **Points clés :**
+
 1. **Go Modules** : La méthode moderne pour organiser les projets
 2. **Séparation des responsabilités** : Chaque package a un rôle précis
 3. **Visibilité** : Majuscule = public, minuscule = privé
@@ -685,6 +723,7 @@ GOOS=windows GOARCH=amd64 go build
 5. **Dépendances** : `go mod` gère tout automatiquement
 
 **Commandes essentielles :**
+
 ```bash
 go mod init projet        # Créer un nouveau module
 go get package           # Ajouter une dépendance

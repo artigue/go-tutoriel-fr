@@ -127,6 +127,7 @@ fmt.Println("Slice:", slice)           // [0 0 0]
 ```
 
 **Explication :**
+
 - **Longueur** : nombre d'éléments actuellement dans le slice
 - **Capacité** : nombre maximum d'éléments que le slice peut contenir avant réallocation
 
@@ -165,7 +166,7 @@ fmt.Println("slice3:", slice3)    // [3 4 5 6]
 fmt.Println("slice4:", slice4)    // [1 2 3 4 5 6]
 ```
 
-### Attention : Slices partagent la mémoire !
+### Attention : Slices partagent la mémoire
 
 ```go
 array := [5]int{1, 2, 3, 4, 5}
@@ -367,20 +368,26 @@ func extraireDebut(slice []int) []int {
 ## Exercices pratiques
 
 ### Exercice 1 : Basique
+
 Créez un programme qui :
+
 1. Déclare un slice de strings avec 5 prénoms
 2. Affiche chaque prénom avec son index
 3. Ajoute deux nouveaux prénoms
 4. Affiche la longueur finale
 
 ### Exercice 2 : Intermédiaire
+
 Écrivez une fonction qui prend un slice d'entiers et retourne :
+
 - Le plus petit élément
 - Le plus grand élément
 - La somme de tous les éléments
 
 ### Exercice 3 : Avancé
+
 Implémentez une fonction qui :
+
 1. Prend un slice de strings
 2. Retourne un nouveau slice sans les doublons
 3. Préserve l'ordre de la première occurrence
@@ -389,7 +396,7 @@ Implémentez une fonction qui :
 package main
 
 import (
-	"fmt"
+ "fmt"
 )
 
 // ==========================================
@@ -397,26 +404,26 @@ import (
 // ==========================================
 
 func exercice1() {
-	fmt.Println("=== EXERCICE 1 : BASIQUE ===")
+ fmt.Println("=== EXERCICE 1 : BASIQUE ===")
 
-	// 1. Déclarer un slice de strings avec 5 prénoms
-	prenoms := []string{"Alice", "Bob", "Charlie", "Diana", "Eve"}
+ // 1. Déclarer un slice de strings avec 5 prénoms
+ prenoms := []string{"Alice", "Bob", "Charlie", "Diana", "Eve"}
 
-	// 2. Afficher chaque prénom avec son index
-	fmt.Println("Prénoms initiaux :")
-	for index, prenom := range prenoms {
-		fmt.Printf("Index %d: %s\n", index, prenom)
-	}
+ // 2. Afficher chaque prénom avec son index
+ fmt.Println("Prénoms initiaux :")
+ for index, prenom := range prenoms {
+  fmt.Printf("Index %d: %s\n", index, prenom)
+ }
 
-	// 3. Ajouter deux nouveaux prénoms
-	prenoms = append(prenoms, "Frank", "Grace")
+ // 3. Ajouter deux nouveaux prénoms
+ prenoms = append(prenoms, "Frank", "Grace")
 
-	// 4. Afficher la longueur finale
-	fmt.Printf("\nAprès ajout de 2 prénoms:\n")
-	fmt.Printf("Longueur finale: %d\n", len(prenoms))
-	fmt.Printf("Tous les prénoms: %v\n", prenoms)
+ // 4. Afficher la longueur finale
+ fmt.Printf("\nAprès ajout de 2 prénoms:\n")
+ fmt.Printf("Longueur finale: %d\n", len(prenoms))
+ fmt.Printf("Tous les prénoms: %v\n", prenoms)
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -425,60 +432,60 @@ func exercice1() {
 
 // Fonction qui analyse un slice d'entiers
 func analyserSlice(nombres []int) (min int, max int, somme int) {
-	// Vérifier si le slice est vide
-	if len(nombres) == 0 {
-		return 0, 0, 0
-	}
+ // Vérifier si le slice est vide
+ if len(nombres) == 0 {
+  return 0, 0, 0
+ }
 
-	// Initialiser avec le premier élément
-	min = nombres[0]
-	max = nombres[0]
-	somme = 0
+ // Initialiser avec le premier élément
+ min = nombres[0]
+ max = nombres[0]
+ somme = 0
 
-	// Parcourir tous les éléments
-	for _, nombre := range nombres {
-		// Calculer la somme
-		somme += nombre
+ // Parcourir tous les éléments
+ for _, nombre := range nombres {
+  // Calculer la somme
+  somme += nombre
 
-		// Trouver le minimum
-		if nombre < min {
-			min = nombre
-		}
+  // Trouver le minimum
+  if nombre < min {
+   min = nombre
+  }
 
-		// Trouver le maximum
-		if nombre > max {
-			max = nombre
-		}
-	}
+  // Trouver le maximum
+  if nombre > max {
+   max = nombre
+  }
+ }
 
-	return min, max, somme
+ return min, max, somme
 }
 
 func exercice2() {
-	fmt.Println("=== EXERCICE 2 : INTERMÉDIAIRE ===")
+ fmt.Println("=== EXERCICE 2 : INTERMÉDIAIRE ===")
 
-	// Test avec différents slices
-	testCases := [][]int{
-		{5, 2, 8, 1, 9, 3},
-		{-5, -2, -8, -1},
-		{42},
-		{}, // slice vide
-		{10, 10, 10, 10},
-	}
+ // Test avec différents slices
+ testCases := [][]int{
+  {5, 2, 8, 1, 9, 3},
+  {-5, -2, -8, -1},
+  {42},
+  {}, // slice vide
+  {10, 10, 10, 10},
+ }
 
-	for i, nombres := range testCases {
-		fmt.Printf("Test %d: %v\n", i+1, nombres)
+ for i, nombres := range testCases {
+  fmt.Printf("Test %d: %v\n", i+1, nombres)
 
-		if len(nombres) == 0 {
-			fmt.Println("  Slice vide !")
-		} else {
-			min, max, somme := analyserSlice(nombres)
-			fmt.Printf("  Minimum: %d\n", min)
-			fmt.Printf("  Maximum: %d\n", max)
-			fmt.Printf("  Somme: %d\n", somme)
-		}
-		fmt.Println()
-	}
+  if len(nombres) == 0 {
+   fmt.Println("  Slice vide !")
+  } else {
+   min, max, somme := analyserSlice(nombres)
+   fmt.Printf("  Minimum: %d\n", min)
+   fmt.Printf("  Maximum: %d\n", max)
+   fmt.Printf("  Somme: %d\n", somme)
+  }
+  fmt.Println()
+ }
 }
 
 // ==========================================
@@ -487,79 +494,79 @@ func exercice2() {
 
 // Fonction pour supprimer les doublons tout en préservant l'ordre
 func supprimerDoublons(slice []string) []string {
-	// Utiliser une map pour suivre les éléments déjà vus
-	vus := make(map[string]bool)
-	resultat := []string{}
+ // Utiliser une map pour suivre les éléments déjà vus
+ vus := make(map[string]bool)
+ resultat := []string{}
 
-	// Parcourir le slice original
-	for _, element := range slice {
-		// Si l'élément n'a pas encore été vu
-		if !vus[element] {
-			// L'ajouter au résultat
-			resultat = append(resultat, element)
-			// Le marquer comme vu
-			vus[element] = true
-		}
-	}
+ // Parcourir le slice original
+ for _, element := range slice {
+  // Si l'élément n'a pas encore été vu
+  if !vus[element] {
+   // L'ajouter au résultat
+   resultat = append(resultat, element)
+   // Le marquer comme vu
+   vus[element] = true
+  }
+ }
 
-	return resultat
+ return resultat
 }
 
 // Version alternative avec une approche différente
 func supprimerDoublonsV2(slice []string) []string {
-	if len(slice) == 0 {
-		return []string{}
-	}
+ if len(slice) == 0 {
+  return []string{}
+ }
 
-	resultat := []string{}
+ resultat := []string{}
 
-	// Pour chaque élément du slice
-	for _, element := range slice {
-		// Vérifier s'il existe déjà dans le résultat
-		existe := false
-		for _, existing := range resultat {
-			if existing == element {
-				existe = true
-				break
-			}
-		}
+ // Pour chaque élément du slice
+ for _, element := range slice {
+  // Vérifier s'il existe déjà dans le résultat
+  existe := false
+  for _, existing := range resultat {
+   if existing == element {
+    existe = true
+    break
+   }
+  }
 
-		// S'il n'existe pas, l'ajouter
-		if !existe {
-			resultat = append(resultat, element)
-		}
-	}
+  // S'il n'existe pas, l'ajouter
+  if !existe {
+   resultat = append(resultat, element)
+  }
+ }
 
-	return resultat
+ return resultat
 }
 
 func exercice3() {
-	fmt.Println("=== EXERCICE 3 : AVANCÉ ===")
+ fmt.Println("=== EXERCICE 3 : AVANCÉ ===")
 
-	// Test avec différents slices
-	testCases := [][]string{
-		{"pomme", "banane", "pomme", "orange", "banane", "kiwi"},
-		{"a", "b", "c", "a", "b", "c", "d"},
-		{"test", "test", "test"},
-		{"unique"},
-		{}, // slice vide
-		{"", "vide", "", "encore", "vide"},
-	}
+ // Test avec différents slices
+ testCases := [][]string{
+  {"pomme", "banane", "pomme", "orange", "banane", "kiwi"},
+  {"a", "b", "c", "a", "b", "c", "d"},
+  {"test", "test", "test"},
+  {"unique"},
+  {}, // slice vide
+  {"", "vide", "", "encore", "vide"},
+ }
 
-	for i, slice := range testCases {
-		fmt.Printf("Test %d:\n", i+1)
-		fmt.Printf("  Original: %v\n", slice)
+ for i, slice := range testCases {
+  fmt.Printf("Test %d:\n", i+1)
+  fmt.Printf("  Original: %v\n", slice)
 
-		// Tester la première version
-		sansDoublons := supprimerDoublons(slice)
-		fmt.Printf("  Sans doublons (v1): %v\n", sansDoublons)
+  // Tester la première version
+  sansDoublons := supprimerDoublons(slice)
+  fmt.Printf("  Sans doublons (v1): %v\n", sansDoublons)
 
-		// Tester la deuxième version
-		sansDoublonsV2 := supprimerDoublonsV2(slice)
-		fmt.Printf("  Sans doublons (v2): %v\n", sansDoublonsV2)
+  // Tester la deuxième version
+  sansDoublonsV2 := supprimerDoublonsV2(slice)
+  fmt.Printf("  Sans doublons (v2): %v\n", sansDoublonsV2)
 
-		fmt.Println()
-	}
+  fmt.Println()
+ }
 }
 
 // ==========================================
@@ -568,51 +575,51 @@ func exercice3() {
 
 // Fonction pour afficher des statistiques sur un slice
 func afficherStats(slice []int) {
-	if len(slice) == 0 {
-		fmt.Println("Slice vide")
-		return
-	}
+ if len(slice) == 0 {
+  fmt.Println("Slice vide")
+  return
+ }
 
-	min, max, somme := analyserSlice(slice)
-	moyenne := float64(somme) / float64(len(slice))
+ min, max, somme := analyserSlice(slice)
+ moyenne := float64(somme) / float64(len(slice))
 
-	fmt.Printf("Statistiques pour %v:\n", slice)
-	fmt.Printf("  Longueur: %d\n", len(slice))
-	fmt.Printf("  Minimum: %d\n", min)
-	fmt.Printf("  Maximum: %d\n", max)
-	fmt.Printf("  Somme: %d\n", somme)
-	fmt.Printf("  Moyenne: %.2f\n", moyenne)
+ fmt.Printf("Statistiques pour %v:\n", slice)
+ fmt.Printf("  Longueur: %d\n", len(slice))
+ fmt.Printf("  Minimum: %d\n", min)
+ fmt.Printf("  Maximum: %d\n", max)
+ fmt.Printf("  Somme: %d\n", somme)
+ fmt.Printf("  Moyenne: %.2f\n", moyenne)
 }
 
 // Fonction pour démontrer les concepts avancés
 func demonstrationAvancee() {
-	fmt.Println("=== DÉMONSTRATION AVANCÉE ===")
+ fmt.Println("=== DÉMONSTRATION AVANCÉE ===")
 
-	// Montrer la différence entre append et copy
-	original := []int{1, 2, 3}
-	fmt.Printf("Original: %v\n", original)
+ // Montrer la différence entre append et copy
+ original := []int{1, 2, 3}
+ fmt.Printf("Original: %v\n", original)
 
-	// Méthode 1: append (peut réallouer)
-	copie1 := append([]int{}, original...)
-	copie1[0] = 99
-	fmt.Printf("Après modification copie1: original=%v, copie1=%v\n", original, copie1)
+ // Méthode 1: append (peut réallouer)
+ copie1 := append([]int{}, original...)
+ copie1[0] = 99
+ fmt.Printf("Après modification copie1: original=%v, copie1=%v\n", original, copie1)
 
-	// Méthode 2: copy (plus explicite)
-	copie2 := make([]int, len(original))
-	copy(copie2, original)
-	copie2[1] = 88
-	fmt.Printf("Après modification copie2: original=%v, copie2=%v\n", original, copie2)
+ // Méthode 2: copy (plus explicite)
+ copie2 := make([]int, len(original))
+ copy(copie2, original)
+ copie2[1] = 88
+ fmt.Printf("Après modification copie2: original=%v, copie2=%v\n", original, copie2)
 
-	// Montrer la capacité
-	slice := make([]int, 3, 10)
-	fmt.Printf("Slice avec longueur 3, capacité 10: %v\n", slice)
-	fmt.Printf("Longueur: %d, Capacité: %d\n", len(slice), cap(slice))
+ // Montrer la capacité
+ slice := make([]int, 3, 10)
+ fmt.Printf("Slice avec longueur 3, capacité 10: %v\n", slice)
+ fmt.Printf("Longueur: %d, Capacité: %d\n", len(slice), cap(slice))
 
-	// Ajouter des éléments
-	for i := 0; i < 8; i++ {
-		slice = append(slice, i)
-		fmt.Printf("Après ajout de %d: len=%d, cap=%d\n", i, len(slice), cap(slice))
-	}
+ // Ajouter des éléments
+ for i := 0; i < 8; i++ {
+  slice = append(slice, i)
+  fmt.Printf("Après ajout de %d: len=%d, cap=%d\n", i, len(slice), cap(slice))
+ }
 }
 
 // ==========================================
@@ -620,20 +627,20 @@ func demonstrationAvancee() {
 // ==========================================
 
 func main() {
-	fmt.Println("SOLUTIONS DES EXERCICES - ARRAYS ET SLICES")
-	fmt.Println("===========================================")
+ fmt.Println("SOLUTIONS DES EXERCICES - ARRAYS ET SLICES")
+ fmt.Println("===========================================")
 
-	exercice1()
-	exercice2()
-	exercice3()
+ exercice1()
+ exercice2()
+ exercice3()
 
-	// Bonus: démonstration avancée
-	demonstrationAvancee()
+ // Bonus: démonstration avancée
+ demonstrationAvancee()
 
-	// Bonus: utilisation de la fonction utilitaire
-	fmt.Println("\n=== BONUS: STATISTIQUES ===")
-	testSlice := []int{15, 8, 23, 4, 16, 42, 11, 7}
-	afficherStats(testSlice)
+ // Bonus: utilisation de la fonction utilitaire
+ fmt.Println("\n=== BONUS: STATISTIQUES ===")
+ testSlice := []int{15, 8, 23, 4, 16, 42, 11, 7}
+ afficherStats(testSlice)
 }
 ```
 
@@ -645,6 +652,7 @@ Les arrays et slices sont des structures fondamentales en Go :
 - **Slices** : Taille dynamique, passés par référence, très utilisés
 
 **Points clés à retenir :**
+
 - Les slices sont plus flexibles que les arrays
 - Utilisez `append()` pour ajouter des éléments
 - Attention au partage de mémoire entre slices

@@ -48,7 +48,8 @@ func main() {
 ```
 
 **Sortie :**
-```
+
+```text
 Valeur: 42, Type: int
 Valeur: Hello, Go!, Type: string
 Valeur: [1 2 3], Type: []int
@@ -143,7 +144,8 @@ func main() {
 ```
 
 **Sortie :**
-```
+
+```text
 C'est un string: Bonjour
 C'est un int: 42
 C'est un float64: 3.14
@@ -514,6 +516,7 @@ func main() {
 ## Cas d'usage courants
 
 ### 1. Fonctions de logging
+
 ```go
 func Log(level string, message any) {
     switch v := message.(type) {
@@ -528,6 +531,7 @@ func Log(level string, message any) {
 ```
 
 ### 2. Cache générique
+
 ```go
 type Cache struct {
     donnees map[string]any

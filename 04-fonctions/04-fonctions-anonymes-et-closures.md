@@ -50,6 +50,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Je suis une fonction anonyme !
 Bonjour Alice depuis une fonction anonyme !
@@ -98,6 +99,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Salut Bob !
 Salut Charlie !
@@ -133,12 +135,14 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Hello depuis l'extérieur
 Message modifié
 ```
 
 **Points importants :**
+
 - La fonction anonyme peut accéder à `message` même si elle n'est pas passée en paramètre
 - Quand `message` change, la closure voit le changement
 - C'est ça une closure : une fonction + son environnement capturé
@@ -178,6 +182,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Compteur1: 1
 Compteur1: 2
@@ -188,6 +193,7 @@ Compteur2: 2
 ```
 
 **Explication magique :**
+
 - Chaque appel à `creerCompteur()` crée une nouvelle variable `compte`
 - La fonction retournée "se souvient" de SA propre variable `compte`
 - Même après que `creerCompteur()` termine, la variable `compte` reste accessible à la closure
@@ -231,6 +237,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Doubler 5: 10
 Tripler 4: 12
@@ -280,6 +287,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Originaux: [1 2 3 4 5]
 Doublés:   [2 4 6 8 10]
@@ -331,6 +339,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Tous:    [1 2 3 4 5 6 7 8 9 10]
 Pairs:   [2 4 6 8 10]
@@ -384,6 +393,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Nombres pairs: 0 2 4 6 8
 Multiples de 5: 5 10 15 20
@@ -446,6 +456,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Ajouté au cache: nom -> Alice
 Ajouté au cache: age -> 25
@@ -536,6 +547,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 ✅ [Email] 'alice@example.com': Email valide
 ❌ [Email] 'alice': Format d'email invalide
@@ -548,6 +560,7 @@ func main() {
 ## Exercices pratiques
 
 ### Exercice 1 : Accumulateur personnalisé
+
 Créez une fonction qui retourne une closure permettant d'accumuler des valeurs avec une opération personnalisée (addition, multiplication, etc.).
 
 <details>
@@ -603,9 +616,11 @@ func main() {
     fmt.Printf("Différence après - 5: %d\n", difference(5))    // 85
 }
 ```
+
 </details>
 
 ### Exercice 2 : Système de rappels (callbacks)
+
 Créez un système qui permet d'enregistrer des fonctions de rappel et de les exécuter toutes ensemble.
 
 <details>
@@ -674,9 +689,11 @@ func main() {
     executer()
 }
 ```
+
 </details>
 
 ### Exercice 3 : Builder pattern avec closures
+
 Créez un système pour construire des objets étape par étape en utilisant des closures.
 
 <details>
@@ -805,6 +822,7 @@ func main() {
     fmt.Printf("Deuxième personne: %s\n", personne2)
 }
 ```
+
 </details>
 
 ## Patterns avancés et cas d'usage
@@ -879,6 +897,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 === Handler simple ===
 Résultat: Traité: Hello
@@ -973,6 +992,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Résultat incorrect:
 Valeur: 3
@@ -991,6 +1011,7 @@ Valeur: 2
 ```
 
 **Explication du problème :**
+
 - Toutes les closures capturent la **même** variable `i`
 - Quand la boucle finit, `i` vaut 3
 - Toutes les closures voient cette valeur finale
@@ -1236,6 +1257,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 === Builder fonctionnel ===
 [DEBUG][WEB] Serveur démarré
@@ -1576,6 +1598,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 Serveur par défaut: Server{Host: localhost, Port: 8080, Timeout: 30s, Debug: false, MaxConn: 100}
 Serveur personnalisé: Server{Host: 0.0.0.0, Port: 3000, Timeout: 30s, Debug: true, MaxConn: 100}
@@ -1587,16 +1610,19 @@ Serveur complet: Server{Host: api.example.com, Port: 443, Timeout: 60s, Debug: f
 ### Ce que nous avons appris
 
 **Fonctions anonymes :**
+
 - Syntaxe : `func(params) retour { ... }`
 - Peuvent être appelées immédiatement ou stockées dans des variables
 - Utiles pour les callbacks et les transformations ponctuelles
 
 **Closures :**
+
 - Fonctions qui capturent des variables de leur environnement
 - Permettent de créer des fonctions avec état persistant
 - Très puissantes pour les patterns comme les factories et les builders
 
 **Patterns courants :**
+
 - **Callbacks** : passer des fonctions comme paramètres
 - **Factories** : fonctions qui créent et retournent d'autres fonctions
 - **Options pattern** : configuration flexible avec des closures
@@ -1605,11 +1631,13 @@ Serveur complet: Server{Host: api.example.com, Port: 443, Timeout: 60s, Debug: f
 ### Quand utiliser quoi ?
 
 **Utilisez des fonctions anonymes quand :**
+
 - Vous avez besoin d'une fonction simple et ponctuelle
 - Vous implémentez des callbacks
 - Vous voulez éviter de polluer l'espace de noms global
 
 **Utilisez des closures quand :**
+
 - Vous avez besoin d'état persistant entre les appels
 - Vous créez des configurations ou des builders flexibles
 - Vous implémentez des patterns comme le middleware
@@ -1686,6 +1714,7 @@ func main() {
 ```
 
 **Résultat :**
+
 ```
 === Démonstration complète ===
 1. Fonction anonyme exécutée immédiatement

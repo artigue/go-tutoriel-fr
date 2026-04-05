@@ -9,6 +9,7 @@ Maintenant que nous avons vu les conventions d'erreur, les erreurs personnalisé
 ## Principe fondamental : Fail Fast, Fail Clear
 
 La philosophie Go pour les erreurs suit le principe **"Fail Fast, Fail Clear"** :
+
 - **Fail Fast** : détecter les erreurs le plus tôt possible
 - **Fail Clear** : fournir des messages d'erreur clairs et actionnables
 

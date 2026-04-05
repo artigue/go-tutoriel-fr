@@ -11,21 +11,27 @@ Go (également appelé Golang) est un langage de programmation open source déve
 ## Pourquoi apprendre Go ?
 
 ### Simplicité et lisibilité
+
 Go privilégie la clarté et la simplicité. Sa syntaxe épurée permet de se concentrer sur la logique plutôt que sur les subtilités du langage.
 
 ### Performance
+
 Go offre des performances proches du C tout en gardant une syntaxe plus accessible. Il compile vers du code machine natif, éliminant ainsi les problèmes de performance liés aux langages interprétés.
 
 ### Concurrence native
+
 Go intègre nativement la programmation concurrente avec les goroutines et les channels, rendant le développement d'applications parallèles naturel et efficace.
 
 ### Écosystème riche
+
 - Standard library complète et bien conçue
 - Outils de développement intégrés (formateur, testeur, profileur)
 - Communauté active et écosystème de packages en croissance
 
 ### Domaines d'application
+
 Go excelle particulièrement dans :
+
 - **Développement web** : APIs REST, microservices
 - **Outils en ligne de commande** : CLI robustes et performants
 - **Infrastructure et DevOps** : Docker, Kubernetes, Terraform
@@ -45,6 +51,7 @@ Ce tutoriel est organisé en plusieurs parties progressives :
 ## Prérequis
 
 Pour suivre ce tutoriel, vous devez avoir :
+
 - Des notions de base en programmation (variables, fonctions, boucles)
 - Une familiarité avec la ligne de commande
 - Une compréhension générale des concepts de programmation orientée objet (optionnel mais utile)
@@ -52,6 +59,7 @@ Pour suivre ce tutoriel, vous devez avoir :
 ## Objectifs d'apprentissage
 
 À la fin de ce tutoriel, vous serez capable de :
+
 - Maîtriser la syntaxe et les concepts fondamentaux de Go
 - Développer des applications concurrentes robustes
 - Créer des APIs REST et des microservices
@@ -61,6 +69,7 @@ Pour suivre ce tutoriel, vous devez avoir :
 ## Comment utiliser ce tutoriel
 
 Chaque section comprend :
+
 - **Théorie** : Explications des concepts avec exemples
 - **Pratique** : Exercices et projets hands-on
 - **Ressources** : Liens vers la documentation officielle et ressources complémentaires

@@ -9,6 +9,7 @@ Dans la section précédente, nous avons vu comment utiliser les erreurs de base
 ## Pourquoi créer des erreurs personnalisées ?
 
 Les erreurs personnalisées permettent de :
+
 - **Transporter plus d'informations** que juste un message
 - **Identifier précisément** le type d'erreur
 - **Traiter différemment** selon le type d'erreur
@@ -409,6 +410,7 @@ func main() {
 ## Bonnes pratiques
 
 ### 1. Nommage cohérent
+
 ```go
 // ✅ Bon - préfixe "Err" pour les types d'erreur
 type ErreurValidation struct { ... }
@@ -418,6 +420,7 @@ var ErrUtilisateurInexistant = errors.New("...")
 ```
 
 ### 2. Messages d'erreur informatifs
+
 ```go
 // ✅ Bon - détaillé et actionnable
 return fmt.Errorf("impossible de se connecter à la base de données %s:%d: %v",
@@ -428,6 +431,7 @@ return errors.New("erreur de connexion")
 ```
 
 ### 3. Utiliser les erreurs prédéfinies quand c'est possible
+
 ```go
 // ✅ Bon - réutilise les erreurs standard
 if file == "" {
@@ -441,6 +445,7 @@ if file == "" {
 ```
 
 ### 4. Permettre l'inspection des erreurs
+
 ```go
 // ✅ Bon - les champs sont exportés pour inspection
 type ErreurValidation struct {

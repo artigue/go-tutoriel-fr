@@ -197,6 +197,7 @@ Depuis sa création, Go a été adopté par de nombreuses entreprises et projets
 ### Rétrocompatibilité
 
 Depuis Go 1.0, Google s'engage à maintenir la compatibilité :
+
 - Le code Go 1.0 doit toujours compiler avec les versions récentes
 - Les nouvelles fonctionnalités sont ajoutées sans casser l'existant
 
@@ -212,12 +213,14 @@ Depuis Go 1.0, Google s'engage à maintenir la compatibilité :
 Go représente une approche pragmatique de la programmation moderne. Ses créateurs ont délibérément choisi la simplicité et l'efficacité plutôt que la complexité et la flexibilité extrême.
 
 Cette philosophie fait de Go un excellent choix pour :
+
 - Les développeurs débutants (syntaxe claire)
 - Les équipes (code lisible et maintenable)
 - Les applications modernes (concurrence native)
 - Les projets à grande échelle (compilation rapide)
 
 **À retenir :**
+
 - Go privilégie la simplicité et la lisibilité
 - Il a été créé pour résoudre des problèmes réels du développement moderne
 - Sa philosophie influence directement sa syntaxe et ses fonctionnalités

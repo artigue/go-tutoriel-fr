@@ -48,6 +48,7 @@ func Calculate(x, y int, op string) int {
 ## Installation et utilisation de godoc
 
 ### Installation
+
 ```bash
 # Installer godoc (si pas déjà installé)
 go install golang.org/x/tools/cmd/godoc@latest
@@ -57,6 +58,7 @@ godoc -h
 ```
 
 ### Génération de documentation
+
 ```bash
 # Serveur local de documentation
 godoc -http=:6060
@@ -66,6 +68,7 @@ godoc -http=:6060
 ```
 
 ### Alternative moderne : go doc
+
 ```bash
 # Afficher la documentation d'un package dans le terminal
 go doc package_name
@@ -79,6 +82,7 @@ go doc .        # Documentation du package actuel
 ## Règles de documentation en Go
 
 ### 1. Commentaires de package
+
 Chaque package doit avoir un commentaire de package avant la déclaration `package`.
 
 ```go
@@ -98,6 +102,7 @@ package mathutils
 ```
 
 ### 2. Commentaires de fonctions
+
 Chaque fonction publique (qui commence par une majuscule) doit être documentée.
 
 ```go
@@ -141,6 +146,7 @@ func Divide(a, b float64) (float64, error) {
 ```
 
 ### 3. Commentaires de types
+
 Documentez vos structs, interfaces et types personnalisés.
 
 ```go
@@ -184,6 +190,7 @@ type UserService interface {
 ```
 
 ### 4. Commentaires de méthodes
+
 ```go
 // NewUser crée une nouvelle instance d'utilisateur avec validation.
 //
@@ -237,7 +244,8 @@ func (u *User) IsActive() bool {
 Créons un package complètement documenté pour une calculatrice.
 
 ### Structure du projet
-```
+
+```text
 calculator/
 ├── go.mod
 ├── doc.go              # Documentation du package
@@ -250,6 +258,7 @@ calculator/
 ```
 
 ### 1. Fichier doc.go
+
 ```go
 // Package calculator fournit une calculatrice programmable avec historique.
 //
@@ -286,6 +295,7 @@ package calculator
 ```
 
 ### 2. Fichier calculator.go
+
 ```go
 package calculator
 
@@ -445,6 +455,7 @@ func (c *Calculator) setError(err error) *Calculator {
 ```
 
 ### 3. Fichier operations.go
+
 ```go
 package calculator
 
@@ -625,6 +636,7 @@ func (c *Calculator) SquareRoot() *Calculator {
 ```
 
 ### 4. Exemple d'utilisation (examples/basic/main.go)
+
 ```go
 package main
 
@@ -677,6 +689,7 @@ func main() {
 ## Consulter la documentation
 
 ### 1. Serveur local
+
 ```bash
 # Dans le dossier de votre projet
 godoc -http=:6060
@@ -686,6 +699,7 @@ godoc -http=:6060
 ```
 
 ### 2. Documentation en ligne de commande
+
 ```bash
 # Documentation du package actuel
 go doc
@@ -698,11 +712,13 @@ go doc -all
 ```
 
 ### 3. Publication en ligne
+
 Une fois votre module publié sur GitHub, il apparaîtra automatiquement sur [pkg.go.dev](https://pkg.go.dev) !
 
 ## Conventions et bonnes pratiques
 
 ### 1. Structure des commentaires
+
 ```go
 // NomFonction fait quelque chose de spécifique.
 //
@@ -720,6 +736,7 @@ func NomFonction(param string) string {
 ```
 
 ### 2. Utilisation d'exemples
+
 ```go
 // Fibonacci calcule le nième nombre de Fibonacci.
 //
@@ -740,6 +757,7 @@ func Fibonacci(n int) int {
 ```
 
 ### 3. Documentation des erreurs
+
 ```go
 // ParseConfig lit et parse un fichier de configuration.
 //
@@ -765,6 +783,7 @@ func ParseConfig(filename string) (*Config, error) {
 ## Tests de documentation
 
 ### Tests d'exemples
+
 Go peut tester vos exemples de documentation !
 
 ```go
@@ -790,6 +809,7 @@ func ExampleNew() {
 ```
 
 Exécuter les tests :
+
 ```bash
 go test -v
 ```
@@ -799,21 +819,25 @@ go test -v
 La documentation avec godoc permet :
 
 **📚 Documentation automatique :**
+
 - Génération web à partir des commentaires
 - Integration avec pkg.go.dev
 - Recherche et navigation faciles
 
 **✍️ Conventions simples :**
+
 - Commentaires avant les déclarations
 - Premier mot = nom de l'élément
 - Exemples intégrés au code
 
 **🔧 Outils intégrés :**
+
 - `godoc -http` pour serveur local
 - `go doc` pour consultation rapide
 - Tests d'exemples automatiques
 
 **💡 Bonnes pratiques :**
+
 - Documenter tous les éléments publics
 - Fournir des exemples concrets
 - Expliquer les cas d'erreur

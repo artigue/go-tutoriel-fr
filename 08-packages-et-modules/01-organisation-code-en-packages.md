@@ -7,7 +7,8 @@
 Un **package** en Go est simplement un dossier qui contient des fichiers `.go`. Tous les fichiers dans le même dossier appartiennent au même package et peuvent partager leurs fonctions, variables et types entre eux.
 
 ### Exemple simple
-```
+
+```text
 mon-projet/
 ├── main.go          # package main
 └── utils/
@@ -18,6 +19,7 @@ mon-projet/
 ## Règles de base des packages
 
 ### 1. Déclaration du package
+
 Chaque fichier Go doit commencer par une déclaration de package :
 
 ```go
@@ -25,6 +27,7 @@ package nom_du_package
 ```
 
 **Exemple :**
+
 ```go
 // fichier: utils/math.go
 package utils
@@ -35,6 +38,7 @@ func Add(a, b int) int {
 ```
 
 ### 2. Le package main
+
 Le package `main` est spécial : c'est le point d'entrée de votre programme. Il doit contenir une fonction `main()`.
 
 ```go
@@ -49,11 +53,13 @@ func main() {
 ```
 
 ### 3. Un dossier = un package
+
 Tous les fichiers dans un même dossier doivent avoir la même déclaration de package.
 
 ## Importer des packages
 
 ### Import local
+
 Pour utiliser un package de votre projet :
 
 ```go
@@ -71,6 +77,7 @@ func main() {
 ```
 
 ### Import avec modules (recommandé)
+
 ```go
 package main
 
@@ -90,7 +97,8 @@ func main() {
 Créons une calculatrice simple pour illustrer l'organisation en packages.
 
 ### Structure du projet
-```
+
+```text
 calculatrice/
 ├── go.mod
 ├── main.go
@@ -102,11 +110,13 @@ calculatrice/
 ```
 
 ### 1. Initialisation du module
+
 ```bash
 go mod init calculatrice
 ```
 
 ### 2. Package math/basic.go
+
 ```go
 package math
 
@@ -135,6 +145,7 @@ func Divide(a, b float64) float64 {
 ```
 
 ### 3. Package math/advanced.go
+
 ```go
 package math
 
@@ -152,6 +163,7 @@ func SquareRoot(n float64) float64 {
 ```
 
 ### 4. Package utils/display.go
+
 ```go
 package utils
 
@@ -169,6 +181,7 @@ func PrintSingleResult(operation string, a, result float64) {
 ```
 
 ### 5. Fichier main.go
+
 ```go
 package main
 
@@ -205,12 +218,14 @@ func main() {
 ## Bonnes pratiques d'organisation
 
 ### 1. Nommage des packages
+
 - Utilisez des noms courts et descriptifs
 - Évitez les underscores (utilisez `mathutils` plutôt que `math_utils`)
 - Préférez le singulier au pluriel (`user` plutôt que `users`)
 
 ### 2. Structure par fonctionnalité
-```
+
+```text
 projet/
 ├── user/          # Tout ce qui concerne les utilisateurs
 │   ├── model.go
@@ -224,9 +239,10 @@ projet/
 ```
 
 ### 3. Éviter les packages trop gros
+
 Si un package contient plus de 5-7 fichiers, considérez le diviser :
 
-```
+```text
 // Au lieu de :
 utils/
 ├── math.go
@@ -246,9 +262,10 @@ fileutils/
 ```
 
 ### 4. Package internal
+
 Pour du code privé à votre projet, utilisez un dossier `internal/` :
 
-```
+```text
 projet/
 ├── main.go
 ├── public/        # Code utilisable par d'autres projets
@@ -260,6 +277,7 @@ projet/
 ## Erreurs communes à éviter
 
 ### 1. Imports circulaires
+
 ```go
 // Package A importe B
 // Package B importe A
@@ -267,6 +285,7 @@ projet/
 ```
 
 ### 2. Packages trop petits
+
 ```go
 // ❌ Évitez d'avoir un package avec une seule fonction simple
 package add
@@ -277,6 +296,7 @@ func Add(a, b int) int {
 ```
 
 ### 3. Mauvais nommage
+
 ```go
 // ❌ Évitez les noms génériques
 package utils
@@ -293,7 +313,7 @@ package configloader
 
 Créez un projet "gestion-bibliotheque" avec la structure suivante :
 
-```
+```text
 gestion-bibliotheque/
 ├── go.mod
 ├── main.go
@@ -306,6 +326,7 @@ gestion-bibliotheque/
 ```
 
 **Fonctionnalités à implémenter :**
+
 - Struct `Book` avec titre, auteur, année
 - Fonctions pour ajouter/supprimer des livres
 - Fonction pour lister tous les livres
@@ -314,12 +335,14 @@ gestion-bibliotheque/
 ## Résumé
 
 Les packages en Go permettent :
+
 - ✅ D'organiser le code de manière logique
 - ✅ De réutiliser du code facilement
 - ✅ De collaborer efficacement en équipe
 - ✅ De maintenir des projets de grande taille
 
 **Points clés à retenir :**
+
 1. Un dossier = un package
 2. Tous les fichiers d'un dossier partagent le même package
 3. Utilisez des noms courts et descriptifs

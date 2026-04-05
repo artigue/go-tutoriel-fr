@@ -14,21 +14,26 @@ Dans cette section, nous allons installer Go sur votre système et configurer vo
 #### Windows
 
 **Étape 1 : Télécharger Go**
+
 1. Rendez-vous sur [golang.org/dl](https://golang.org/dl/)
 2. Téléchargez le fichier `.msi` pour Windows (ex: `go1.21.5.windows-amd64.msi`)
 3. Exécutez le fichier téléchargé
 
 **Étape 2 : Installation**
+
 1. Suivez l'assistant d'installation
 2. Go sera installé dans `C:\Program Files\Go` par défaut
 3. L'installateur ajoutera automatiquement Go au PATH
 
 **Étape 3 : Vérification**
 Ouvrez l'invite de commande (cmd) et tapez :
+
 ```cmd
 go version
 ```
+
 Vous devriez voir quelque chose comme :
+
 ```
 go version go1.21.5 windows/amd64
 ```
@@ -36,16 +41,19 @@ go version go1.21.5 windows/amd64
 #### macOS
 
 **Option A : Avec l'installateur officiel**
+
 1. Téléchargez le fichier `.pkg` depuis [golang.org/dl](https://golang.org/dl/)
 2. Double-cliquez sur le fichier téléchargé
 3. Suivez les instructions d'installation
 
 **Option B : Avec Homebrew (si installé)**
+
 ```bash
 brew install go
 ```
 
 **Vérification :**
+
 ```bash
 go version
 ```
@@ -53,12 +61,14 @@ go version
 #### Linux (Ubuntu/Debian)
 
 **Option A : Avec le gestionnaire de paquets**
+
 ```bash
 sudo apt update
 sudo apt install golang-go
 ```
 
 **Option B : Installation manuelle (version plus récente)**
+
 ```bash
 # Télécharger la dernière version
 wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
@@ -72,6 +82,7 @@ source ~/.bashrc
 ```
 
 **Vérification :**
+
 ```bash
 go version
 ```
@@ -79,6 +90,7 @@ go version
 ### Méthode 2 : Installation avec des gestionnaires de versions
 
 #### Avec g (gestionnaire de versions Go)
+
 ```bash
 # Installer g
 curl -sSL https://git.io/g-install | sh -s
@@ -92,11 +104,13 @@ g install latest
 ### Variables d'environnement importantes
 
 #### GOROOT
+
 - **Définition** : Répertoire où Go est installé
 - **Valeur par défaut** : Définie automatiquement lors de l'installation
 - **À modifier ?** : Généralement non, sauf installation personnalisée
 
 #### GOPATH (moins important depuis Go 1.11)
+
 - **Définition** : Répertoire de travail pour les projets Go
 - **Utilisation moderne** : Remplacé par les modules Go
 - **Configuration** : Optionnelle pour les nouveaux projets
@@ -104,6 +118,7 @@ g install latest
 #### Configuration recommandée
 
 **Windows :**
+
 ```cmd
 # Vérifier les variables (PowerShell)
 $env:GOROOT
@@ -113,6 +128,7 @@ go env GOPATH
 ```
 
 **macOS/Linux :**
+
 ```bash
 # Vérifier les variables
 echo $GOROOT
@@ -143,16 +159,19 @@ go env GOPATH
 #### 1. Visual Studio Code (Gratuit, Recommandé)
 
 **Installation :**
+
 1. Téléchargez VS Code depuis [code.visualstudio.com](https://code.visualstudio.com/)
 2. Installez l'extension Go officielle
 
 **Configuration de l'extension Go :**
+
 1. Ouvrez VS Code
 2. Allez dans Extensions (Ctrl+Shift+X)
 3. Recherchez "Go" et installez l'extension officielle de Google
 4. Redémarrez VS Code
 
 **Fonctionnalités disponibles :**
+
 - Coloration syntaxique
 - Auto-complétion intelligente
 - Débogage intégré
@@ -162,12 +181,14 @@ go env GOPATH
 #### 2. GoLand (Payant, Professionnel)
 
 **Avantages :**
+
 - IDE complet spécialisé pour Go
 - Débogage avancé
 - Outils de refactoring puissants
 - Intégration Git excellente
 
 **Inconvénients :**
+
 - Payant (30 jours d'essai gratuit)
 - Plus lourd que VS Code
 
@@ -189,6 +210,7 @@ Après avoir installé l'extension Go, VS Code vous proposera d'installer les ou
 4. Cliquez sur "Install All"
 
 **Outils installés automatiquement :**
+
 - `gopls` : Serveur de langage Go
 - `dlv` : Débogueur Go
 - `goimports` : Formatage et organisation des imports
@@ -216,17 +238,20 @@ Créez un fichier `.vscode/settings.json` dans votre projet :
 ### Créer votre premier programme
 
 **Étape 1 : Créer un répertoire de projet**
+
 ```bash
 mkdir mon-premier-go
 cd mon-premier-go
 ```
 
 **Étape 2 : Initialiser un module Go**
+
 ```bash
 go mod init mon-premier-go
 ```
 
 **Étape 3 : Créer le fichier main.go**
+
 ```go
 package main
 
@@ -239,11 +264,13 @@ func main() {
 ```
 
 **Étape 4 : Exécuter le programme**
+
 ```bash
 go run main.go
 ```
 
 **Résultat attendu :**
+
 ```
 Hello, World!
 Go est correctement installé !
@@ -300,11 +327,13 @@ goimports -w .
 ### Go n'est pas reconnu dans le terminal
 
 **Windows :**
+
 1. Vérifiez que `C:\Program Files\Go\bin` est dans votre PATH
 2. Redémarrez votre terminal
 3. Ou ajoutez manuellement à votre PATH
 
 **macOS/Linux :**
+
 ```bash
 # Ajouter à ~/.bashrc ou ~/.zshrc
 export PATH=$PATH:/usr/local/go/bin
@@ -316,6 +345,7 @@ source ~/.bashrc
 ### Erreur "go: cannot find main module"
 
 **Solution :**
+
 ```bash
 # Initialiser un module Go dans votre répertoire
 go mod init nom-du-projet
@@ -330,12 +360,14 @@ go mod init nom-du-projet
 ## Prochaines étapes
 
 Félicitations ! Vous avez maintenant :
+
 - ✅ Go installé sur votre système
 - ✅ Un éditeur de code configuré
 - ✅ Votre premier programme Go qui fonctionne
 - ✅ Les outils de développement prêts
 
 **Récapitulatif des commandes importantes :**
+
 ```bash
 go version          # Vérifier la version
 go mod init projet  # Initialiser un nouveau projet

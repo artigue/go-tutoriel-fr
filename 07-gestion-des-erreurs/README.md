@@ -19,6 +19,7 @@ Dans le développement logiciel, les erreurs sont inévitables. Elles peuvent su
 - **Erreurs logiques** : conditions inattendues dans le code
 
 Une gestion d'erreur appropriée permet de :
+
 - **Rendre les programmes robustes** face aux conditions exceptionnelles
 - **Fournir des messages informatifs** aux utilisateurs
 - **Faciliter le débogage** lors du développement
@@ -42,6 +43,7 @@ if err != nil {
 ```
 
 Cette approche force le développeur à :
+
 - **Anticiper les erreurs** possibles
 - **Traiter chaque erreur** de manière consciente
 - **Rendre le code plus prévisible** et lisible
@@ -49,6 +51,7 @@ Cette approche force le développeur à :
 ### Comparaison avec d'autres langages
 
 **Langages avec exceptions (Java, Python, C#) :**
+
 ```java
 // Java - exceptions peuvent être "oubliées"
 try {
@@ -60,6 +63,7 @@ try {
 ```
 
 **Go - gestion explicite :**
+
 ```go
 // Go - impossible d'ignorer l'erreur sans intention
 contenu, err := lireFichier("config.txt")
@@ -73,23 +77,29 @@ if err != nil {
 ## Avantages de l'approche Go
 
 ### 1. **Lisibilité**
+
 Le flux d'erreur est visible directement dans le code. Pas de chemins cachés ou de "magic" qui peut surprendre.
 
 ### 2. **Performance**
+
 Pas de stack unwinding coûteux comme avec les exceptions. Les erreurs sont de simples valeurs.
 
 ### 3. **Simplicité**
+
 Une seule façon de gérer les erreurs = moins de confusion, code plus uniforme.
 
 ### 4. **Fiabilité**
+
 Impossible d'oublier accidentellement de gérer une erreur critique.
 
 ## Inconvénients apparents
 
 ### **Verbosité**
+
 Le code Go peut sembler répétitif avec tous ces `if err != nil`. C'est un choix conscient pour la clarté.
 
 ### **Changement d'habitude**
+
 Pour les développeurs habitués aux exceptions, l'adaptation peut prendre du temps.
 
 **Important :** Ces "inconvénients" deviennent rapidement des avantages quand on développe des applications robustes en équipe.
@@ -99,12 +109,14 @@ Pour les développeurs habitués aux exceptions, l'adaptation peut prendre du te
 Go distingue deux catégories principales de problèmes :
 
 ### 1. **Erreurs** (errors)
+
 - Conditions attendues mais indésirables
 - Font partie du flux normal du programme
 - Doivent être gérées explicitement
 - Exemples : fichier introuvable, format de données invalide
 
 ### 2. **Panics**
+
 - Conditions exceptionnelles et inattendues
 - Arrêtent l'exécution normale du programme
 - Equivalent aux exceptions non gérées
@@ -115,24 +127,28 @@ Go distingue deux catégories principales de problèmes :
 Dans les sections suivantes, nous allons explorer :
 
 ### **7-1 : Conventions d'erreur en Go**
+
 - Le type `error` et son interface
 - Pattern de retour multiple `(result, error)`
 - Vérification standard avec `if err != nil`
 - Création d'erreurs simples
 
 ### **7-2 : Création d'erreurs personnalisées**
+
 - Types d'erreur custom avec struct
 - Erreurs avec contexte et métadonnées
 - Wrapping et unwrapping d'erreurs
 - Erreurs prédéfinies et codes d'erreur
 
 ### **7-3 : Panic et recover**
+
 - Quand et comment utiliser `panic()`
 - Mécanisme de `recover()` avec `defer`
 - Patterns pour des applications robustes
 - Différences entre erreurs et panics
 
 ### **7-4 : Bonnes pratiques**
+
 - Messages d'erreur efficaces
 - Stratégies de gestion d'erreur
 - Testing des cas d'erreur
@@ -177,6 +193,7 @@ func main() {
 ```
 
 **Ce qui se passe ici :**
+
 1. `strconv.Atoi()` retourne `(int, error)` - pattern typique Go
 2. On vérifie immédiatement `if err != nil`
 3. On gère l'erreur de manière appropriée (message + arrêt)
@@ -197,6 +214,7 @@ func main() {
 ## Prérequis
 
 Avant de commencer ce chapitre, assurez-vous de maîtriser :
+
 - Les fonctions et leurs valeurs de retour
 - Les interfaces de base
 - Les types de données (string, struct)

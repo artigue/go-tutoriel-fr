@@ -9,6 +9,7 @@ Un **pointeur** (pointer) est une variable qui stocke l'**adresse mémoire** d'u
 ## Analogie simple
 
 Imaginez que vous avez un carnet d'adresses :
+
 - **Valeur directe** : "Alice habite dans une maison bleue avec un jardin"
 - **Pointeur** : "Alice habite au 123 Rue de la Paix"
 
@@ -29,6 +30,7 @@ func main() {
 ```
 
 **Explications :**
+
 - `age` contient la valeur `25`
 - `&age` donne l'adresse mémoire où `age` est stocké
 - `*int` signifie "pointeur vers un int"
@@ -49,12 +51,14 @@ fmt.Printf("Type de p: %T\n", p)         // *int
 Go utilise deux opérateurs principaux :
 
 **Opérateur `&` (address-of)** : Obtient l'adresse d'une variable
+
 ```go
 nombre := 42
 pointeur := &nombre  // pointeur contient l'adresse de nombre
 ```
 
 **Opérateur `*` (dereference)** : Accède à la valeur pointée
+
 ```go
 valeur := *pointeur  // valeur = 42 (le contenu de l'adresse)
 ```
@@ -785,19 +789,25 @@ func NouvelUtilisateur(nom string, age int) *Utilisateur {
 ## Exercices pratiques
 
 ### Exercice 1 : Basique
+
 Créez des fonctions qui :
+
 1. Échangent les valeurs de deux variables entières
 2. Trouvent le minimum et maximum dans un slice et retournent des pointeurs vers ces valeurs
 3. Incrémentent un compteur via un pointeur
 
 ### Exercice 2 : Intermédiaire
+
 Implémentez une stack (pile) avec :
+
 1. Structure utilisant des pointeurs pour les noeuds
 2. Méthodes `Push()`, `Pop()`, `Peek()`, `IsEmpty()`
 3. Gestion sécurisée des pointeurs nil
 
 ### Exercice 3 : Avancé
+
 Créez un système de gestion de mémoire simple :
+
 1. Pool d'objets réutilisables avec pointeurs
 2. Fonction d'allocation et de libération
 3. Compteur de références pour éviter les fuites
@@ -806,8 +816,8 @@ Créez un système de gestion de mémoire simple :
 package main
 
 import (
-	"fmt"
-	"sync"
+ "fmt"
+ "sync"
 )
 
 // ==========================================
@@ -816,154 +826,154 @@ import (
 
 // 1. Fonction pour échanger deux variables entières
 func echanger(a, b *int) {
-	if a == nil || b == nil {
-		fmt.Println("⚠️  Pointeurs nil détectés dans echanger()")
-		return
-	}
+ if a == nil || b == nil {
+  fmt.Println("⚠️  Pointeurs nil détectés dans echanger()")
+  return
+ }
 
-	temp := *a
-	*a = *b
-	*b = temp
+ temp := *a
+ *a = *b
+ *b = temp
 
-	fmt.Printf("Échange effectué: a=%d, b=%d\n", *a, *b)
+ fmt.Printf("Échange effectué: a=%d, b=%d\n", *a, *b)
 }
 
 // 2. Fonction pour trouver min et max avec pointeurs vers les valeurs originales
 func trouverMinMax(slice []int) (*int, *int) {
-	if len(slice) == 0 {
-		return nil, nil
-	}
+ if len(slice) == 0 {
+  return nil, nil
+ }
 
-	// Initialiser avec le premier élément
-	minPtr := &slice[0]
-	maxPtr := &slice[0]
+ // Initialiser avec le premier élément
+ minPtr := &slice[0]
+ maxPtr := &slice[0]
 
-	// Parcourir le reste du slice
-	for i := 1; i < len(slice); i++ {
-		if slice[i] < *minPtr {
-			minPtr = &slice[i]
-		}
-		if slice[i] > *maxPtr {
-			maxPtr = &slice[i]
-		}
-	}
+ // Parcourir le reste du slice
+ for i := 1; i < len(slice); i++ {
+  if slice[i] < *minPtr {
+   minPtr = &slice[i]
+  }
+  if slice[i] > *maxPtr {
+   maxPtr = &slice[i]
+  }
+ }
 
-	return minPtr, maxPtr
+ return minPtr, maxPtr
 }
 
 // Alternative: retourner des pointeurs vers des copies
 func trouverMinMaxCopie(slice []int) (*int, *int) {
-	if len(slice) == 0 {
-		return nil, nil
-	}
+ if len(slice) == 0 {
+  return nil, nil
+ }
 
-	min := slice[0]
-	max := slice[0]
+ min := slice[0]
+ max := slice[0]
 
-	for _, valeur := range slice[1:] {
-		if valeur < min {
-			min = valeur
-		}
-		if valeur > max {
-			max = valeur
-		}
-	}
+ for _, valeur := range slice[1:] {
+  if valeur < min {
+   min = valeur
+  }
+  if valeur > max {
+   max = valeur
+  }
+ }
 
-	// Retourner des pointeurs vers des copies
-	return &min, &max
+ // Retourner des pointeurs vers des copies
+ return &min, &max
 }
 
 // 3. Fonction pour incrémenter un compteur
 func incrementerCompteur(compteur *int) {
-	if compteur == nil {
-		fmt.Println("⚠️  Compteur nil dans incrementerCompteur()")
-		return
-	}
+ if compteur == nil {
+  fmt.Println("⚠️  Compteur nil dans incrementerCompteur()")
+  return
+ }
 
-	(*compteur)++
-	fmt.Printf("Compteur incrémenté: %d\n", *compteur)
+ (*compteur)++
+ fmt.Printf("Compteur incrémenté: %d\n", *compteur)
 }
 
 // Fonction bonus: incrémenter de n
 func incrementerCompteurDe(compteur *int, increment int) {
-	if compteur == nil {
-		fmt.Println("⚠️  Compteur nil dans incrementerCompteurDe()")
-		return
-	}
+ if compteur == nil {
+  fmt.Println("⚠️  Compteur nil dans incrementerCompteurDe()")
+  return
+ }
 
-	*compteur += increment
-	fmt.Printf("Compteur incrémenté de %d: nouvelle valeur = %d\n", increment, *compteur)
+ *compteur += increment
+ fmt.Printf("Compteur incrémenté de %d: nouvelle valeur = %d\n", increment, *compteur)
 }
 
 func exercice1() {
-	fmt.Println("=== EXERCICE 1 : BASIQUE ===")
+ fmt.Println("=== EXERCICE 1 : BASIQUE ===")
 
-	// Test 1: Échange de valeurs
-	fmt.Println("\n--- Test 1: Échange de valeurs ---")
-	x, y := 10, 20
-	fmt.Printf("Avant échange: x=%d, y=%d\n", x, y)
-	echanger(&x, &y)
-	fmt.Printf("Après échange: x=%d, y=%d\n", x, y)
+ // Test 1: Échange de valeurs
+ fmt.Println("\n--- Test 1: Échange de valeurs ---")
+ x, y := 10, 20
+ fmt.Printf("Avant échange: x=%d, y=%d\n", x, y)
+ echanger(&x, &y)
+ fmt.Printf("Après échange: x=%d, y=%d\n", x, y)
 
-	// Test avec pointeurs nil
-	var nilPtr *int
-	echanger(&x, nilPtr) // Doit afficher un avertissement
+ // Test avec pointeurs nil
+ var nilPtr *int
+ echanger(&x, nilPtr) // Doit afficher un avertissement
 
-	// Test 2: Trouver min/max
-	fmt.Println("\n--- Test 2: Min/Max avec pointeurs ---")
-	nombres := []int{5, 2, 8, 1, 9, 3, 7}
-	fmt.Printf("Slice: %v\n", nombres)
+ // Test 2: Trouver min/max
+ fmt.Println("\n--- Test 2: Min/Max avec pointeurs ---")
+ nombres := []int{5, 2, 8, 1, 9, 3, 7}
+ fmt.Printf("Slice: %v\n", nombres)
 
-	minPtr, maxPtr := trouverMinMax(nombres)
-	if minPtr != nil && maxPtr != nil {
-		fmt.Printf("Min: %d (adresse: %p)\n", *minPtr, minPtr)
-		fmt.Printf("Max: %d (adresse: %p)\n", *maxPtr, maxPtr)
+ minPtr, maxPtr := trouverMinMax(nombres)
+ if minPtr != nil && maxPtr != nil {
+  fmt.Printf("Min: %d (adresse: %p)\n", *minPtr, minPtr)
+  fmt.Printf("Max: %d (adresse: %p)\n", *maxPtr, maxPtr)
 
-		// Démontrer que ce sont des pointeurs vers les éléments originaux
-		fmt.Println("Modification via les pointeurs:")
-		*minPtr = 0
-		*maxPtr = 100
-		fmt.Printf("Slice après modification: %v\n", nombres)
-	}
+  // Démontrer que ce sont des pointeurs vers les éléments originaux
+  fmt.Println("Modification via les pointeurs:")
+  *minPtr = 0
+  *maxPtr = 100
+  fmt.Printf("Slice après modification: %v\n", nombres)
+ }
 
-	// Test avec slice vide
-	fmt.Println("\nTest avec slice vide:")
-	vide := []int{}
-	minPtr, maxPtr = trouverMinMax(vide)
-	if minPtr == nil && maxPtr == nil {
-		fmt.Println("✅ Slice vide géré correctement (pointeurs nil)")
-	}
+ // Test avec slice vide
+ fmt.Println("\nTest avec slice vide:")
+ vide := []int{}
+ minPtr, maxPtr = trouverMinMax(vide)
+ if minPtr == nil && maxPtr == nil {
+  fmt.Println("✅ Slice vide géré correctement (pointeurs nil)")
+ }
 
-	// Test avec version copie
-	fmt.Println("\n--- Test avec version copie ---")
-	nombres2 := []int{15, 3, 9, 1, 12}
-	fmt.Printf("Slice: %v\n", nombres2)
-	minCopie, maxCopie := trouverMinMaxCopie(nombres2)
-	if minCopie != nil && maxCopie != nil {
-		fmt.Printf("Min (copie): %d\n", *minCopie)
-		fmt.Printf("Max (copie): %d\n", *maxCopie)
+ // Test avec version copie
+ fmt.Println("\n--- Test avec version copie ---")
+ nombres2 := []int{15, 3, 9, 1, 12}
+ fmt.Printf("Slice: %v\n", nombres2)
+ minCopie, maxCopie := trouverMinMaxCopie(nombres2)
+ if minCopie != nil && maxCopie != nil {
+  fmt.Printf("Min (copie): %d\n", *minCopie)
+  fmt.Printf("Max (copie): %d\n", *maxCopie)
 
-		// Modifier les copies n'affecte pas le slice original
-		*minCopie = -1
-		*maxCopie = 999
-		fmt.Printf("Slice original inchangé: %v\n", nombres2)
-	}
+  // Modifier les copies n'affecte pas le slice original
+  *minCopie = -1
+  *maxCopie = 999
+  fmt.Printf("Slice original inchangé: %v\n", nombres2)
+ }
 
-	// Test 3: Incrémenter compteur
-	fmt.Println("\n--- Test 3: Incrément de compteur ---")
-	compteur := 0
-	fmt.Printf("Compteur initial: %d\n", compteur)
+ // Test 3: Incrémenter compteur
+ fmt.Println("\n--- Test 3: Incrément de compteur ---")
+ compteur := 0
+ fmt.Printf("Compteur initial: %d\n", compteur)
 
-	incrementerCompteur(&compteur)
-	incrementerCompteur(&compteur)
-	incrementerCompteurDe(&compteur, 5)
+ incrementerCompteur(&compteur)
+ incrementerCompteur(&compteur)
+ incrementerCompteurDe(&compteur, 5)
 
-	fmt.Printf("Compteur final: %d\n", compteur)
+ fmt.Printf("Compteur final: %d\n", compteur)
 
-	// Test avec pointeur nil
-	incrementerCompteur(nil) // Doit afficher un avertissement
+ // Test avec pointeur nil
+ incrementerCompteur(nil) // Doit afficher un avertissement
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -972,194 +982,194 @@ func exercice1() {
 
 // Noeud de la stack
 type NoeudStack struct {
-	Valeur   interface{}
-	Precedent *NoeudStack
+ Valeur   interface{}
+ Precedent *NoeudStack
 }
 
 // Structure Stack
 type Stack struct {
-	sommet *NoeudStack
-	taille int
+ sommet *NoeudStack
+ taille int
 }
 
 // Créer une nouvelle stack
 func NouvelleStack() *Stack {
-	return &Stack{
-		sommet: nil,
-		taille: 0,
-	}
+ return &Stack{
+  sommet: nil,
+  taille: 0,
+ }
 }
 
 // Push: ajouter un élément au sommet
 func (s *Stack) Push(valeur interface{}) {
-	nouveauNoeud := &NoeudStack{
-		Valeur:    valeur,
-		Precedent: s.sommet,
-	}
-	s.sommet = nouveauNoeud
-	s.taille++
+ nouveauNoeud := &NoeudStack{
+  Valeur:    valeur,
+  Precedent: s.sommet,
+ }
+ s.sommet = nouveauNoeud
+ s.taille++
 
-	fmt.Printf("📥 Push: %v (taille: %d)\n", valeur, s.taille)
+ fmt.Printf("📥 Push: %v (taille: %d)\n", valeur, s.taille)
 }
 
 // Pop: retirer et retourner l'élément du sommet
 func (s *Stack) Pop() (interface{}, bool) {
-	if s.IsEmpty() {
-		fmt.Println("⚠️  Tentative de Pop sur stack vide")
-		return nil, false
-	}
+ if s.IsEmpty() {
+  fmt.Println("⚠️  Tentative de Pop sur stack vide")
+  return nil, false
+ }
 
-	valeur := s.sommet.Valeur
-	s.sommet = s.sommet.Precedent
-	s.taille--
+ valeur := s.sommet.Valeur
+ s.sommet = s.sommet.Precedent
+ s.taille--
 
-	fmt.Printf("📤 Pop: %v (taille: %d)\n", valeur, s.taille)
-	return valeur, true
+ fmt.Printf("📤 Pop: %v (taille: %d)\n", valeur, s.taille)
+ return valeur, true
 }
 
 // Peek: voir l'élément du sommet sans le retirer
 func (s *Stack) Peek() (interface{}, bool) {
-	if s.IsEmpty() {
-		return nil, false
-	}
+ if s.IsEmpty() {
+  return nil, false
+ }
 
-	return s.sommet.Valeur, true
+ return s.sommet.Valeur, true
 }
 
 // IsEmpty: vérifier si la stack est vide
 func (s *Stack) IsEmpty() bool {
-	return s.sommet == nil
+ return s.sommet == nil
 }
 
 // Taille: retourner le nombre d'éléments
 func (s *Stack) Taille() int {
-	return s.taille
+ return s.taille
 }
 
 // Afficher la stack (pour debug)
 func (s *Stack) Afficher() {
-	if s.IsEmpty() {
-		fmt.Println("Stack vide")
-		return
-	}
+ if s.IsEmpty() {
+  fmt.Println("Stack vide")
+  return
+ }
 
-	fmt.Print("Stack (sommet → base): ")
-	courant := s.sommet
-	for courant != nil {
-		fmt.Printf("%v ", courant.Valeur)
-		courant = courant.Precedent
-	}
-	fmt.Printf("(taille: %d)\n", s.taille)
+ fmt.Print("Stack (sommet → base): ")
+ courant := s.sommet
+ for courant != nil {
+  fmt.Printf("%v ", courant.Valeur)
+  courant = courant.Precedent
+ }
+ fmt.Printf("(taille: %d)\n", s.taille)
 }
 
 // Vider la stack
 func (s *Stack) Vider() {
-	for !s.IsEmpty() {
-		s.Pop()
-	}
-	fmt.Println("🗑️  Stack vidée")
+ for !s.IsEmpty() {
+  s.Pop()
+ }
+ fmt.Println("🗑️  Stack vidée")
 }
 
 // Clone: créer une copie de la stack
 func (s *Stack) Clone() *Stack {
-	if s.IsEmpty() {
-		return NouvelleStack()
-	}
+ if s.IsEmpty() {
+  return NouvelleStack()
+ }
 
-	// Utiliser une stack temporaire pour inverser l'ordre
-	temp := NouvelleStack()
-	courant := s.sommet
+ // Utiliser une stack temporaire pour inverser l'ordre
+ temp := NouvelleStack()
+ courant := s.sommet
 
-	// Copier dans l'ordre inverse
-	for courant != nil {
-		temp.Push(courant.Valeur)
-		courant = courant.Precedent
-	}
+ // Copier dans l'ordre inverse
+ for courant != nil {
+  temp.Push(courant.Valeur)
+  courant = courant.Precedent
+ }
 
-	// Créer la stack finale dans le bon ordre
-	clone := NouvelleStack()
-	for !temp.IsEmpty() {
-		valeur, _ := temp.Pop()
-		clone.Push(valeur)
-	}
+ // Créer la stack finale dans le bon ordre
+ clone := NouvelleStack()
+ for !temp.IsEmpty() {
+  valeur, _ := temp.Pop()
+  clone.Push(valeur)
+ }
 
-	return clone
+ return clone
 }
 
 func exercice2() {
-	fmt.Println("=== EXERCICE 2 : INTERMÉDIAIRE - STACK ===")
+ fmt.Println("=== EXERCICE 2 : INTERMÉDIAIRE - STACK ===")
 
-	// Créer une nouvelle stack
-	stack := NouvelleStack()
+ // Créer une nouvelle stack
+ stack := NouvelleStack()
 
-	// Test IsEmpty sur stack vide
-	fmt.Printf("Stack vide? %t\n", stack.IsEmpty())
+ // Test IsEmpty sur stack vide
+ fmt.Printf("Stack vide? %t\n", stack.IsEmpty())
 
-	// Test Peek sur stack vide
-	if valeur, ok := stack.Peek(); ok {
-		fmt.Printf("Sommet: %v\n", valeur)
-	} else {
-		fmt.Println("✅ Peek sur stack vide géré correctement")
-	}
+ // Test Peek sur stack vide
+ if valeur, ok := stack.Peek(); ok {
+  fmt.Printf("Sommet: %v\n", valeur)
+ } else {
+  fmt.Println("✅ Peek sur stack vide géré correctement")
+ }
 
-	// Test Push
-	fmt.Println("\n--- Test Push ---")
-	stack.Push(10)
-	stack.Push("Hello")
-	stack.Push(3.14)
-	stack.Push(true)
+ // Test Push
+ fmt.Println("\n--- Test Push ---")
+ stack.Push(10)
+ stack.Push("Hello")
+ stack.Push(3.14)
+ stack.Push(true)
 
-	stack.Afficher()
+ stack.Afficher()
 
-	// Test Peek
-	fmt.Println("\n--- Test Peek ---")
-	if valeur, ok := stack.Peek(); ok {
-		fmt.Printf("👀 Sommet (sans retirer): %v\n", valeur)
-	}
-	stack.Afficher() // Vérifier que rien n'a changé
+ // Test Peek
+ fmt.Println("\n--- Test Peek ---")
+ if valeur, ok := stack.Peek(); ok {
+  fmt.Printf("👀 Sommet (sans retirer): %v\n", valeur)
+ }
+ stack.Afficher() // Vérifier que rien n'a changé
 
-	// Test Pop
-	fmt.Println("\n--- Test Pop ---")
-	for i := 0; i < 3; i++ {
-		if valeur, ok := stack.Pop(); ok {
-			fmt.Printf("Valeur récupérée: %v\n", valeur)
-		}
-		stack.Afficher()
-	}
+ // Test Pop
+ fmt.Println("\n--- Test Pop ---")
+ for i := 0; i < 3; i++ {
+  if valeur, ok := stack.Pop(); ok {
+   fmt.Printf("Valeur récupérée: %v\n", valeur)
+  }
+  stack.Afficher()
+ }
 
-	// Ajouter plus d'éléments
-	fmt.Println("\n--- Remplissage à nouveau ---")
-	for i := 1; i <= 5; i++ {
-		stack.Push(i * 10)
-	}
-	stack.Afficher()
+ // Ajouter plus d'éléments
+ fmt.Println("\n--- Remplissage à nouveau ---")
+ for i := 1; i <= 5; i++ {
+  stack.Push(i * 10)
+ }
+ stack.Afficher()
 
-	// Test Clone
-	fmt.Println("\n--- Test Clone ---")
-	clone := stack.Clone()
-	fmt.Print("Original: ")
-	stack.Afficher()
-	fmt.Print("Clone: ")
-	clone.Afficher()
+ // Test Clone
+ fmt.Println("\n--- Test Clone ---")
+ clone := stack.Clone()
+ fmt.Print("Original: ")
+ stack.Afficher()
+ fmt.Print("Clone: ")
+ clone.Afficher()
 
-	// Modifier l'original pour prouver l'indépendance
-	stack.Push(999)
-	fmt.Println("Après ajout de 999 à l'original:")
-	fmt.Print("Original: ")
-	stack.Afficher()
-	fmt.Print("Clone (inchangé): ")
-	clone.Afficher()
+ // Modifier l'original pour prouver l'indépendance
+ stack.Push(999)
+ fmt.Println("Après ajout de 999 à l'original:")
+ fmt.Print("Original: ")
+ stack.Afficher()
+ fmt.Print("Clone (inchangé): ")
+ clone.Afficher()
 
-	// Vider la stack
-	fmt.Println("\n--- Test Vider ---")
-	stack.Vider()
-	fmt.Printf("Stack vide après vidage? %t\n", stack.IsEmpty())
+ // Vider la stack
+ fmt.Println("\n--- Test Vider ---")
+ stack.Vider()
+ fmt.Printf("Stack vide après vidage? %t\n", stack.IsEmpty())
 
-	// Test Pop sur stack vide
-	fmt.Println("\n--- Test Pop sur stack vide ---")
-	stack.Pop() // Doit afficher un avertissement
+ // Test Pop sur stack vide
+ fmt.Println("\n--- Test Pop sur stack vide ---")
+ stack.Pop() // Doit afficher un avertissement
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -1168,321 +1178,321 @@ func exercice2() {
 
 // Objet géré par le pool
 type ObjetPool struct {
-	ID       int
-	Donnees  []byte
-	EnUse    bool
-	RefCount int
+ ID       int
+ Donnees  []byte
+ EnUse    bool
+ RefCount int
 }
 
 // Interface pour les objets poolés
 type Poolable interface {
-	Reset()           // Remet l'objet à zéro
-	GetID() int       // Retourne l'ID unique
-	IsInUse() bool    // Vérifie si l'objet est utilisé
+ Reset()           // Remet l'objet à zéro
+ GetID() int       // Retourne l'ID unique
+ IsInUse() bool    // Vérifie si l'objet est utilisé
 }
 
 // Implémenter l'interface Poolable
 func (obj *ObjetPool) Reset() {
-	obj.Donnees = obj.Donnees[:0] // Vider le slice sans réallouer
-	obj.EnUse = false
-	obj.RefCount = 0
+ obj.Donnees = obj.Donnees[:0] // Vider le slice sans réallouer
+ obj.EnUse = false
+ obj.RefCount = 0
 }
 
 func (obj *ObjetPool) GetID() int {
-	return obj.ID
+ return obj.ID
 }
 
 func (obj *ObjetPool) IsInUse() bool {
-	return obj.EnUse
+ return obj.EnUse
 }
 
 // Pool de gestion de mémoire
 type MemoryPool struct {
-	objets        []*ObjetPool
-	libres        []*ObjetPool
-	utilises      map[int]*ObjetPool
-	prochainID    int
-	tailleMax     int
-	mutex         sync.RWMutex
-	statistiques  PoolStats
+ objets        []*ObjetPool
+ libres        []*ObjetPool
+ utilises      map[int]*ObjetPool
+ prochainID    int
+ tailleMax     int
+ mutex         sync.RWMutex
+ statistiques  PoolStats
 }
 
 // Statistiques du pool
 type PoolStats struct {
-	TotalCrees    int
-	TotalLiberes  int
-	TotalAlloues  int
-	PicUtilises   int
-	ReutilisationRate float64
+ TotalCrees    int
+ TotalLiberes  int
+ TotalAlloues  int
+ PicUtilises   int
+ ReutilisationRate float64
 }
 
 // Créer un nouveau pool
 func NouveauMemoryPool(tailleMax int) *MemoryPool {
-	return &MemoryPool{
-		objets:       make([]*ObjetPool, 0, tailleMax),
-		libres:       make([]*ObjetPool, 0, tailleMax),
-		utilises:     make(map[int]*ObjetPool),
-		prochainID:   1,
-		tailleMax:    tailleMax,
-		statistiques: PoolStats{},
-	}
+ return &MemoryPool{
+  objets:       make([]*ObjetPool, 0, tailleMax),
+  libres:       make([]*ObjetPool, 0, tailleMax),
+  utilises:     make(map[int]*ObjetPool),
+  prochainID:   1,
+  tailleMax:    tailleMax,
+  statistiques: PoolStats{},
+ }
 }
 
 // Allouer un objet du pool
 func (mp *MemoryPool) Allouer() *ObjetPool {
-	mp.mutex.Lock()
-	defer mp.mutex.Unlock()
+ mp.mutex.Lock()
+ defer mp.mutex.Unlock()
 
-	var obj *ObjetPool
+ var obj *ObjetPool
 
-	// Essayer de réutiliser un objet libre
-	if len(mp.libres) > 0 {
-		obj = mp.libres[len(mp.libres)-1]
-		mp.libres = mp.libres[:len(mp.libres)-1]
-		obj.Reset()
-		fmt.Printf("♻️  Réutilisation objet ID %d\n", obj.ID)
-	} else if len(mp.objets) < mp.tailleMax {
-		// Créer un nouvel objet
-		obj = &ObjetPool{
-			ID:      mp.prochainID,
-			Donnees: make([]byte, 0, 1024), // Capacité initiale
-		}
-		mp.prochainID++
-		mp.objets = append(mp.objets, obj)
-		mp.statistiques.TotalCrees++
-		fmt.Printf("🆕 Création nouvel objet ID %d\n", obj.ID)
-	} else {
-		fmt.Printf("❌ Pool plein! Impossible d'allouer (max: %d)\n", mp.tailleMax)
-		return nil
-	}
+ // Essayer de réutiliser un objet libre
+ if len(mp.libres) > 0 {
+  obj = mp.libres[len(mp.libres)-1]
+  mp.libres = mp.libres[:len(mp.libres)-1]
+  obj.Reset()
+  fmt.Printf("♻️  Réutilisation objet ID %d\n", obj.ID)
+ } else if len(mp.objets) < mp.tailleMax {
+  // Créer un nouvel objet
+  obj = &ObjetPool{
+   ID:      mp.prochainID,
+   Donnees: make([]byte, 0, 1024), // Capacité initiale
+  }
+  mp.prochainID++
+  mp.objets = append(mp.objets, obj)
+  mp.statistiques.TotalCrees++
+  fmt.Printf("🆕 Création nouvel objet ID %d\n", obj.ID)
+ } else {
+  fmt.Printf("❌ Pool plein! Impossible d'allouer (max: %d)\n", mp.tailleMax)
+  return nil
+ }
 
-	// Marquer comme utilisé
-	obj.EnUse = true
-	obj.RefCount = 1
-	mp.utilises[obj.ID] = obj
-	mp.statistiques.TotalAlloues++
+ // Marquer comme utilisé
+ obj.EnUse = true
+ obj.RefCount = 1
+ mp.utilises[obj.ID] = obj
+ mp.statistiques.TotalAlloues++
 
-	// Mettre à jour le pic d'utilisation
-	if len(mp.utilises) > mp.statistiques.PicUtilises {
-		mp.statistiques.PicUtilises = len(mp.utilises)
-	}
+ // Mettre à jour le pic d'utilisation
+ if len(mp.utilises) > mp.statistiques.PicUtilises {
+  mp.statistiques.PicUtilises = len(mp.utilises)
+ }
 
-	return obj
+ return obj
 }
 
 // Libérer un objet (décrémenter le compteur de références)
 func (mp *MemoryPool) Liberer(obj *ObjetPool) bool {
-	if obj == nil {
-		fmt.Println("⚠️  Tentative de libération d'un objet nil")
-		return false
-	}
+ if obj == nil {
+  fmt.Println("⚠️  Tentative de libération d'un objet nil")
+  return false
+ }
 
-	mp.mutex.Lock()
-	defer mp.mutex.Unlock()
+ mp.mutex.Lock()
+ defer mp.mutex.Unlock()
 
-	// Vérifier que l'objet est bien dans le pool
-	if _, existe := mp.utilises[obj.ID]; !existe {
-		fmt.Printf("⚠️  Objet ID %d non trouvé dans les objets utilisés\n", obj.ID)
-		return false
-	}
+ // Vérifier que l'objet est bien dans le pool
+ if _, existe := mp.utilises[obj.ID]; !existe {
+  fmt.Printf("⚠️  Objet ID %d non trouvé dans les objets utilisés\n", obj.ID)
+  return false
+ }
 
-	// Décrémenter le compteur de références
-	obj.RefCount--
-	fmt.Printf("📉 Objet ID %d: RefCount = %d\n", obj.ID, obj.RefCount)
+ // Décrémenter le compteur de références
+ obj.RefCount--
+ fmt.Printf("📉 Objet ID %d: RefCount = %d\n", obj.ID, obj.RefCount)
 
-	// Si plus de références, libérer réellement
-	if obj.RefCount <= 0 {
-		delete(mp.utilises, obj.ID)
-		obj.EnUse = false
-		mp.libres = append(mp.libres, obj)
-		mp.statistiques.TotalLiberes++
-		fmt.Printf("🔓 Objet ID %d libéré et retourné au pool\n", obj.ID)
-		return true
-	}
+ // Si plus de références, libérer réellement
+ if obj.RefCount <= 0 {
+  delete(mp.utilises, obj.ID)
+  obj.EnUse = false
+  mp.libres = append(mp.libres, obj)
+  mp.statistiques.TotalLiberes++
+  fmt.Printf("🔓 Objet ID %d libéré et retourné au pool\n", obj.ID)
+  return true
+ }
 
-	return false
+ return false
 }
 
 // Incrémenter le compteur de références
 func (mp *MemoryPool) AjouterReference(obj *ObjetPool) bool {
-	if obj == nil {
-		return false
-	}
+ if obj == nil {
+  return false
+ }
 
-	mp.mutex.Lock()
-	defer mp.mutex.Unlock()
+ mp.mutex.Lock()
+ defer mp.mutex.Unlock()
 
-	if _, existe := mp.utilises[obj.ID]; existe {
-		obj.RefCount++
-		fmt.Printf("📈 Objet ID %d: RefCount = %d\n", obj.ID, obj.RefCount)
-		return true
-	}
+ if _, existe := mp.utilises[obj.ID]; existe {
+  obj.RefCount++
+  fmt.Printf("📈 Objet ID %d: RefCount = %d\n", obj.ID, obj.RefCount)
+  return true
+ }
 
-	return false
+ return false
 }
 
 // Forcer la libération d'un objet (ignorer le RefCount)
 func (mp *MemoryPool) ForcerLiberation(obj *ObjetPool) bool {
-	if obj == nil {
-		return false
-	}
+ if obj == nil {
+  return false
+ }
 
-	mp.mutex.Lock()
-	defer mp.mutex.Unlock()
+ mp.mutex.Lock()
+ defer mp.mutex.Unlock()
 
-	if _, existe := mp.utilises[obj.ID]; existe {
-		delete(mp.utilises, obj.ID)
-		obj.EnUse = false
-		obj.RefCount = 0
-		mp.libres = append(mp.libres, obj)
-		mp.statistiques.TotalLiberes++
-		fmt.Printf("🔨 Objet ID %d libéré de force\n", obj.ID)
-		return true
-	}
+ if _, existe := mp.utilises[obj.ID]; existe {
+  delete(mp.utilises, obj.ID)
+  obj.EnUse = false
+  obj.RefCount = 0
+  mp.libres = append(mp.libres, obj)
+  mp.statistiques.TotalLiberes++
+  fmt.Printf("🔨 Objet ID %d libéré de force\n", obj.ID)
+  return true
+ }
 
-	return false
+ return false
 }
 
 // Obtenir les statistiques du pool
 func (mp *MemoryPool) Statistiques() PoolStats {
-	mp.mutex.RLock()
-	defer mp.mutex.RUnlock()
+ mp.mutex.RLock()
+ defer mp.mutex.RUnlock()
 
-	stats := mp.statistiques
-	stats.ReutilisationRate = 0
-	if stats.TotalAlloues > 0 {
-		stats.ReutilisationRate = float64(stats.TotalAlloues-stats.TotalCrees) / float64(stats.TotalAlloues) * 100
-	}
+ stats := mp.statistiques
+ stats.ReutilisationRate = 0
+ if stats.TotalAlloues > 0 {
+  stats.ReutilisationRate = float64(stats.TotalAlloues-stats.TotalCrees) / float64(stats.TotalAlloues) * 100
+ }
 
-	return stats
+ return stats
 }
 
 // Afficher l'état du pool
 func (mp *MemoryPool) AfficherEtat() {
-	mp.mutex.RLock()
-	defer mp.mutex.RUnlock()
+ mp.mutex.RLock()
+ defer mp.mutex.RUnlock()
 
-	fmt.Printf("\n=== ÉTAT DU POOL ===\n")
-	fmt.Printf("Objets totaux créés: %d\n", len(mp.objets))
-	fmt.Printf("Objets libres: %d\n", len(mp.libres))
-	fmt.Printf("Objets utilisés: %d\n", len(mp.utilises))
-	fmt.Printf("Capacité maximale: %d\n", mp.tailleMax)
+ fmt.Printf("\n=== ÉTAT DU POOL ===\n")
+ fmt.Printf("Objets totaux créés: %d\n", len(mp.objets))
+ fmt.Printf("Objets libres: %d\n", len(mp.libres))
+ fmt.Printf("Objets utilisés: %d\n", len(mp.utilises))
+ fmt.Printf("Capacité maximale: %d\n", mp.tailleMax)
 
-	if len(mp.utilises) > 0 {
-		fmt.Printf("Objets en cours d'utilisation:\n")
-		for id, obj := range mp.utilises {
-			fmt.Printf("  - ID %d (RefCount: %d)\n", id, obj.RefCount)
-		}
-	}
+ if len(mp.utilises) > 0 {
+  fmt.Printf("Objets en cours d'utilisation:\n")
+  for id, obj := range mp.utilises {
+   fmt.Printf("  - ID %d (RefCount: %d)\n", id, obj.RefCount)
+  }
+ }
 
-	stats := mp.Statistiques()
-	fmt.Printf("\nStatistiques:\n")
-	fmt.Printf("  Total créés: %d\n", stats.TotalCrees)
-	fmt.Printf("  Total alloués: %d\n", stats.TotalAlloues)
-	fmt.Printf("  Total libérés: %d\n", stats.TotalLiberes)
-	fmt.Printf("  Pic d'utilisation: %d\n", stats.PicUtilises)
-	fmt.Printf("  Taux de réutilisation: %.1f%%\n", stats.ReutilisationRate)
+ stats := mp.Statistiques()
+ fmt.Printf("\nStatistiques:\n")
+ fmt.Printf("  Total créés: %d\n", stats.TotalCrees)
+ fmt.Printf("  Total alloués: %d\n", stats.TotalAlloues)
+ fmt.Printf("  Total libérés: %d\n", stats.TotalLiberes)
+ fmt.Printf("  Pic d'utilisation: %d\n", stats.PicUtilises)
+ fmt.Printf("  Taux de réutilisation: %.1f%%\n", stats.ReutilisationRate)
 }
 
 // Nettoyer le pool (libérer tous les objets)
 func (mp *MemoryPool) Nettoyer() {
-	mp.mutex.Lock()
-	defer mp.mutex.Unlock()
+ mp.mutex.Lock()
+ defer mp.mutex.Unlock()
 
-	// Forcer la libération de tous les objets utilisés
-	for id, obj := range mp.utilises {
-		obj.Reset()
-		mp.libres = append(mp.libres, obj)
-		delete(mp.utilises, id)
-	}
+ // Forcer la libération de tous les objets utilisés
+ for id, obj := range mp.utilises {
+  obj.Reset()
+  mp.libres = append(mp.libres, obj)
+  delete(mp.utilises, id)
+ }
 
-	fmt.Printf("🧹 Pool nettoyé: %d objets retournés\n", len(mp.libres))
+ fmt.Printf("🧹 Pool nettoyé: %d objets retournés\n", len(mp.libres))
 }
 
 func exercice3() {
-	fmt.Println("=== EXERCICE 3 : AVANCÉ - POOL D'OBJETS ===")
+ fmt.Println("=== EXERCICE 3 : AVANCÉ - POOL D'OBJETS ===")
 
-	// Créer un pool avec une capacité maximale de 5 objets
-	pool := NouveauMemoryPool(5)
+ // Créer un pool avec une capacité maximale de 5 objets
+ pool := NouveauMemoryPool(5)
 
-	fmt.Println("\n--- Test d'allocation de base ---")
+ fmt.Println("\n--- Test d'allocation de base ---")
 
-	// Allouer quelques objets
-	obj1 := pool.Allouer()
-	obj2 := pool.Allouer()
-	obj3 := pool.Allouer()
+ // Allouer quelques objets
+ obj1 := pool.Allouer()
+ obj2 := pool.Allouer()
+ obj3 := pool.Allouer()
 
-	pool.AfficherEtat()
+ pool.AfficherEtat()
 
-	// Test du compteur de références
-	fmt.Println("\n--- Test compteur de références ---")
-	if obj1 != nil {
-		pool.AjouterReference(obj1) // RefCount = 2
-		pool.AjouterReference(obj1) // RefCount = 3
+ // Test du compteur de références
+ fmt.Println("\n--- Test compteur de références ---")
+ if obj1 != nil {
+  pool.AjouterReference(obj1) // RefCount = 2
+  pool.AjouterReference(obj1) // RefCount = 3
 
-		// Tentatives de libération
-		pool.Liberer(obj1) // RefCount = 2
-		pool.Liberer(obj1) // RefCount = 1
-		pool.Liberer(obj1) // RefCount = 0, objet libéré
-	}
+  // Tentatives de libération
+  pool.Liberer(obj1) // RefCount = 2
+  pool.Liberer(obj1) // RefCount = 1
+  pool.Liberer(obj1) // RefCount = 0, objet libéré
+ }
 
-	pool.AfficherEtat()
+ pool.AfficherEtat()
 
-	// Test de réutilisation
-	fmt.Println("\n--- Test de réutilisation ---")
-	obj4 := pool.Allouer() // Doit réutiliser obj1
-	obj5 := pool.Allouer() // Nouvel objet
-	obj6 := pool.Allouer() // Nouvel objet
+ // Test de réutilisation
+ fmt.Println("\n--- Test de réutilisation ---")
+ obj4 := pool.Allouer() // Doit réutiliser obj1
+ obj5 := pool.Allouer() // Nouvel objet
+ obj6 := pool.Allouer() // Nouvel objet
 
-	pool.AfficherEtat()
+ pool.AfficherEtat()
 
-	// Atteindre la limite du pool
-	fmt.Println("\n--- Test limite du pool ---")
-	obj7 := pool.Allouer() // Dernier objet possible
-	obj8 := pool.Allouer() // Doit échouer (pool plein)
+ // Atteindre la limite du pool
+ fmt.Println("\n--- Test limite du pool ---")
+ obj7 := pool.Allouer() // Dernier objet possible
+ obj8 := pool.Allouer() // Doit échouer (pool plein)
 
-	pool.AfficherEtat()
+ pool.AfficherEtat()
 
-	// Libérer quelques objets pour faire de la place
-	fmt.Println("\n--- Libération d'objets ---")
-	if obj2 != nil {
-		pool.Liberer(obj2)
-	}
-	if obj3 != nil {
-		pool.Liberer(obj3)
-	}
+ // Libérer quelques objets pour faire de la place
+ fmt.Println("\n--- Libération d'objets ---")
+ if obj2 != nil {
+  pool.Liberer(obj2)
+ }
+ if obj3 != nil {
+  pool.Liberer(obj3)
+ }
 
-	// Maintenant on peut allouer à nouveau
-	obj9 := pool.Allouer() // Doit réussir (réutilise obj2 ou obj3)
+ // Maintenant on peut allouer à nouveau
+ obj9 := pool.Allouer() // Doit réussir (réutilise obj2 ou obj3)
 
-	pool.AfficherEtat()
+ pool.AfficherEtat()
 
-	// Test de libération forcée
-	fmt.Println("\n--- Test libération forcée ---")
-	if obj4 != nil {
-		pool.AjouterReference(obj4) // RefCount = 2
-		fmt.Printf("Avant libération forcée - RefCount obj4: %d\n", obj4.RefCount)
-		pool.ForcerLiberation(obj4) // Force la libération malgré RefCount > 1
-	}
+ // Test de libération forcée
+ fmt.Println("\n--- Test libération forcée ---")
+ if obj4 != nil {
+  pool.AjouterReference(obj4) // RefCount = 2
+  fmt.Printf("Avant libération forcée - RefCount obj4: %d\n", obj4.RefCount)
+  pool.ForcerLiberation(obj4) // Force la libération malgré RefCount > 1
+ }
 
-	pool.AfficherEtat()
+ pool.AfficherEtat()
 
-	// Statistiques finales
-	fmt.Println("\n--- Statistiques finales ---")
-	stats := pool.Statistiques()
-	fmt.Printf("📊 Statistiques du pool:\n")
-	fmt.Printf("   Objets créés: %d\n", stats.TotalCrees)
-	fmt.Printf("   Allocations totales: %d\n", stats.TotalAlloues)
-	fmt.Printf("   Libérations totales: %d\n", stats.TotalLiberes)
-	fmt.Printf("   Pic d'utilisation: %d objets\n", stats.PicUtilises)
-	fmt.Printf("   Taux de réutilisation: %.1f%%\n", stats.ReutilisationRate)
+ // Statistiques finales
+ fmt.Println("\n--- Statistiques finales ---")
+ stats := pool.Statistiques()
+ fmt.Printf("📊 Statistiques du pool:\n")
+ fmt.Printf("   Objets créés: %d\n", stats.TotalCrees)
+ fmt.Printf("   Allocations totales: %d\n", stats.TotalAlloues)
+ fmt.Printf("   Libérations totales: %d\n", stats.TotalLiberes)
+ fmt.Printf("   Pic d'utilisation: %d objets\n", stats.PicUtilises)
+ fmt.Printf("   Taux de réutilisation: %.1f%%\n", stats.ReutilisationRate)
 
-	// Nettoyer le pool
-	fmt.Println("\n--- Nettoyage final ---")
-	pool.Nettoyer()
-	pool.AfficherEtat()
+ // Nettoyer le pool
+ fmt.Println("\n--- Nettoyage final ---")
+ pool.Nettoyer()
+ pool.AfficherEtat()
 
-	fmt.Println()
+ fmt.Println()
 }
 
 // ==========================================
@@ -1491,89 +1501,89 @@ func exercice3() {
 
 // Démonstration des différences entre pointeurs et valeurs
 func demonstrationPerformance() {
-	fmt.Println("=== DÉMONSTRATION PERFORMANCE ===")
+ fmt.Println("=== DÉMONSTRATION PERFORMANCE ===")
 
-	// Structure pour tester
-	type GrosseStructure struct {
-		Donnees [1000]int
-		Nom     string
-	}
+ // Structure pour tester
+ type GrosseStructure struct {
+  Donnees [1000]int
+  Nom     string
+ }
 
-	// Création d'une grosse structure
-	gs := GrosseStructure{Nom: "Test"}
-	for i := 0; i < 1000; i++ {
-		gs.Donnees[i] = i
-	}
+ // Création d'une grosse structure
+ gs := GrosseStructure{Nom: "Test"}
+ for i := 0; i < 1000; i++ {
+  gs.Donnees[i] = i
+ }
 
-	// Fonction avec passage par valeur (copie)
-	passerParValeur := func(gs GrosseStructure) {
-		// Toute la structure est copiée (8KB environ)
-		gs.Nom = "Modifié en copie"
-	}
+ // Fonction avec passage par valeur (copie)
+ passerParValeur := func(gs GrosseStructure) {
+  // Toute la structure est copiée (8KB environ)
+  gs.Nom = "Modifié en copie"
+ }
 
-	// Fonction avec passage par pointeur (référence)
-	passerParPointeur := func(gs *GrosseStructure) {
-		// Seul le pointeur est passé (8 bytes)
-		gs.Nom = "Modifié par pointeur"
-	}
+ // Fonction avec passage par pointeur (référence)
+ passerParPointeur := func(gs *GrosseStructure) {
+  // Seul le pointeur est passé (8 bytes)
+  gs.Nom = "Modifié par pointeur"
+ }
 
-	fmt.Printf("Nom avant: %s\n", gs.Nom)
+ fmt.Printf("Nom avant: %s\n", gs.Nom)
 
-	passerParValeur(gs)
-	fmt.Printf("Après passage par valeur: %s\n", gs.Nom) // Inchangé
+ passerParValeur(gs)
+ fmt.Printf("Après passage par valeur: %s\n", gs.Nom) // Inchangé
 
-	passerParPointeur(&gs)
-	fmt.Printf("Après passage par pointeur: %s\n", gs.Nom) // Modifié
+ passerParPointeur(&gs)
+ fmt.Printf("Après passage par pointeur: %s\n", gs.Nom) // Modifié
 
-	fmt.Println("💡 Pour les grosses structures, les pointeurs sont plus efficaces!")
+ fmt.Println("💡 Pour les grosses structures, les pointeurs sont plus efficaces!")
 }
 
 // Test de gestion mémoire avancée
 func testGestionMemoire() {
-	fmt.Println("\n=== TEST GESTION MÉMOIRE AVANCÉE ===")
+ fmt.Println("\n=== TEST GESTION MÉMOIRE AVANCÉE ===")
 
-	// Simuler des fuites de mémoire et leur prévention
-	type Ressource struct {
-		ID       int
-		Donnees  *[]byte
-		Callback func()
-	}
+ // Simuler des fuites de mémoire et leur prévention
+ type Ressource struct {
+  ID       int
+  Donnees  *[]byte
+  Callback func()
+ }
 
-	// Fonction pour créer une ressource avec cleanup
-	creerRessource := func(id int, taille int) *Ressource {
-		donnees := make([]byte, taille)
+ // Fonction pour créer une ressource avec cleanup
+ creerRessource := func(id int, taille int) *Ressource {
+  donnees := make([]byte, taille)
 
-		ressource := &Ressource{
-			ID:      id,
-			Donnees: &donnees,
-			Callback: func() {
-				fmt.Printf("🧹 Nettoyage ressource %d\n", id)
-			},
-		}
+  ressource := &Ressource{
+   ID:      id,
+   Donnees: &donnees,
+   Callback: func() {
+    fmt.Printf("🧹 Nettoyage ressource %d\n", id)
+   },
+  }
 
-		return ressource
-	}
+  return ressource
+ }
 
-	// Créer et nettoyer des ressources
-	ressources := make([]*Ressource, 0, 3)
+ // Créer et nettoyer des ressources
+ ressources := make([]*Ressource, 0, 3)
 
-	for i := 1; i <= 3; i++ {
-		r := creerRessource(i, 1024*i) // Tailles variables
-		ressources = append(ressources, r)
-		fmt.Printf("📦 Ressource %d créée (%d bytes)\n", r.ID, 1024*i)
-	}
+ for i := 1; i <= 3; i++ {
+  r := creerRessource(i, 1024*i) // Tailles variables
+  ressources = append(ressources, r)
+  fmt.Printf("📦 Ressource %d créée (%d bytes)\n", r.ID, 1024*i)
+ }
 
-	// Nettoyer les ressources
-	fmt.Println("\nNettoyage des ressources:")
-	for _, r := range ressources {
-		if r.Callback != nil {
-			r.Callback()
-		}
-	}
+ // Nettoyer les ressources
+ fmt.Println("\nNettoyage des ressources:")
+ for _, r := range ressources {
+  if r.Callback != nil {
+   r.Callback()
+  }
+ }
 
-	// Les slices sont automatiquement nettoyés par le GC de Go
-	ressources = nil
-	fmt.Println("✅ Toutes les ressources libérées")
+ // Les slices sont automatiquement nettoyés par le GC de Go
+ ressources = nil
+ fmt.Println("✅ Toutes les ressources libérées")
 }
 
 // ==========================================
@@ -1581,19 +1591,19 @@ func testGestionMemoire() {
 // ==========================================
 
 func main() {
-	fmt.Println("SOLUTIONS DES EXERCICES - POINTERS")
-	fmt.Println("===================================")
+ fmt.Println("SOLUTIONS DES EXERCICES - POINTERS")
+ fmt.Println("===================================")
 
-	exercice1()
-	exercice2()
-	exercice3()
+ exercice1()
+ exercice2()
+ exercice3()
 
-	// Bonus: démonstrations avancées
-	demonstrationPerformance()
-	testGestionMemoire()
+ // Bonus: démonstrations avancées
+ demonstrationPerformance()
+ testGestionMemoire()
 
-	fmt.Println("\n🎉 Tous les exercices terminés!")
-	fmt.Println("💡 Les pointeurs permettent une gestion mémoire efficace et un partage de données sécurisé en Go.")
+ fmt.Println("\n🎉 Tous les exercices terminés!")
+ fmt.Println("💡 Les pointeurs permettent une gestion mémoire efficace et un partage de données sécurisé en Go.")
 }
 ```
 
@@ -1602,12 +1612,14 @@ func main() {
 Les pointeurs sont un outil puissant en Go pour :
 
 **Avantages :**
+
 - Efficacité mémoire (pas de copie)
 - Modification de données partagées
 - Structures de données complexes (listes, arbres)
 - Polymorphisme avec interfaces
 
 **Points clés à retenir :**
+
 - `&` pour obtenir l'adresse, `*` pour déréférencer
 - Vérifiez toujours les pointeurs nil
 - Utilisez des pointeurs pour les grosses structs et les modifications
@@ -1615,6 +1627,7 @@ Les pointeurs sont un outil puissant en Go pour :
 - Les méthodes peuvent avoir des receivers par valeur ou par pointeur
 
 **Règle générale :**
+
 - Petites données immutables → valeurs
 - Grosses données ou modifications → pointeurs
 

@@ -19,6 +19,7 @@ for initialisation; condition; mise_à_jour {
 ```
 
 **Exemple simple :**
+
 ```go
 package main
 
@@ -33,7 +34,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```text
 Compteur : 1
 Compteur : 2
 Compteur : 3
@@ -51,6 +53,7 @@ Compteur : 5
 ## 2. Différentes formes de la boucle for
 
 ### Boucle infinie
+
 ```go
 package main
 
@@ -73,6 +76,7 @@ func main() {
 ```
 
 ### Boucle while (avec seulement une condition)
+
 ```go
 package main
 
@@ -90,6 +94,7 @@ func main() {
 ```
 
 ### Boucle sans initialisation
+
 ```go
 package main
 
@@ -109,6 +114,7 @@ func main() {
 ## 3. Mots-clés de contrôle : break et continue
 
 ### break : Sortir de la boucle
+
 ```go
 package main
 
@@ -127,6 +133,7 @@ func main() {
 ```
 
 ### continue : Passer à l'itération suivante
+
 ```go
 package main
 
@@ -151,6 +158,7 @@ func main() {
 Le mot-clé `range` est très utile pour parcourir des collections (arrays, slices, maps, strings).
 
 ### Parcourir un slice
+
 ```go
 package main
 
@@ -181,6 +189,7 @@ func main() {
 ```
 
 ### Parcourir une string
+
 ```go
 package main
 
@@ -197,6 +206,7 @@ func main() {
 ```
 
 ### Parcourir un array
+
 ```go
 package main
 
@@ -215,6 +225,7 @@ func main() {
 ## 5. Exemples pratiques
 
 ### Exemple 1 : Table de multiplication
+
 ```go
 package main
 
@@ -232,6 +243,7 @@ func main() {
 ```
 
 ### Exemple 2 : Calculer une somme
+
 ```go
 package main
 
@@ -251,7 +263,7 @@ func main() {
 }
 ```
 
-### Exemple 3 : Chercher un élément
+
 ```go
 package main
 
@@ -280,6 +292,7 @@ func main() {
 ```
 
 ### Exemple 4 : Compter les voyelles
+
 ```go
 package main
 
@@ -311,6 +324,7 @@ func main() {
 Vous pouvez mettre une boucle à l'intérieur d'une autre boucle.
 
 ### Exemple : Table de multiplication complète
+
 ```go
 package main
 
@@ -329,6 +343,7 @@ func main() {
 ```
 
 ### Exemple : Motif d'étoiles
+
 ```go
 package main
 
@@ -349,7 +364,8 @@ func main() {
 ```
 
 **Résultat :**
-```
+
+```text
 *
 * *
 * * *
@@ -383,6 +399,7 @@ func main() {
 ## 8. Erreurs courantes à éviter
 
 ### Erreur 1 : Modifier la variable de boucle dans range
+
 ```go
 // ❌ Incorrect
 fruits := []string{"pomme", "banane"}
@@ -399,6 +416,7 @@ for i := 0; i < len(fruits); i++ {
 ```
 
 ### Erreur 2 : Boucle infinie accidentelle
+
 ```go
 // ❌ Attention : boucle infinie !
 i := 0
@@ -418,6 +436,7 @@ for i < 5 {
 ## 9. Bonnes pratiques
 
 ### 1. Noms de variables clairs
+
 ```go
 // ✅ Bon
 for index, utilisateur := range utilisateurs {
@@ -431,6 +450,7 @@ for i, u := range utilisateurs {
 ```
 
 ### 2. Utiliser range quand c'est possible
+
 ```go
 slice := []int{1, 2, 3, 4, 5}
 
@@ -446,6 +466,7 @@ for i := 0; i < len(slice); i++ {
 ```
 
 ### 3. Éviter les boucles trop profondes
+
 ```go
 // ❌ Difficile à lire
 for i := 0; i < 10; i++ {
@@ -467,25 +488,31 @@ func traiterLigne(i int) {
 ## 10. Exercices pratiques
 
 ### Exercice 1 : Nombre premier
+
 Créez un programme qui vérifie si un nombre est premier.
 
 ### Exercice 2 : Factorielle
+
 Calculez la factorielle d'un nombre (n! = 1 × 2 × 3 × ... × n).
 
 ### Exercice 3 : Inverser une chaîne
+
 Inversez une chaîne de caractères sans utiliser de fonctions prédéfinies.
 
 ### Exercice 4 : Maximum dans un slice
+
 Trouvez le plus grand nombre dans un slice d'entiers.
 
 ### Exercice 5 : Triangle de Pascal
+
 Générez les n premières lignes du triangle de Pascal.
 
-## Solutions des Exercices - Boucles (for, range)
+### Solutions des Exercices - Boucles (for, range)
 
 ### Exercice 1 : Nombre premier
 
-#### Solution simple
+##### Solution simple
+
 ```go
 package main
 
@@ -533,6 +560,7 @@ func main() {
 ```
 
 #### Solution avec explications détaillées
+
 ```go
 package main
 
