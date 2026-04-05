@@ -1,6 +1,7 @@
-🔝 Retour au [Sommaire](/SOMMAIRE.md)
 
 # 1-2 : Installation et configuration de l'environnement Go
+
+🔝 Retour au [Sommaire](/SOMMAIRE.md)
 
 ## Vue d'ensemble
 

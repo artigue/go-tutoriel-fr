@@ -11,12 +11,14 @@ Le traditionnel programme "Hello World" est souvent le premier programme qu'on �
 ### Étape 1 : Préparer l'environnement
 
 **Créer un nouveau répertoire :**
+
 ```bash
 mkdir hello-world
 cd hello-world
 ```
 
 **Initialiser un module Go :**
+
 ```bash
 go mod init hello-world
 ```
@@ -26,6 +28,7 @@ Cette commande crée un fichier `go.mod` qui identifie votre projet comme un mod
 ### Étape 2 : Écrire le code
 
 **Créer le fichier `main.go` :**
+
 ```go
 package main
 
@@ -43,11 +46,12 @@ go run main.go
 ```
 
 **Résultat attendu :**
-```
+
+```html
 Hello, World!
 ```
 
-**Félicitations ! Vous venez d'exécuter votre premier programme Go ! 🎉**
+****Félicitations ! Vous venez d'exécuter votre premier programme Go ! 🎉****
 
 ## Analyse ligne par ligne
 
@@ -60,11 +64,13 @@ package main
 ```
 
 **Qu'est-ce qu'un package ?**
+
 - Un package est un moyen d'organiser le code Go
 - Chaque fichier Go doit commencer par une déclaration de package
 - `main` est un package spécial qui indique que ce fichier contient un programme exécutable
 
 **Pourquoi `main` ?**
+
 - Le package `main` dit à Go : "Ce fichier contient un programme qui peut être exécuté"
 - Sans `package main`, vous ne pourriez pas créer un programme exécutable
 
@@ -75,6 +81,7 @@ import "fmt"
 ```
 
 **Qu'est-ce qu'un import ?**
+
 - `import` permet d'utiliser du code d'autres packages
 - `fmt` est un package de la bibliothèque standard de Go
 - `fmt` signifie "format" et contient des fonctions pour afficher du texte
@@ -89,6 +96,7 @@ C'est comme dire "J'ai besoin d'emprunter des outils de la boîte à outils 'fmt
 ```
 
 **Pourquoi une ligne vide ?**
+
 - Améliore la lisibilité du code
 - Sépare les déclarations des instructions
 - Bonne pratique en Go
@@ -100,16 +108,19 @@ func main() {
 ```
 
 **Qu'est-ce qu'une fonction ?**
+
 - Une fonction est un bloc de code qui effectue une tâche spécifique
 - `func` est le mot-clé pour déclarer une fonction
 - `main` est le nom de la fonction
 
 **Pourquoi `main` ?**
+
 - La fonction `main` est le point d'entrée de votre programme
 - C'est la première fonction qui s'exécute quand vous lancez le programme
 - Obligatoire dans le package `main`
 
 **Les accolades `{` :**
+
 - Indiquent le début du bloc de code de la fonction
 - Tout ce qui se trouve entre `{` et `}` appartient à la fonction
 
@@ -120,6 +131,7 @@ func main() {
 ```
 
 **Décomposition :**
+
 - `fmt` : Le package qu'on a importé
 - `.` : L'opérateur d'accès (comme dire "dans le package fmt")
 - `Println` : Une fonction du package fmt qui affiche du texte
@@ -127,6 +139,7 @@ func main() {
 - `"Hello, World!"` : Une chaîne de caractères (string)
 
 **Que fait `Println` ?**
+
 - Affiche le texte suivi d'un retour à la ligne
 - "Print line" = Afficher une ligne
 
@@ -137,6 +150,7 @@ func main() {
 ```
 
 **L'accolade fermante :**
+
 - Marque la fin de la fonction `main`
 - Doit toujours fermer chaque `{` ouvert
 
@@ -156,6 +170,7 @@ func main() {
 ```
 
 **Nouveautés :**
+
 - `message :=` : Déclaration et assignation d'une variable
 - `fmt.Println(message)` : Affiche le contenu de la variable
 
@@ -188,6 +203,7 @@ func main() {
 ```
 
 **Nouveautés :**
+
 - `Printf` : Fonction de formatage (comme `printf` en C)
 - `%s` : Placeholder pour une chaîne de caractères
 - `%d` : Placeholder pour un nombre entier
@@ -202,6 +218,7 @@ go run main.go
 ```
 
 **Avantages :**
+
 - Rapide pour tester
 - Pas de fichier temporaire créé
 - Idéal pour le développement
@@ -218,6 +235,7 @@ main.exe        # Sur Windows
 ```
 
 **Avantages :**
+
 - Crée un fichier exécutable
 - Plus rapide à l'exécution (déjà compilé)
 - Peut être distribué sans Go installé
@@ -239,6 +257,7 @@ go build -o mon-programme main.go
 **Cause :** Vous n'avez pas initialisé un module Go
 
 **Solution :**
+
 ```bash
 go mod init nom-du-projet
 ```
@@ -248,6 +267,7 @@ go mod init nom-du-projet
 **Cause :** Vous avez oublié d'importer le package fmt
 
 **Solution :**
+
 ```go
 import "fmt"  // Ajouter cette ligne
 ```
@@ -257,6 +277,7 @@ import "fmt"  // Ajouter cette ligne
 **Cause :** La déclaration `package main` doit être la première ligne
 
 **Solution :**
+
 ```go
 package main  // Doit être en première ligne
 
@@ -268,6 +289,7 @@ import "fmt"
 **Cause :** Pas de fonction `main` dans le package `main`
 
 **Solution :**
+
 ```go
 func main() {
     // Votre code ici
@@ -279,11 +301,13 @@ func main() {
 ### Formatage automatique
 
 Toujours formater votre code avec :
+
 ```bash
 go fmt main.go
 ```
 
 **Avant le formatage :**
+
 ```go
 package main
 import"fmt"
@@ -293,6 +317,7 @@ fmt.Println("Hello, World!")
 ```
 
 **Après le formatage :**
+
 ```go
 package main
 
@@ -329,12 +354,14 @@ func main() {
 ## Exercices pratiques
 
 ### Exercice 1 : Message personnalisé
+
 Modifiez le programme pour qu'il affiche votre nom :
 ```
 Hello, [Votre nom]!
 ```
 
 ### Exercice 2 : Plusieurs lignes
+
 Créez un programme qui affiche :
 ```
 Bonjour !
@@ -343,14 +370,17 @@ J'apprends Go
 ```
 
 ### Exercice 3 : Avec variables
+
 Utilisez des variables pour stocker votre nom et votre âge, puis affichez-les.
 
 ### Exercice 4 : Compilation
+
 Compilez votre programme et créez un fichier exécutable nommé `salut`.
 
 ### Solutions
 
 **Exercice 1 :**
+
 ```go
 package main
 
@@ -362,6 +392,7 @@ func main() {
 ```
 
 **Exercice 2 :**
+
 ```go
 package main
 
@@ -375,6 +406,7 @@ func main() {
 ```
 
 **Exercice 3 :**
+
 ```go
 package main
 
@@ -388,6 +420,7 @@ func main() {
 ```
 
 **Exercice 4 :**
+
 ```bash
 go build -o salut main.go
 ./salut
@@ -396,6 +429,7 @@ go build -o salut main.go
 ## Récapitulatif
 
 **Ce que vous avez appris :**
+
 - ✅ Structure de base d'un programme Go
 - ✅ Rôle du package `main` et de la fonction `main`
 - ✅ Comment importer et utiliser des packages
@@ -403,6 +437,7 @@ go build -o salut main.go
 - ✅ Bonnes pratiques de formatage
 
 **Points clés à retenir :**
+
 1. Tout programme Go exécutable doit avoir `package main`
 2. La fonction `main()` est le point d'entrée
 3. `import` permet d'utiliser des packages externes
@@ -410,6 +445,7 @@ go build -o salut main.go
 5. `go fmt` formate automatiquement votre code
 
 **Commandes importantes :**
+
 ```bash
 go mod init projet    # Initialiser un module
 go run main.go        # Exécuter directement

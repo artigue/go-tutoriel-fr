@@ -7,6 +7,7 @@
 ### Naissance chez Google (2007-2009)
 
 Go a été créé en 2007 par trois ingénieurs de Google :
+
 - **Robert Griesemer** : expert en langages de programmation
 - **Rob Pike** : co-créateur d'Unix et UTF-8
 - **Ken Thompson** : co-créateur d'Unix et du langage B
@@ -18,16 +19,19 @@ Le projet est né d'une frustration commune : les langages existants ne réponda
 Les créateurs de Go ont identifié plusieurs problèmes avec les langages populaires de l'époque :
 
 **Avec C/C++ :**
+
 - Compilation très lente sur de gros projets
 - Gestion manuelle de la mémoire source d'erreurs
 - Syntaxe complexe et difficile à maintenir
 
 **Avec Java/C# :**
+
 - Verbosité excessive du code
 - Dépendance à une machine virtuelle
 - Garbage collector parfois imprévisible
 
 **Avec Python/JavaScript :**
+
 - Performance limitée (langages interprétés)
 - Difficultés avec la programmation concurrente
 - Typage dynamique source d'erreurs en production
@@ -45,6 +49,7 @@ Go a été annoncé publiquement le **10 novembre 2009**. La première version s
 Go privilégie la simplicité dans tous ses aspects :
 
 **Syntaxe minimaliste :**
+
 ```go
 // Déclaration simple d'une variable
 var nom string = "Alice"
@@ -63,6 +68,7 @@ Alors que Python dit "il devrait y avoir une façon évidente de le faire", Go v
 Go n'a pas de classes ni d'héritage traditionnel. À la place, il utilise :
 
 **Structs et méthodes :**
+
 ```go
 type Personne struct {
     Nom string
@@ -75,6 +81,7 @@ func (p Personne) Saluer() string {
 ```
 
 **Interfaces implicites :**
+
 ```go
 type Parleur interface {
     Saluer() string
@@ -98,6 +105,7 @@ defer fichier.Close()
 ```
 
 **Pourquoi ce choix ?**
+
 - Rend le code plus prévisible
 - Force le développeur à penser aux cas d'erreur
 - Évite les crashes inattendus
@@ -107,11 +115,13 @@ defer fichier.Close()
 Go intègre nativement la programmation concurrente :
 
 **Goroutines :**
+
 ```go
 go maFonction() // Exécute en parallèle
 ```
 
 **Channels :**
+
 ```go
 ch := make(chan string)
 go func() {
@@ -123,20 +133,25 @@ message := <-ch // Reçoit le message
 ## Les principes de conception
 
 ### 1. Orthogonalité
+
 Chaque fonctionnalité du langage est indépendante des autres. Il n'y a pas d'interactions surprenantes entre les différentes parties du langage.
 
 ### 2. Lisibilité
+
 Le code Go doit être facile à lire et à comprendre, même pour quelqu'un qui ne l'a pas écrit.
 
 ### 3. Régularité
+
 Les règles du langage sont cohérentes et prévisibles. Pas d'exceptions ou de cas spéciaux.
 
 ### 4. Sécurité
+
 - Typage statique fort
 - Gestion automatique de la mémoire
 - Détection des erreurs à la compilation
 
 ### 5. Efficacité
+
 - Compilation rapide
 - Exécution performante
 - Utilisation efficace des ressources
@@ -148,11 +163,13 @@ Les règles du langage sont cohérentes et prévisibles. Pas d'exceptions ou de 
 Depuis sa création, Go a été adopté par de nombreuses entreprises et projets majeurs :
 
 **Infrastructure moderne :**
+
 - **Docker** : Plateforme de conteneurisation
 - **Kubernetes** : Orchestrateur de conteneurs
 - **Terraform** : Infrastructure as Code
 
 **Entreprises utilisatrices :**
+
 - Google (bien sûr)
 - Uber, Netflix, Spotify
 - Dropbox, GitHub, Twitch
