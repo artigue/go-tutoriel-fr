@@ -53,6 +53,7 @@ func main() {
 ```
 
 **Sortie :**
+
 ```
 Goroutine: Je vais envoyer un message...
 Main: Je vais recevoir le message...

@@ -44,7 +44,7 @@ Go a été annoncé publiquement le **10 novembre 2009**. La première version s
 
 ### Simplicité avant tout
 
-> *"La simplicité est la sophistication ultime"* - Devise informelle de l'équipe Go
+> _"La simplicité est la sophistication ultime"_ - Devise informelle de l'équipe Go
 
 Go privilégie la simplicité dans tous ses aspects :
 
@@ -58,7 +58,7 @@ nom := "Alice"
 ```
 
 **Pas de surcharge d'opérateurs :**
-Contrairement à C++, Go n'autorise pas la redéfinition des opérateurs (+, -, *, etc.)
+Contrairement à C++, Go n'autorise pas la redéfinition des opérateurs (+, -, \*, etc.)
 
 **Un seul moyen de faire les choses :**
 Alors que Python dit "il devrait y avoir une façon évidente de le faire", Go va plus loin en ne proposant souvent qu'une seule façon.
@@ -184,13 +184,13 @@ Depuis sa création, Go a été adopté par de nombreuses entreprises et projets
 
 ## Comparaison avec d'autres langages
 
-| Aspect | Go | Python | Java | C++ |
-|--------|----|---------|----- |-----|
-| **Facilité d'apprentissage** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
-| **Performance** | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Concurrence** | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| **Vitesse de compilation** | ⭐⭐⭐⭐⭐ | N/A | ⭐⭐ | ⭐⭐ |
-| **Sécurité mémoire** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ |
+| Aspect                       | Go         | Python     | Java       | C++        |
+| ---------------------------- | ---------- | ---------- | ---------- | ---------- |
+| **Facilité d'apprentissage** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | ⭐⭐       |
+| **Performance**              | ⭐⭐⭐⭐   | ⭐⭐       | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ |
+| **Concurrence**              | ⭐⭐⭐⭐⭐ | ⭐⭐       | ⭐⭐⭐     | ⭐⭐⭐     |
+| **Vitesse de compilation**   | ⭐⭐⭐⭐⭐ | N/A        | ⭐⭐       | ⭐⭐       |
+| **Sécurité mémoire**         | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐       |
 
 ## L'évolution continue
 
@@ -228,6 +228,6 @@ Cette philosophie fait de Go un excellent choix pour :
 
 ---
 
-*Dans la prochaine section, nous verrons comment installer Go et configurer votre environnement de développement pour commencer à programmer !*
+_Dans la prochaine section, nous verrons comment installer Go et configurer votre environnement de développement pour commencer à programmer !_
 
 ⏭️

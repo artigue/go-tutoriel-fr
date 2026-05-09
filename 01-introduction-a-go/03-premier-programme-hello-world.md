@@ -51,7 +51,7 @@ go run main.go
 Hello, World!
 ```
 
-****Félicitations ! Vous venez d'exécuter votre premier programme Go ! 🎉****
+\***\*Félicitations ! Vous venez d'exécuter votre premier programme Go ! 🎉\*\***
 
 ## Analyse ligne par ligne
 
@@ -458,6 +458,6 @@ go vet main.go        # Vérifier
 
 ---
 
-*Dans la prochaine section, nous explorerons la structure d'un projet Go et découvrirons comment organiser votre code de manière professionnelle !*
+_Dans la prochaine section, nous explorerons la structure d'un projet Go et découvrirons comment organiser votre code de manière professionnelle !_
 
 ⏭️

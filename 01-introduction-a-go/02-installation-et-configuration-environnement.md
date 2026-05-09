@@ -1,4 +1,3 @@
-
 # 1-2 : Installation et configuration de l'environnement Go
 
 🔝 Retour au [Sommaire](/SOMMAIRE.md)
@@ -222,14 +221,14 @@ Créez un fichier `.vscode/settings.json` dans votre projet :
 
 ```json
 {
-    "go.formatTool": "goimports",
-    "go.useLanguageServer": true,
-    "go.lintOnSave": "package",
-    "go.vetOnSave": "package",
-    "editor.formatOnSave": true,
-    "go.toolsEnvVars": {
-        "GO111MODULE": "on"
-    }
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
+  "go.lintOnSave": "package",
+  "go.vetOnSave": "package",
+  "editor.formatOnSave": true,
+  "go.toolsEnvVars": {
+    "GO111MODULE": "on"
+  }
 }
 ```
 
@@ -295,15 +294,15 @@ go build main.go  # Compilation
 
 ### Commandes Go essentielles
 
-| Commande | Description | Exemple |
-|----------|-------------|---------|
-| `go run` | Exécute un programme Go | `go run main.go` |
-| `go build` | Compile un programme | `go build main.go` |
-| `go fmt` | Formate le code | `go fmt .` |
-| `go vet` | Vérifie le code | `go vet .` |
-| `go test` | Exécute les tests | `go test .` |
-| `go mod` | Gestion des modules | `go mod init myproject` |
-| `go get` | Télécharge des dépendances | `go get github.com/gin-gonic/gin` |
+| Commande   | Description                | Exemple                           |
+| ---------- | -------------------------- | --------------------------------- |
+| `go run`   | Exécute un programme Go    | `go run main.go`                  |
+| `go build` | Compile un programme       | `go build main.go`                |
+| `go fmt`   | Formate le code            | `go fmt .`                        |
+| `go vet`   | Vérifie le code            | `go vet .`                        |
+| `go test`  | Exécute les tests          | `go test .`                       |
+| `go mod`   | Gestion des modules        | `go mod init myproject`           |
+| `go get`   | Télécharge des dépendances | `go get github.com/gin-gonic/gin` |
 
 ### Formatage automatique
 
@@ -378,6 +377,6 @@ go fmt .            # Formater le code
 
 ---
 
-*Dans la prochaine section, nous analyserons en détail votre premier programme "Hello World" et découvrirons la structure d'un programme Go !*
+_Dans la prochaine section, nous analyserons en détail votre premier programme "Hello World" et découvrirons la structure d'un programme Go !_
 
 ⏭️
