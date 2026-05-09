@@ -86,7 +86,7 @@ github.com/gin-gonic/gin v1.9.1/go.mod h1:hPrL7YrpYKXt5YId3A/Tnip5kqbEAP+KLuI3SU
 
 ### Projet basique (un seul fichier)
 
-```go
+````go
 
 mon-petit-projet/
 ├── go.mod
@@ -103,7 +103,7 @@ import "fmt"
 func main() {
     fmt.Println("Mon petit projet Go")
 }
-```
+````
 
 ### Projet avec plusieurs fichiers
 
@@ -734,6 +734,6 @@ go test ./...            # Tester tout le projet
 
 ---
 
-*Félicitations ! Vous maîtrisez maintenant l'organisation d'un projet Go. Dans la prochaine section, nous plongerons dans la syntaxe de base avec les variables et les types de données !*
+_Félicitations ! Vous maîtrisez maintenant l'organisation d'un projet Go. Dans la prochaine section, nous plongerons dans la syntaxe de base avec les variables et les types de données !_
 
 ⏭️
