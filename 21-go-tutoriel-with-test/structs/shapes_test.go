@@ -21,4 +21,4 @@ func TestRectangleArea(t *testing.T) {
 	if actual != expected {
 		t.Errorf("Expected %v, got %v", expected, actual)
 	}
-}		
+}
